@@ -23,7 +23,7 @@
 package com.aoindustries.collections;
 
 /**
- * Provides access to an associated list of int's and booleans.
+ * Provides access to an associated list of int's and long's.
  *
  * @author  AO Industries, Inc.
  */
