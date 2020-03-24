@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ao-collections - Collections and related utilities for Java.
+Copyright (C) 2020  AO Industries, Inc.
+	support@aoindustries.com
+	7262 Bull Pen Cir
+	Mobile, AL 36695
+
+This file is part of ao-collections.
+
+ao-collections is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+ao-collections is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.aoindustries</groupId><artifactId>ao-oss-parent</artifactId><version>1.7.1-POST-SNAPSHOT</version>
+		<relativePath>../ao-oss-parent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.aoindustries</groupId><artifactId>ao-collections</artifactId><version>1.0.0-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+
+	<name>AO Collections</name>
+	<url>https://aoindustries.com/ao-collections/</url>
+	<description>Collections and related utilities for Java.</description>
+	<inceptionYear>2020</inceptionYear>
+
+	<scm>
+		<!-- Can't inherit due to multi-module -->
+		<connection>scm:git:git://github.com/aoindustries/ao-collections.git</connection>
+		<developerConnection>scm:git:git@github.com:aoindustries/ao-collections.git</developerConnection>
+		<url>https://github.com/aoindustries/ao-collections</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
+						<configuration>
+							<links>
+								<link>${javadoc.link.javase}</link>
+								<!-- Direct -->
+								<link>https://aoindustries.com/ao-lang/apidocs/</link>
+								<!-- Javadoc-only -->
+								<link>https://commons.apache.org/proper/commons-collections/javadocs/api-4.4/</link>
+							</links>
+							<additionalDependencies>
+								<additionalDependency>
+									<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>4.4</version>
+								</additionalDependency>
+							</additionalDependencies>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Direct -->
+			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId><version>4.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Direct -->
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-lang</artifactId>
+		</dependency>
+	</dependencies>
+</project>
