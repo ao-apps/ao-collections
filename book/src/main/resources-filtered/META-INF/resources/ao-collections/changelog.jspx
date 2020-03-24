@@ -37,6 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
+		dateModified="2020-03-24T01:58:21-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-collections:pom.version}" />
@@ -56,6 +57,13 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 					<li>
 						Project split out of <core:link book="/ao-lang" page="/index.jspx" />
 						<!-- TODO: and <core:link book="/aocode-public" page="/index.jspx" />-->.
+					</li>
+					<li>
+						New utility class <code><ao:a href="apidocs/com/aoindustries/collections/Sets.html">Sets</ao:a></code>
+						for working with sets.  Prefer functionality in
+						<ao:a href="https://commons.apache.org/proper/commons-collections/">Commons Collections</ao:a>
+						or other more mainstream places.  These methods are things not so concisely
+						doable in commons collections.
 					</li>
 				</ul>
 			</changelog:release>

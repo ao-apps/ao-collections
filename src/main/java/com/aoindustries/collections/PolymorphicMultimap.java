@@ -38,7 +38,6 @@ import java.util.function.Predicate;
  *
  * @author  AO Industries, Inc.
  */
-// TODO: Should this spin-off to a microproject?
 // TODO: Should this fully implement the Map interface from Class -> Lists (exposing Lists as part of API)?
 public class PolymorphicMultimap<K,V> {
 

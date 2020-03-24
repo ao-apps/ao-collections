@@ -23,12 +23,12 @@
 package com.aoindustries.collections;
 
 import com.aoindustries.lang.reflect.Classes;
-import com.aoindustries.util.function.Predicate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Predicate;
 
 /**
  * A registry of objects by their class, along with all their parent classes
@@ -37,7 +37,6 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author  AO Industries, Inc.
  */
-// TODO: Should this spin-off to a microproject?
 public class PolymorphicRegistry<U> {
 
 	private final Class<U> upperBound;
