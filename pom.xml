@@ -35,7 +35,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	<name>AO Collections</name>
 	<url>https://aoindustries.com/ao-collections/</url>
 	<description>Collections and related utilities for Java.</description>
-	<inceptionYear>2020</inceptionYear>
+	<inceptionYear>2000</inceptionYear>
 
 	<scm>
 		<!-- Can't inherit due to multi-module -->

@@ -44,7 +44,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	<name>AO Collections Book</name>
 	<url>https://aoindustries.com/ao-collections/</url>
 	<description>Documentation for AO Collections in SemanticCMS format.</description>
-	<inceptionYear>2020</inceptionYear>
+	<inceptionYear>2000</inceptionYear>
 
 	<scm>
 		<connection>scm:git:git://github.com/aoindustries/ao-collections.git</connection>
