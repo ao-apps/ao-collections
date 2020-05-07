@@ -24,9 +24,12 @@ package com.aoindustries.collections;
 
 import java.text.Collator;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -35,8 +38,6 @@ import java.util.TreeSet;
  *
  * @deprecated  Please use {@link org.apache.commons.collections4.properties.SortedProperties} from
  *              <a href="https://commons.apache.org/proper/commons-collections/">Apache Commons Collections</a>.
- *              Please note that this version sorts by {@link String#compareTo(java.lang.String)} instead of
- *              {@link Collator}, so will exhibit case-sensitive sorting.
  *
  * @author  AO Industries, Inc.
  */
@@ -53,11 +54,34 @@ public class SortedProperties extends Properties {
 		super(defaults);
 	}
 
+	/**
+	 * Gets the comparator used to sort the keys.
+	 * <p>
+	 * Defaults to {@link Collator#getInstance(java.util.Locale)}
+	 * in {@link Locale#ROOT}.
+	 * </p>
+	 */
+	public Comparator<Object> getKeyComparator() {
+		return Collator.getInstance(Locale.ROOT);
+	}
+
+	// Java <= 1.8: Properties.save uses keys()
 	@Override
 	public Enumeration<Object> keys() {
-		SortedSet<Object> sortedSet = new TreeSet<>(Collator.getInstance(Locale.ROOT));
+		SortedSet<Object> sortedSet = new TreeSet<>(getKeyComparator());
 		Enumeration<Object> e = super.keys();
 		while(e.hasMoreElements()) sortedSet.add(e.nextElement());
 		return Collections.enumeration(sortedSet);
+	}
+
+	// Java >= 9: Properties.save uses entrySet()
+	@Override
+	public Set<Map.Entry<Object, Object>> entrySet() {
+		Comparator<Object> keyComparator = getKeyComparator();
+		SortedSet<Map.Entry<Object, Object>> sortedSet = new TreeSet<>(
+			(Map.Entry<Object, Object> e1, Map.Entry<Object, Object> e2) -> keyComparator.compare(e1.getKey(), e2.getKey())
+		);
+		sortedSet.addAll(super.entrySet());
+		return sortedSet;
 	}
 }

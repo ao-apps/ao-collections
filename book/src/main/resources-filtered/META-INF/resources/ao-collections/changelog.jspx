@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2020-03-25T02:37:10-05:00"
+		dateModified="2020-05-07T00:12:33-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-collections:pom.version}" />
@@ -52,7 +52,19 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						<p>
+							Fixed <code><ao:a href="apidocs/com/aoindustries/collections/SortedProperties.html">SortedProperties</ao:a></code>
+							compatibility with Java 9+ by also sorting <code>entrySet()</code>.
+						</p>
+						<p>
+							Also added <code>getKeyComparator()</code> method to support different sort orders.
+						</p>
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
