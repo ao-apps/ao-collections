@@ -109,7 +109,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		public E getSingleton(Object target) {
 			try {
 				return (E)method.invoke(target);
-			} catch(IllegalAccessException | InvocationTargetException exc) {
+			} catch(IllegalAccessException | InvocationTargetException exc) { // TODO: ReflectiveOperationException
 				throw new RuntimeException(target+"."+method+"()", exc);
 			}
 		}
@@ -149,7 +149,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		public Set<? extends E> getSet(Object target) {
 			try {
 				return (Set<E>)method.invoke(target);
-			} catch(IllegalAccessException | InvocationTargetException exc) {
+			} catch(IllegalAccessException | InvocationTargetException exc) { // TODO: ReflectiveOperationException
 				throw new RuntimeException(target+"."+method+"()", exc);
 			}
 		}
