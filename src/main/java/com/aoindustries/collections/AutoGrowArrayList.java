@@ -31,6 +31,7 @@ import java.util.Collection;
  *
  * @author  AO Industries, Inc.
  */
+@SuppressWarnings("CloneableImplementsClone")
 public class AutoGrowArrayList<E> extends ArrayList<E> {
 
 	private static final long serialVersionUID = 4698056683308968140L;
@@ -52,7 +53,9 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 	public E set(int index, E element) {
 		int minSize = index+1;
 		ensureCapacity(minSize);
-		while(size()<minSize) add(null);
+		while(size() < minSize) {
+			add(null);
+		}
 		return super.set(index, element);
 	}
 
@@ -60,7 +63,9 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 	@Override
 	public void add(int index, E element) {
 		ensureCapacity(index+1);
-		while(size()<index) add(null);
+		while(size() < index) {
+			add(null);
+		}
 		super.add(index, element);
 	}
 
@@ -68,7 +73,9 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		ensureCapacity(index+c.size());
-		while(size()<index) add(null);
+		while(size() < index) {
+			add(null);
+		}
 		return super.addAll(index, c);
 	}
 }

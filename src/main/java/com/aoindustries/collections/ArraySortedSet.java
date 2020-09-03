@@ -81,6 +81,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
 		this.elements = new ArrayList<>(initialCapacity);
 	}
 
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public ArraySortedSet(Collection<? extends E> c) {
 		this.comparator = null;
 		this.elements = new ArrayList<>(c.size());
@@ -178,6 +179,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
 	}
 
 	@Override
+	@SuppressWarnings("SuspiciousToArrayCall")
 	public <T> T[] toArray(T[] a) {
 		return elements.toArray(a);
 	}
@@ -211,7 +213,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "element-type-mismatch"})
 	public boolean remove(Object o) {
 		int size = elements.size();
 		if(size==0) return false;
@@ -229,15 +231,20 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
 	}
 
 	@Override
+	@SuppressWarnings("element-type-mismatch")
 	public boolean containsAll(Collection<?> c) {
-		for(Object o : c) if(!contains(o)) return false;
+		for(Object o : c) {
+			if(!contains(o)) return false;
+		}
 		return true;
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
 		boolean modified = false;
-		for(E elem : c) if(add(elem)) modified = true;
+		for(E elem : c) {
+			if(add(elem)) modified = true;
+		}
 		return modified;
 	}
 
@@ -249,7 +256,9 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		boolean modified = false;
-		for(Object o : c) if(remove(o)) modified = true;
+		for(Object o : c) {
+			if(remove(o)) modified = true;
+		}
 		return modified;
 	}
 

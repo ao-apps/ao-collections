@@ -134,9 +134,10 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		}
 
 		@Override
+		@SuppressWarnings("element-type-mismatch")
 		public boolean contains(Object target, Object element) {
 			Set<? extends E> set = getSet(target);
-			return set!=null && set.contains(element);
+			return set != null && set.contains(element);
 		}
 
 		@Override
@@ -219,6 +220,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		if(element==null) return false;
 		Class<?> clazz = element.getClass();
 		do {
+			@SuppressWarnings("element-type-mismatch")
 			List<? extends Method<? extends E>> methods = methodsByClass.get(clazz);
 			if(methods!=null) {
 				for(int i=0, size=methods.size(); i<size; i++) {

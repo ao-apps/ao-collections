@@ -42,6 +42,7 @@ import java.util.TreeSet;
  * @author  AO Industries, Inc.
  */
 @Deprecated
+@SuppressWarnings("CloneableImplementsClone")
 public class SortedProperties extends Properties {
 
 	private static final long serialVersionUID = 1L;
@@ -70,7 +71,9 @@ public class SortedProperties extends Properties {
 	public Enumeration<Object> keys() {
 		SortedSet<Object> sortedSet = new TreeSet<>(getKeyComparator());
 		Enumeration<Object> e = super.keys();
-		while(e.hasMoreElements()) sortedSet.add(e.nextElement());
+		while(e.hasMoreElements()) {
+			sortedSet.add(e.nextElement());
+		}
 		return Collections.enumeration(sortedSet);
 	}
 

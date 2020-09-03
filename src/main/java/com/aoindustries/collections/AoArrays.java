@@ -152,14 +152,18 @@ public class AoArrays {
 					} else {
 						// Get rest of i2
 						results[pos++] = next2;
-						while(i2.hasNext()) results[pos++] = i2.next();
+						while(i2.hasNext()) {
+							results[pos++] = i2.next();
+						}
 						break;
 					}
 				} else {
 					if(next2==null) {
 						// Get rest of i1
 						results[pos++] = next1;
-						while(i1.hasNext()) results[pos++] = i1.next();
+						while(i1.hasNext()) {
+							results[pos++] = i1.next();
+						}
 						break;
 					} else {
 						if(comparator.compare(next1, next2)<=0) {
@@ -251,7 +255,7 @@ public class AoArrays {
 		@Override
 		public Iterator<E> iterator() {
 			return new Iterator<E>() {
-				int pos = 0;
+				private int pos = 0;
 				@Override
 				public boolean hasNext() {
 					return pos<array.length;
@@ -304,6 +308,7 @@ public class AoArrays {
 		}
 
 		@Override
+		@SuppressWarnings("element-type-mismatch")
 		public boolean containsAll(Collection<?> c) {
 			for(Object e : c) {
 				if(!contains(e)) return false;

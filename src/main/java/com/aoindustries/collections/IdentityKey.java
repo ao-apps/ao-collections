@@ -51,6 +51,7 @@ public class IdentityKey<T> {
 	}
 
 	@Override
+	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
 		return this==obj;
 	}

@@ -32,6 +32,7 @@ import java.util.Iterator;
  *
  * @author  AO Industries, Inc.
  */
+@SuppressWarnings("CloneableImplementsClone")
 public class SortedArrayList<E> extends ArrayList<E> {
 
 	private static final long serialVersionUID = 1L;
@@ -98,7 +99,9 @@ public class SortedArrayList<E> extends ArrayList<E> {
 			if(T.hashCode()!=elemHash) break;
 			if(T.equals(elem)) {
 				// Found one, iterate backwards to the first one
-				while(pos>0 && get(pos-1).equals(elem)) pos--;
+				while(pos > 0 && get(pos - 1).equals(elem)) {
+					pos--;
+				}
 				return pos;
 			}
 			pos--;
@@ -126,7 +129,9 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		if(pos<0) return -1;
 
 		// Try backwards until different hashCode
-		while(pos>0 && get(pos-1).hashCode()==hashCode) pos--;
+		while(pos > 0 && get(pos - 1).hashCode()==hashCode) {
+			pos--;
+		}
 		return pos;
 	}
 
@@ -156,7 +161,9 @@ public class SortedArrayList<E> extends ArrayList<E> {
 			if(T.hashCode()!=elemHash) break;
 			if(T.equals(elem)) {
 				// Found one, iterate backwards to the first one
-				while(pos<(size-1) && get(pos+1).equals(elem)) pos++;
+				while(pos < (size - 1) && get(pos + 1).equals(elem)) {
+					pos++;
+				}
 				return pos;
 			}
 			pos++;
@@ -210,7 +217,9 @@ public class SortedArrayList<E> extends ArrayList<E> {
 					super.add(-(index+1), o);
 				} else {
 					// Add after the last item with matching hashCodes
-					while(index<(size-1) && get(index+1).hashCode()==Ohash) index++;
+					while(index < (size - 1) && get(index + 1).hashCode() == Ohash) {
+						index++;
+					}
 					super.add(index+1, o);
 				}
 			}

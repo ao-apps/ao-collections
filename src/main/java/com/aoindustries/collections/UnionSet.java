@@ -60,11 +60,13 @@ public class UnionSet<E> extends AbstractSet<E> {
 	public UnionSet() {
 	}
 
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public UnionSet(Collection<? extends E> c) {
 		combined = new HashSet<>(c.size()*4/3+1);
 		addAll(c);
 	}
 
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public UnionSet(Set<? extends E> set) {
 		addAll(set);
 	}
@@ -74,10 +76,14 @@ public class UnionSet<E> extends AbstractSet<E> {
 			if(combined==null) {
 				// Avoid rehash at the expense of possibly allocating more than needed when there are duplicates
 				int totalSize = 0;
-				for(Set<? extends E> set : added) totalSize += set.size();
+				for(Set<? extends E> set : added) {
+					totalSize += set.size();
+				}
 				combined = new HashSet<>(totalSize*4/3+1);
 			}
-			for(Set<? extends E> set : added) combined.addAll(set);
+			for(Set<? extends E> set : added) {
+				combined.addAll(set);
+			}
 			added.clear();
 		}
 	}
@@ -99,7 +105,9 @@ public class UnionSet<E> extends AbstractSet<E> {
 	@Override
 	public boolean contains(Object o) {
 		if(combined!=null && combined.contains(o)) return true;
-		for(Set<? extends E> set : added) if(set.contains(o)) return true;
+		for(Set<? extends E> set : added) {
+			if(set.contains(o)) return true;
+		}
 		return false;
 	}
 
@@ -135,6 +143,7 @@ public class UnionSet<E> extends AbstractSet<E> {
 	 * Triggers combining.
 	 */
 	@Override
+	@SuppressWarnings("SuspiciousToArrayCall")
 	public <T> T[] toArray(T[] a) {
 		combine();
 		if(combined==null) {
@@ -160,8 +169,11 @@ public class UnionSet<E> extends AbstractSet<E> {
 	}
 
 	@Override
+	@SuppressWarnings("element-type-mismatch")
 	public boolean containsAll(Collection<?> c) {
-		for(Object o : c) if(!contains(o)) return false;
+		for(Object o : c) {
+			if(!contains(o)) return false;
+		}
 		return true;
 	}
 

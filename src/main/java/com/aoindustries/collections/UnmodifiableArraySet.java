@@ -98,7 +98,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 	}
 	 //*/
 
-	E[] elements;
+	private E[] elements;
 
 	private static boolean inOrderAndUnique(Object[] elements) {
 		// Make sure all elements are in hashCode order and unique
@@ -188,7 +188,9 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 		if(size==0 || o==null) return false;
 		if(size<BINARY_SEARCH_THRESHOLD) {
 			// Simple search
-			for(int i=0;i<size;i++) if(elems[i].equals(o)) return true;
+			for(int i = 0; i < size; i++) {
+				if(elems[i].equals(o)) return true;
+			}
 		} else {
 			int index = binarySearch(elems, o.hashCode());
 			if(index<0) return false;
@@ -215,7 +217,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 	@Override
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
-			int index = 0;
+			private int index = 0;
 			final E[] elems = UnmodifiableArraySet.this.elements; // Local fast reference
 			@Override
 			public boolean hasNext() {
@@ -259,9 +261,12 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 	}
 
 	@Override
+	@SuppressWarnings("element-type-mismatch")
 	public boolean containsAll(Collection<?> c) {
 		// Could do a nifty single-pass merge if the other collection is also an UnmodifiableArraySet and contains a large number of elements
-		for(Object o : c) if(!contains(o)) return false;
+		for(Object o : c) {
+			if(!contains(o)) return false;
+		}
 		return true;
 	}
 
@@ -299,7 +304,9 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 			fastOut.writeInt(len);
 			if(len>0) {
 				E[] elems = UnmodifiableArraySet.this.elements; // Local fast reference
-				for(int i=0; i<len; i++) fastOut.writeObject(elems[i]);
+				for(int i=0; i<len; i++) {
+					fastOut.writeObject(elems[i]);
+				}
 			}
 		} finally {
 			fastOut.unwrap();
@@ -316,7 +323,9 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 			if(len==0) elements = (E[])EmptyArrays.EMPTY_OBJECT_ARRAY;
 			else {
 				E[] newElements = (E[])new Object[len];
-				for(int i=0; i<len; i++) newElements[i] = (E)fastIn.readObject();
+				for(int i=0; i<len; i++) {
+					newElements[i] = (E)fastIn.readObject();
+				}
 				if(ASSERTIONS_ENABLED) assert inOrderAndUnique(newElements);
 				UnmodifiableArraySet.this.elements = newElements;
 			}

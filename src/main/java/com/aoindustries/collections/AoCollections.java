@@ -188,6 +188,7 @@ public class AoCollections {
 		}
 
 		@Override
+		@SuppressWarnings("ReturnOfCollectionOrArrayField")
 		public SortedSet<E> tailSet(E fromElement) {
 			if(Objects.equals(element, fromElement)) return this;
 			throw new IllegalArgumentException();
@@ -252,6 +253,7 @@ public class AoCollections {
 	 * Casts the iterable to collection, if possible.
 	 * Otherwise builds a new list from the iterable, maintaining iteration order.
 	 */
+	@SuppressWarnings("null")
 	public static <E> Collection<E> asCollection(Iterable<E> iterable) {
 		if(iterable instanceof Collection) return (Collection<E>)iterable;
 		List<E> list = new ArrayList<>();
@@ -329,6 +331,7 @@ public class AoCollections {
 	 * Casts the iterable to list, if possible.
 	 * Otherwise builds a new list from the iterable, maintaining iteration order.
 	 */
+	@SuppressWarnings("null")
 	public static <E> List<E> asList(Iterable<E> iterable) {
 		if(iterable instanceof List) return (List<E>)iterable;
 		List<E> list = new ArrayList<>();
@@ -408,6 +411,7 @@ public class AoCollections {
 	 * Casts the iterable to set, if possible.
 	 * Otherwise builds a new set from the iterable, maintaining iteration order.
 	 */
+	@SuppressWarnings("null")
 	public static <E> Set<E> asSet(Iterable<E> iterable) {
 		if(iterable instanceof Set) return (Set<E>)iterable;
 		Set<E> set = new LinkedHashSet<>();
@@ -467,7 +471,9 @@ public class AoCollections {
 		int size = sortedSet.size();
 		if(size==0) return emptySortedSet();
 		Class<?> clazz = sortedSet.getClass();
-		for(int i=0, len=unmodifiableSortedSetClasses.length; i<len; i++) if(unmodifiableSortedSetClasses[i]==clazz) return sortedSet;
+		for(int i = 0, len = unmodifiableSortedSetClasses.length; i < len; i++) {
+			if(unmodifiableSortedSetClasses[i] == clazz) return sortedSet;
+		}
 		if(size==1) return singletonSortedSet(sortedSet.first());
 		return Collections.unmodifiableSortedSet(sortedSet);
 	}
@@ -477,6 +483,7 @@ public class AoCollections {
 	 * Casts the iterable to sorted set, if possible.
 	 * Otherwise builds a new sorted set from the iterable, in natural ordering.
 	 */
+	@SuppressWarnings("null")
 	public static <E> SortedSet<E> asSortedSet(Iterable<E> iterable) {
 		if(iterable instanceof SortedSet) return (SortedSet<E>)iterable;
 		SortedSet<E> sortedSet = new TreeSet<>();

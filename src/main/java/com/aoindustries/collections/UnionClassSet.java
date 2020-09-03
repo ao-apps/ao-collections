@@ -64,10 +64,12 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 	public UnionClassSet() {
 	}
 
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public UnionClassSet(Collection<? extends E> c) {
 		addAll(c);
 	}
 
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public UnionClassSet(Set<? extends E> set) {
 		addAll(set);
 	}
@@ -140,7 +142,9 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 	}
 
 	private static boolean allSameClass(Class<?> clazz, Iterator<?> iter) {
-		while(iter.hasNext()) if(iter.next().getClass()!=clazz) return false;
+		while(iter.hasNext()) {
+			if(iter.next().getClass() != clazz) return false;
+		}
 		return true;
 	}
 

@@ -36,6 +36,7 @@ import junit.framework.TestSuite;
 /**
  * @author  AO Industries, Inc.
  */
+@SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class ArraySortedSetTest extends TestCase {
 
 	public ArraySortedSetTest(String testName) {
@@ -53,7 +54,9 @@ public class ArraySortedSetTest extends TestCase {
 		SortedSet<Integer> randomValues = new TreeSet<>();
 		for(int testSize = 1; testSize<=endTestSize; testSize *= 10) {
 			// Generate testSize random ints
-			while(randomValues.size()<testSize) randomValues.add(random.nextInt());
+			while(randomValues.size() < testSize) {
+				randomValues.add(random.nextInt());
+			}
 			List<Integer> randomList = new ArrayList<>(randomValues);
 			// Time new
 			long startNanos = System.nanoTime();
@@ -83,6 +86,8 @@ public class ArraySortedSetTest extends TestCase {
 
 	public void testPerformance() {
 		final int numTests = 1;
-		for(int c=0;c<numTests;c++) doTestPerformance();
+		for(int c = 0; c < numTests; c++) {
+			doTestPerformance();
+		}
 	}
 }

@@ -22,6 +22,7 @@
  */
 package com.aoindustries.collections;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -57,9 +58,13 @@ public class Sets {
 	@SafeVarargs
 	public static <E> Set<E> union(Set<? extends E> ... sets) {
 		int size = 0;
-		for(Set<? extends E> set : sets) size += set.size();
+		for(Set<? extends E> set : sets) {
+			size += set.size();
+		}
 		Set<E> union = new LinkedHashSet<>(size * 4/3+1);
-		for(Set<? extends E> set : sets) union.addAll(set);
+		for(Set<? extends E> set : sets) {
+			union.addAll(set);
+		}
 		return union;
 	}
 
@@ -69,11 +74,12 @@ public class Sets {
 	 * @see  LinkedHashSet
 	 */
 	@SafeVarargs
+	@SuppressWarnings("varargs")
 	public static <E> Set<E> union(Set<? extends E> set, E ... elements) {
 		int size = set.size() + elements.length;
 		Set<E> union = new LinkedHashSet<>(size * 4/3+1);
 		union.addAll(set);
-		for(E element : elements) union.add(element);
+		union.addAll(Arrays.asList(elements));
 		return union;
 	}
 }

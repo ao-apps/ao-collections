@@ -35,6 +35,8 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	<properties>
 		<!-- Dependencies -->
 		<commons-collections4.version>4.4</commons-collections4.version>
+		<!-- NetBeans Hints that we can't find @SuppressWarnings for -->
+		<org-netbeans-spi-editor-hints-projects.text.x-java.org_2e_netbeans_2e_modules_2e_java_2e_hints_2e_bugs_2e_CloneAndCloneable_2e_cloneWithoutThrows.hintSeverity>HINT</org-netbeans-spi-editor-hints-projects.text.x-java.org_2e_netbeans_2e_modules_2e_java_2e_hints_2e_bugs_2e_CloneAndCloneable_2e_cloneWithoutThrows.hintSeverity>
 	</properties>
 
 	<name>AO Collections</name>

@@ -86,10 +86,13 @@ public class LongArrayList extends AbstractList<Long>
 		size = c.size();
 		// Allow 10% room for growth
 		elementData = new long[
-					  (int)Math.min((size*110L)/100,Integer.MAX_VALUE)];
+			(int)Math.min((size*110L)/100,Integer.MAX_VALUE)
+		];
 		Iterator<? extends Number> iter = c.iterator();
 		int pos=0;
-		while(iter.hasNext()) elementData[pos++]=iter.next().longValue();
+		while(iter.hasNext()) {
+			elementData[pos++] = iter.next().longValue();
+		}
 	}
 
 	public LongArrayList(long[] elements) {
@@ -209,9 +212,9 @@ public class LongArrayList extends AbstractList<Long>
 	 */
 	@Override
 	public int indexOf(long elem) {
-		for (int i = 0; i < size; i++)
-			if (elem==elementData[i])
-				return i;
+		for (int i = 0; i < size; i++) {
+			if (elem==elementData[i]) return i;
+		}
 		return -1;
 	}
 
@@ -240,9 +243,9 @@ public class LongArrayList extends AbstractList<Long>
 	 */
 	@Override
 	public int lastIndexOf(long elem) {
-		for (int i = size-1; i >= 0; i--)
-			if (elem==elementData[i])
-				return i;
+		for (int i = size-1; i >= 0; i--) {
+			if (elem==elementData[i]) return i;
+		}
 		return -1;
 	}
 
@@ -276,7 +279,9 @@ public class LongArrayList extends AbstractList<Long>
 	@Override
 	public Object[] toArray() {
 		Object[] result = new Object[size];
-		for(int c=0;c<size;c++) result[c] = elementData[c];
+		for(int c = 0; c < size; c++) {
+			result[c] = elementData[c];
+		}
 		return result;
 	}
 
@@ -524,11 +529,12 @@ public class LongArrayList extends AbstractList<Long>
 	 */
 	@Override
 	public boolean removeByValue(long value) {
-		for (int index = 0; index < size; index++)
-			if (value==elementData[index]) {
+		for (int index = 0; index < size; index++) {
+			if (value == elementData[index]) {
 				fastRemove(index);
 				return true;
 			}
+		}
 		return false;
 	}
 
@@ -554,8 +560,9 @@ public class LongArrayList extends AbstractList<Long>
 		modCount++;
 
 		// Let gc do its work
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < size; i++) {
 			elementData[i] = 0;
+		}
 
 		size = 0;
 	}
@@ -578,7 +585,9 @@ public class LongArrayList extends AbstractList<Long>
 		int numNew = c.size();
 		ensureCapacity(size + numNew);  // Increments modCount
 		Iterator<? extends Long> iter=c.iterator();
-		while(iter.hasNext()) elementData[size++]=iter.next();
+		while(iter.hasNext()) {
+			elementData[size++] = iter.next();
+		}
 		return numNew != 0;
 	}
 
@@ -613,7 +622,9 @@ public class LongArrayList extends AbstractList<Long>
 
 		Iterator<? extends Long> iter=c.iterator();
 		int pos = index;
-		while(iter.hasNext()) elementData[pos++]=iter.next();
+		while(iter.hasNext()) {
+			elementData[pos++] = iter.next();
+		}
 		size += numNew;
 		return numNew != 0;
 	}
@@ -637,8 +648,9 @@ public class LongArrayList extends AbstractList<Long>
 
 		// Let gc do its work
 		int newSize = size - (toIndex-fromIndex);
-		while (size != newSize)
+		while (size != newSize) {
 			elementData[--size] = 0;
+		}
 	}
 
 	/**
@@ -671,10 +683,11 @@ public class LongArrayList extends AbstractList<Long>
 		s.writeInt(elementData.length);
 
 		// Write out all elements in the proper order.
-		for (int i=0; i<size; i++)
+		for (int i=0; i<size; i++) {
 			s.writeLong(elementData[i]);
+		}
 
-		 if (modCount != expectedModCount) {
+		if (modCount != expectedModCount) {
 			throw new ConcurrentModificationException();
 		}
 	}
@@ -690,10 +703,12 @@ public class LongArrayList extends AbstractList<Long>
 
 		// Read in array length and allocate array
 		int arrayLength = s.readInt();
-		long[] a = elementData = new long[arrayLength];
+		long[] a = new long[arrayLength];
+		elementData = a;
 
 		// Read in all elements in the proper order.
-		for (int i=0; i<size; i++)
+		for (int i=0; i<size; i++) {
 			a[i] = s.readLong();
+		}
 	}
 }

@@ -53,6 +53,11 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
 		super();
 	}
 
+	@Override
+	public Object clone() {
+		return super.clone();
+	}
+
 	/**
 	 * Performs a binary search for the provide value.
 	 * It will return any matching element, not necessarily
@@ -87,7 +92,9 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
 		if(pos<0) return -1;
 
 		// Found one, iterate backwards to the first one
-		while(pos>0 && elementData[pos-1]==elem) pos--;
+		while(pos>0 && elementData[pos-1]==elem) {
+			pos--;
+		}
 		return pos;
 	}
 
@@ -108,7 +115,9 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
 		if(pos<0) return -1;
 
 		// Found one, iterate forwards to the last one
-		while(pos<(size-1) && elementData[pos+1]==elem) pos++;
+		while(pos<(size-1) && elementData[pos+1]==elem) {
+			pos++;
+		}
 		return pos;
 	}
 

@@ -127,6 +127,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 	 * @deprecated  This is for convention only, please provide a previously sorted ArrayList for best performance.
 	 */
 	@Deprecated
+	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public ArraySet(Collection<? extends E> c) {
 		this.elements = new ArrayList<>(c.size());
 		addAll(c);
@@ -221,7 +222,9 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 		if(size==0 || o==null) return false;
 		if(size<BINARY_SEARCH_THRESHOLD) {
 			// Simple search
-			for(int i=0;i<size;i++) if(elements.get(i).equals(o)) return true;
+			for(int i = 0; i < size; i++) {
+				if(elements.get(i).equals(o)) return true;
+			}
 		} else {
 			int index = binarySearch((E)o);
 			if(index<0) return false;
@@ -269,6 +272,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 		average=GrowthFunction.LINEAR,
 		worst=GrowthFunction.LINEAR
 	)*/
+	@SuppressWarnings("SuspiciousToArrayCall")
 	public <T> T[] toArray(T[] a) {
 		return elements.toArray(a);
 	}
@@ -331,6 +335,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 		averageConditions={GrowthCondition.GOOD_HASH_CODE},
 		worst=GrowthFunction.LINEAR
 	)*/
+	@SuppressWarnings("element-type-mismatch")
 	public boolean remove(Object o) {
 		int size = elements.size();
 		if(size==0) return false;
@@ -354,8 +359,11 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 		averageConditions={GrowthCondition.GOOD_HASH_CODE},
 		worst=GrowthFunction.QUADRATIC
 	)*/
+	@SuppressWarnings("element-type-mismatch")
 	public boolean containsAll(Collection<?> c) {
-		for(Object o : c) if(!contains(o)) return false;
+		for(Object o : c) {
+			if(!contains(o)) return false;
+		}
 		return true;
 	}
 
@@ -370,7 +378,9 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 	)*/
 	public boolean addAll(Collection<? extends E> c) {
 		boolean modified = false;
-		for(E elem : c) if(add(elem)) modified = true;
+		for(E elem : c) {
+			if(add(elem)) modified = true;
+		}
 		return modified;
 	}
 
@@ -388,9 +398,12 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 		averageConditions={GrowthCondition.GOOD_HASH_CODE},
 		worst=GrowthFunction.QUADRATIC
 	)*/
+	@SuppressWarnings("element-type-mismatch")
 	public boolean removeAll(Collection<?> c) {
 		boolean modified = false;
-		for(Object o : c) if(remove(o)) modified = true;
+		for(Object o : c) {
+			if(remove(o)) modified = true;
+		}
 		return modified;
 	}
 
