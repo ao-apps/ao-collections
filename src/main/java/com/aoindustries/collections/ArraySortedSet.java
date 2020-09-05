@@ -254,6 +254,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
 	}
 
 	@Override
+	@SuppressWarnings("element-type-mismatch")
 	public boolean removeAll(Collection<?> c) {
 		boolean modified = false;
 		for(Object o : c) {
