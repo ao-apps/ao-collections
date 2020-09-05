@@ -192,12 +192,12 @@ public class MinimalMap {
 	}
 
 	/**
-	 * Gets an unmodifiable wrapper around this list.
-	 * May or may not wrap this list itself.
+	 * Gets an unmodifiable wrapper around this map.
+	 * May or may not wrap this map itself.
 	 */
 	public static <K,V> Map<K,V> unmodifiable(Map<K,V> map) {
 		// Still supporting null map for API compatibility
-		if(map==null || map.isEmpty()) {
+		if(map == null) {
 			// Empty
 			return Collections.emptyMap();
 		}

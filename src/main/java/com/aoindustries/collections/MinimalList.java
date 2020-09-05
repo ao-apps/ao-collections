@@ -109,7 +109,7 @@ public class MinimalList {
 	 */
 	public static <E> List<E> unmodifiable(List<E> list) {
 		// Still supporting null list for API compatibility
-		if(list==null || list.isEmpty()) {
+		if(list == null) {
 			// Empty
 			return Collections.emptyList();
 		}
