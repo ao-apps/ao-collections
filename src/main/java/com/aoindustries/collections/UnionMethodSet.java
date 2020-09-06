@@ -22,6 +22,7 @@
  */
 package com.aoindustries.collections;
 
+import com.aoindustries.exception.WrappedException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractSet;
 import java.util.ArrayList;
@@ -105,12 +106,17 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({"unchecked", "UseSpecificCatch", "TooBroadCatch"})
 		public E getSingleton(Object target) {
 			try {
 				return (E)method.invoke(target);
-			} catch(IllegalAccessException | InvocationTargetException exc) { // TODO: ReflectiveOperationException
-				throw new RuntimeException(target+"."+method+"()", exc);
+			} catch(InvocationTargetException e) {
+				Throwable cause = e.getCause();
+				throw new WrappedException(target + "." + method + "()", cause == null ? e : cause);
+			} catch(ThreadDeath td) {
+				throw td;
+			} catch(Throwable t) {
+				throw new RuntimeException(target + "." + method + "()", t);
 			}
 		}
 
@@ -146,12 +152,17 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({"unchecked", "UseSpecificCatch", "TooBroadCatch"})
 		public Set<? extends E> getSet(Object target) {
 			try {
 				return (Set<E>)method.invoke(target);
-			} catch(IllegalAccessException | InvocationTargetException exc) { // TODO: ReflectiveOperationException
-				throw new RuntimeException(target+"."+method+"()", exc);
+			} catch(InvocationTargetException e) {
+				Throwable cause = e.getCause();
+				throw new WrappedException(target + "." + method + "()", cause == null ? e : cause);
+			} catch(ThreadDeath td) {
+				throw td;
+			} catch(Throwable t) {
+				throw new RuntimeException(target + "." + method + "()", t);
 			}
 		}
 	}
