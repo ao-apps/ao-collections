@@ -33,6 +33,7 @@ import java.util.RandomAccess;
  *
  * @see  java.util.ArrayList
  */
+// TODO: Support IntStream
 public class IntArrayList extends AbstractList<Integer>
 		implements IntList, RandomAccess, Cloneable, java.io.Serializable
 {

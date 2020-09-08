@@ -29,6 +29,7 @@ import java.util.List;
  *
  * @see  List
  */
+// TODO: Support IntStream
 public interface IntList extends IntCollection, List<Integer> {
 
 	int indexOf(int elem);

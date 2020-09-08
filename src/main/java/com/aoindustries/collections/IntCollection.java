@@ -29,6 +29,7 @@ import java.util.Collection;
  *
  * @see  Collection
  */
+// TODO: Support IntStream
 public interface IntCollection extends Collection<Integer> {
 
 	boolean contains(int elem);

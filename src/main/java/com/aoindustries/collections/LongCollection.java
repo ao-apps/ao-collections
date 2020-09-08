@@ -29,6 +29,7 @@ import java.util.Collection;
  *
  * @see  Collection
  */
+// TODO: Support LongStream
 public interface LongCollection extends Collection<Long> {
 
 	boolean contains(long elem);

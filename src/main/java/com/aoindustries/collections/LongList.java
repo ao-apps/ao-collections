@@ -29,6 +29,7 @@ import java.util.List;
  *
  * @see  java.util.ArrayList
  */
+// TODO: Support LongStream
 public interface LongList extends LongCollection, List<Long> {
 
 	int indexOf(long elem);

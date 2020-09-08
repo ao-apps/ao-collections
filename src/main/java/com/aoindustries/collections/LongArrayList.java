@@ -33,6 +33,7 @@ import java.util.RandomAccess;
  *
  * @see  java.util.ArrayList
  */
+// TODO: Support LongStream
 public class LongArrayList extends AbstractList<Long>
 		implements LongList, RandomAccess, Cloneable, java.io.Serializable
 {
