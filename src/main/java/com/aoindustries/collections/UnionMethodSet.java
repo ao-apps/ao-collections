@@ -109,14 +109,17 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		@SuppressWarnings({"unchecked", "UseSpecificCatch", "TooBroadCatch"})
 		public E getSingleton(Object target) {
 			try {
-				return (E)method.invoke(target);
-			} catch(InvocationTargetException e) {
-				Throwable cause = e.getCause();
-				throw new WrappedException(target + "." + method + "()", cause == null ? e : cause);
+				try {
+					return (E)method.invoke(target);
+				} catch(InvocationTargetException e) {
+					// Unwrap cause for more direct stack traces
+					Throwable cause = e.getCause();
+					throw (cause == null) ? e : cause;
+				}
 			} catch(ThreadDeath td) {
 				throw td;
 			} catch(Throwable t) {
-				throw new RuntimeException(target + "." + method + "()", t);
+				throw new WrappedException(target + "." + method + "()", t);
 			}
 		}
 
@@ -155,14 +158,17 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		@SuppressWarnings({"unchecked", "UseSpecificCatch", "TooBroadCatch"})
 		public Set<? extends E> getSet(Object target) {
 			try {
-				return (Set<E>)method.invoke(target);
-			} catch(InvocationTargetException e) {
-				Throwable cause = e.getCause();
-				throw new WrappedException(target + "." + method + "()", cause == null ? e : cause);
+				try {
+					return (Set<E>)method.invoke(target);
+				} catch(InvocationTargetException e) {
+					// Unwrap cause for more direct stack traces
+					Throwable cause = e.getCause();
+					throw (cause == null) ? e : cause;
+				}
 			} catch(ThreadDeath td) {
 				throw td;
 			} catch(Throwable t) {
-				throw new RuntimeException(target + "." + method + "()", t);
+				throw new WrappedException(target + "." + method + "()", t);
 			}
 		}
 	}
