@@ -191,7 +191,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 			list.add(method);
 		}
 		// Build final map with trimmed array lists or singletonList
-		added = new LinkedHashMap<Class<? extends E>, List<Method<? extends E>>>(newAdded.size()*4/3+1);
+		added = AoCollections.<Class<? extends E>, List<Method<? extends E>>>newLinkedHashMap(newAdded.size());
 		for(Map.Entry<Class<? extends E>, ArrayList<Method<? extends E>>> entry : newAdded.entrySet()) {
 			Class<? extends E> returnType = entry.getKey();
 			ArrayList<Method<? extends E>> list = entry.getValue();

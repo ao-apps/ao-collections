@@ -30,6 +30,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -959,5 +962,181 @@ public class AoCollections {
 			}
 		}
 		return filtered;
+	}
+
+	/**
+	 * Gets the initial capacity to use for hash-based collections that will contain the given number of elements,
+	 * assuming the default load factor of {@code 0.75f}.
+	 *
+	 * @see  HashMap
+	 * @see  HashSet
+	 * @see  IdentityHashMap
+	 */
+	public static int getHashInitialCapacity(int elements) {
+		return (int)(elements / 0.75f) + 1;
+		//long initialCapacity = (long)elements * 4/3 + 1;
+		//return (initialCapacity > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (int)initialCapacity;
+	}
+
+	/**
+	 * Creates a new {@link ArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <E> ArrayList<E> newArrayList(int elements) {
+		return (elements == -1) ? new ArrayList<>() : new ArrayList<>(elements);
+	}
+
+	/**
+	 * Creates a new {@link ArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <E> ArrayList<E> newArrayList(Integer elements) {
+		return newArrayList(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link HashMap} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <K,V> HashMap<K,V> newHashMap(int elements) {
+		return (elements == -1) ? new HashMap<>() : new HashMap<>(getHashInitialCapacity(elements));
+	}
+
+	/**
+	 * Creates a new {@link HashMap} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <K,V> HashMap<K,V> newHashMap(Integer elements) {
+		return newHashMap(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link HashSet} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <E> HashSet<E> newHashSet(int elements) {
+		return (elements == -1) ? new HashSet<>() : new HashSet<>(getHashInitialCapacity(elements));
+	}
+
+	/**
+	 * Creates a new {@link HashSet} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <E> HashSet<E> newHashSet(Integer elements) {
+		return newHashSet(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link IdentityHashMap} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <K,V> IdentityHashMap<K,V> newIdentityHashMap(int elements) {
+		return (elements == -1) ? new IdentityHashMap<>() : new IdentityHashMap<>(elements);
+	}
+
+	/**
+	 * Creates a new {@link IdentityHashMap} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <K,V> IdentityHashMap<K,V> newIdentityHashMap(Integer elements) {
+		return newIdentityHashMap(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link IntArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static IntArrayList newIntArrayList(int elements) {
+		return (elements == -1) ? new IntArrayList() : new IntArrayList(elements);
+	}
+
+	/**
+	 * Creates a new {@link IntArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static IntArrayList newIntArrayList(Integer elements) {
+		return newIntArrayList(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link LinkedHashMap} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <K,V> LinkedHashMap<K,V> newLinkedHashMap(int elements) {
+		return (elements == -1) ? new LinkedHashMap<>() : new LinkedHashMap<>(getHashInitialCapacity(elements));
+	}
+
+	/**
+	 * Creates a new {@link LinkedHashMap} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <K,V> LinkedHashMap<K,V> newLinkedHashMap(Integer elements) {
+		return newLinkedHashMap(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link LinkedHashSet} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <E> LinkedHashSet<E> newLinkedHashSet(int elements) {
+		return (elements == -1) ? new LinkedHashSet<>() : new LinkedHashSet<>(getHashInitialCapacity(elements));
+	}
+
+	/**
+	 * Creates a new {@link LinkedHashSet} with a capacity large enough to contain the given number of elements without rehashing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <E> LinkedHashSet<E> newLinkedHashSet(Integer elements) {
+		return newLinkedHashSet(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link LongArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static LongArrayList newLongArrayList(int elements) {
+		return (elements == -1) ? new LongArrayList() : new LongArrayList(elements);
+	}
+
+	/**
+	 * Creates a new {@link LongArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static LongArrayList newLongArrayList(Integer elements) {
+		return newLongArrayList(elements == null ? -1 : elements);
+	}
+
+	/**
+	 * Creates a new {@link SortedArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code -1} when unknown
+	 */
+	public static <E> SortedArrayList<E> newSortedArrayList(int elements) {
+		return (elements == -1) ? new SortedArrayList<>() : new SortedArrayList<>(elements);
+	}
+
+	/**
+	 * Creates a new {@link SortedArrayList} with a capacity large enough to contain the given number of elements without growing.
+	 *
+	 * @param  elements  The number of elements or {@code null} when unknown
+	 */
+	public static <E> SortedArrayList<E> newSortedArrayList(Integer elements) {
+		return newSortedArrayList(elements == null ? -1 : elements);
 	}
 }

@@ -43,8 +43,7 @@ public class Sets {
 	 */
 	// TODO:? https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/SetUtils.html#union-java.util.Set-java.util.Set-
 	public static <E> Set<E> union(Set<? extends E> set1, Set<? extends E> set2) {
-		int size = set1.size() + set2.size();
-		Set<E> union = new LinkedHashSet<>(size * 4/3+1);
+		Set<E> union = AoCollections.newLinkedHashSet(set1.size() + set2.size());
 		union.addAll(set1);
 		union.addAll(set2);
 		return union;
@@ -61,7 +60,7 @@ public class Sets {
 		for(Set<? extends E> set : sets) {
 			size += set.size();
 		}
-		Set<E> union = new LinkedHashSet<>(size * 4/3+1);
+		Set<E> union = AoCollections.newLinkedHashSet(size);
 		for(Set<? extends E> set : sets) {
 			union.addAll(set);
 		}
@@ -77,7 +76,7 @@ public class Sets {
 	@SuppressWarnings("varargs")
 	public static <E> Set<E> union(Set<? extends E> set, E ... elements) {
 		int size = set.size() + elements.length;
-		Set<E> union = new LinkedHashSet<>(size * 4/3+1);
+		Set<E> union = AoCollections.newLinkedHashSet(size);
 		union.addAll(set);
 		union.addAll(Arrays.asList(elements));
 		return union;

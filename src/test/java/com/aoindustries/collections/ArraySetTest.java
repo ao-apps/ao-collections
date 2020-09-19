@@ -51,7 +51,7 @@ public class ArraySetTest extends TestCase {
 
 	private void doTestPerformance() {
 		final int endTestSize = 1000000;
-		Set<Integer> randomValues = new HashSet<>(endTestSize);
+		Set<Integer> randomValues = AoCollections.newHashSet(endTestSize);
 		for(int testSize = 1; testSize<=endTestSize; testSize *= 10) {
 			// Generate testSize random ints
 			while(randomValues.size()<testSize) {

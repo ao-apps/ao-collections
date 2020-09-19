@@ -62,7 +62,7 @@ public class UnionSet<E> extends AbstractSet<E> {
 
 	@SuppressWarnings("OverridableMethodCallInConstructor")
 	public UnionSet(Collection<? extends E> c) {
-		combined = new HashSet<>(c.size()*4/3+1);
+		combined = AoCollections.newHashSet(c.size());
 		addAll(c);
 	}
 
@@ -79,7 +79,7 @@ public class UnionSet<E> extends AbstractSet<E> {
 				for(Set<? extends E> set : added) {
 					totalSize += set.size();
 				}
-				combined = new HashSet<>(totalSize*4/3+1);
+				combined = AoCollections.newHashSet(totalSize);
 			}
 			for(Set<? extends E> set : added) {
 				combined.addAll(set);

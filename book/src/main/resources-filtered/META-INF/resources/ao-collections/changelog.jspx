@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2020-05-13T17:43:00-05:00"
+		dateModified="2020-09-18T15:44:59-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-collections:pom.version}" />
@@ -52,7 +52,15 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						New utility methods to create <code>HashSet</code> and <code>HashMap</code> to hold a given number
+						of elements.  These are useful as lambda method references, where performing the typical computation
+						inline would be unnecessarily verbose.
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
