@@ -34,8 +34,7 @@ public abstract class AbstractConverter<E,W> implements Converter<E,W> {
 
 	protected final Class<E> eClass;
 	protected final Class<W> wClass;
-
-	protected volatile AbstractConverter<W,E> inverted;
+	protected final AbstractConverter<W,E> inverted;
 
 	/**
 	 * @param eClass The wrapper type
@@ -47,6 +46,21 @@ public abstract class AbstractConverter<E,W> implements Converter<E,W> {
 	) {
 		this.eClass = eClass;
 		this.wClass = wClass;
+		this.inverted = new FunctionalConverter<>(wClass, eClass, e -> fromWrapped(e), w -> toWrapped(w), this);
+	}
+
+	/**
+	 * @param eClass The wrapper type
+	 * @param wClass The wrapped type
+	 */
+	AbstractConverter(
+		Class<E> eClass,
+		Class<W> wClass,
+		AbstractConverter<W,E> inverted
+	) {
+		this.eClass = eClass;
+		this.wClass = wClass;
+		this.inverted = inverted;
 	}
 
 	@Override
@@ -94,12 +108,6 @@ public abstract class AbstractConverter<E,W> implements Converter<E,W> {
 
 	@Override
 	public AbstractConverter<W,E> invert() {
-		AbstractConverter<W,E> i = inverted;
-		if(i == null) {
-			i = new FunctionalConverter<>(wClass, eClass, e -> fromWrapped(e), w -> toWrapped(w));
-			i.inverted = this;
-			this.inverted = i;
-		}
-		return i;
+		return inverted;
 	}
 }

@@ -49,6 +49,24 @@ public class FunctionalConverter<E,W> extends AbstractConverter<E,W> {
 		this.fromWrapped = fromWrapped;
 	}
 
+	/**
+	 * @param eClass The wrapper type
+	 * @param wClass The wrapped type
+	 * @param toWrapped Converts from wrapper to wrapped type
+	 * @param fromWrapped Converts from wrapped to wrapper type
+	 */
+	FunctionalConverter(
+		Class<E> eClass,
+		Class<W> wClass,
+		Function<? super E,? extends W> toWrapped,
+		Function<? super W,? extends E> fromWrapped,
+		AbstractConverter<W,E> inverted
+	) {
+		super(eClass, wClass, inverted);
+		this.toWrapped = toWrapped;
+		this.fromWrapped = fromWrapped;
+	}
+
 	@Override
 	public W toWrapped(E e) {
 		return toWrapped.apply(e);
@@ -57,16 +75,5 @@ public class FunctionalConverter<E,W> extends AbstractConverter<E,W> {
 	@Override
 	public E fromWrapped(W w) {
 		return fromWrapped.apply(w);
-	}
-
-	@Override
-	public AbstractConverter<W,E> invert() {
-		AbstractConverter<W,E> i = inverted;
-		if(i == null) {
-			i = new FunctionalConverter<>(wClass, eClass, fromWrapped, toWrapped);
-			i.inverted = this;
-			this.inverted = i;
-		}
-		return i;
 	}
 }
