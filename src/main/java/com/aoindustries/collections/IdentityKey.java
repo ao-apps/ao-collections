@@ -22,29 +22,61 @@
  */
 package com.aoindustries.collections;
 
+import java.util.IdentityHashMap;
+import java.util.WeakHashMap;
+
 /**
- * Allows any object to be used as a hash key, with identity used for
- * hashCode and equals.  They may be used, for example, to have IdentityHashMap
- * semantics with WeakHashMap references.
- *
- * Supports null value, which may allow null keys in maps that otherwise do not
- * support null keys.
+ * Allows any object to be used as a hash key, with identity used for {@link #hashCode()} and
+ * {@link #equals(java.lang.Object)}.  They may be used, for example, to have {@link IdentityHashMap}
+ * semantics with {@link WeakHashMap} references.
+ * <p>
+ * Supports {@code null} value, which may allow {@code null} keys in maps that otherwise do not support {@code null}
+ * keys.
+ * </p>
  *
  * @author  AO Industries, Inc.
  */
 public class IdentityKey<T> {
 
+	public static final IdentityKey<?> NULL = new IdentityKey<Object>(null);
+
+	/**
+	 * Gets the identity key that represents {@code null}.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> IdentityKey<T> ofNull() {
+		return (IdentityKey<T>)NULL;
+	}
+
+	/**
+	 * Gets the identity key for the given value or {@link #NULL} for a {@code null} value.
+	 */
+	public static <T> IdentityKey<T> of(T value) {
+		if(value == null) {
+			return ofNull();
+		} else {
+			return new IdentityKey<>(value);
+		}
+	}
+
 	private final T value;
 
+	/**
+	 * @deprecated  Please use {@link #of(java.lang.Object)}, which may return {@link #NULL} for {@code null} values.
+	 */
+	@Deprecated
 	public IdentityKey(T value) {
 		this.value = value;
 	}
 
 	@Override
 	public String toString() {
-		return value==null ? "null" : value.toString();
+		return (value == null) ? "null" : value.toString();
 	}
 
+	/**
+	 * @see System#identityHashCode(java.lang.Object)
+	 */
 	@Override
 	public int hashCode() {
 		return System.identityHashCode(value);
@@ -53,7 +85,7 @@ public class IdentityKey<T> {
 	@Override
 	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
 	public boolean equals(Object obj) {
-		return this==obj;
+		return this == obj;
 	}
 
 	public T getValue() {

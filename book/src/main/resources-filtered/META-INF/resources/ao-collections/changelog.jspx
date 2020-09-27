@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2020-09-18T15:44:59-05:00"
+		dateModified="2020-09-26T20:41:06-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-collections:pom.version}" />
@@ -58,6 +58,10 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 						New utility methods to create <code>HashSet</code> and <code>HashMap</code> to hold a given number
 						of elements.  These are useful as lambda method references, where performing the typical computation
 						inline would be unnecessarily verbose.
+					</li>
+					<li>
+						<code>IdentityKey</code> now has a <code>NULL</code> constant, along with static factory methods
+						to use this constant for <code>null</code> values.
 					</li>
 				</ul>
 			</changelog:release>
