@@ -29,25 +29,25 @@ import java.util.Deque;
  *
  * @author  AO Industries, Inc.
  */
-public class DequeWrapper<E,W> extends QueueWrapper<E,W> implements Deque<E> {
+public class TransformDeque<E,W> extends TransformQueue<E,W> implements Deque<E> {
 
 	/**
 	 * Wraps a deque.
 	 */
-	public static <E,W> DequeWrapper<E,W> of(Deque<W> deque, Converter<E,W> converter) {
-		return (deque == null) ? null : new DequeWrapper<>(deque, converter);
+	public static <E,W> TransformDeque<E,W> of(Deque<W> deque, Transformer<E,W> transformer) {
+		return (deque == null) ? null : new TransformDeque<>(deque, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.Deque, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.Deque, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> DequeWrapper<E,E> of(Deque<E> deque) {
-		return of(deque, Converter.identity());
+	public static <E> TransformDeque<E,E> of(Deque<E> deque) {
+		return of(deque, Transformer.identity());
 	}
 
-	protected DequeWrapper(Deque<W> wrapped, Converter<E,W> converter) {
-		super(wrapped, converter);
+	protected TransformDeque(Deque<W> wrapped, Transformer<E,W> transformer) {
+		super(wrapped, transformer);
 	}
 
 	@Override
@@ -57,86 +57,86 @@ public class DequeWrapper<E,W> extends QueueWrapper<E,W> implements Deque<E> {
 
 	@Override
 	public void addFirst(E w) {
-		getWrapped().addFirst(converter.toWrapped(w));
+		getWrapped().addFirst(transformer.toWrapped(w));
 	}
 
 	@Override
 	public void addLast(E e) {
-		getWrapped().addLast(converter.toWrapped(e));
+		getWrapped().addLast(transformer.toWrapped(e));
 	}
 
 	@Override
 	public boolean offerFirst(E e) {
-		return getWrapped().offerFirst(converter.toWrapped(e));
+		return getWrapped().offerFirst(transformer.toWrapped(e));
 	}
 
 	@Override
 	public boolean offerLast(E e) {
-		return getWrapped().offerLast(converter.toWrapped(e));
+		return getWrapped().offerLast(transformer.toWrapped(e));
 	}
 
 	@Override
 	public E removeFirst() {
-		return converter.fromWrapped(getWrapped().removeFirst());
+		return transformer.fromWrapped(getWrapped().removeFirst());
 	}
 
 	@Override
 	public E removeLast() {
-		return converter.fromWrapped(getWrapped().removeLast());
+		return transformer.fromWrapped(getWrapped().removeLast());
 	}
 
 	@Override
 	public E pollFirst() {
-		return converter.fromWrapped(getWrapped().pollFirst());
+		return transformer.fromWrapped(getWrapped().pollFirst());
 	}
 
 	@Override
 	public E pollLast() {
-		return converter.fromWrapped(getWrapped().pollLast());
+		return transformer.fromWrapped(getWrapped().pollLast());
 	}
 
 	@Override
 	public E getFirst() {
-		return converter.fromWrapped(getWrapped().getFirst());
+		return transformer.fromWrapped(getWrapped().getFirst());
 	}
 
 	@Override
 	public E getLast() {
-		return converter.fromWrapped(getWrapped().getLast());
+		return transformer.fromWrapped(getWrapped().getLast());
 	}
 
 	@Override
 	public E peekFirst() {
-		return converter.fromWrapped(getWrapped().peekFirst());
+		return transformer.fromWrapped(getWrapped().peekFirst());
 	}
 
 	@Override
 	public E peekLast() {
-		return converter.fromWrapped(getWrapped().peekLast());
+		return transformer.fromWrapped(getWrapped().peekLast());
 	}
 
 	@Override
 	public boolean removeFirstOccurrence(Object o) {
-		return getWrapped().removeFirstOccurrence(converter.unbounded().toWrapped(o));
+		return getWrapped().removeFirstOccurrence(transformer.unbounded().toWrapped(o));
 	}
 
 	@Override
 	public boolean removeLastOccurrence(Object o) {
-		return getWrapped().removeLastOccurrence(converter.unbounded().toWrapped(o));
+		return getWrapped().removeLastOccurrence(transformer.unbounded().toWrapped(o));
 	}
 
 	@Override
 	public void push(E e) {
-		getWrapped().push(converter.toWrapped(e));
+		getWrapped().push(transformer.toWrapped(e));
 	}
 
 	@Override
 	public E pop() {
-		return converter.fromWrapped(getWrapped().pop());
+		return transformer.fromWrapped(getWrapped().pop());
 	}
 
 	@Override
-	public IteratorWrapper<E,W> descendingIterator() {
-		return IteratorWrapper.of(getWrapped().descendingIterator(), converter);
+	public TransformIterator<E,W> descendingIterator() {
+		return TransformIterator.of(getWrapped().descendingIterator(), transformer);
 	}
 }

@@ -29,25 +29,25 @@ import java.util.ListIterator;
  *
  * @author  AO Industries, Inc.
  */
-public class ListIteratorWrapper<E,W> extends IteratorWrapper<E,W> implements ListIterator<E> {
+public class TransformListIterator<E,W> extends TransformIterator<E,W> implements ListIterator<E> {
 
 	/**
 	 * Wraps a list iterator.
 	 */
-	public static <E,W> ListIteratorWrapper<E,W> of(ListIterator<W> wrapped, Converter<E,W> converter) {
-		return (wrapped == null) ? null : new ListIteratorWrapper<>(wrapped, converter);
+	public static <E,W> TransformListIterator<E,W> of(ListIterator<W> wrapped, Transformer<E,W> transformer) {
+		return (wrapped == null) ? null : new TransformListIterator<>(wrapped, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.ListIterator, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.ListIterator, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> ListIteratorWrapper<E,E> of(ListIterator<E> wrapped) {
-		return of(wrapped, Converter.identity());
+	public static <E> TransformListIterator<E,E> of(ListIterator<E> wrapped) {
+		return of(wrapped, Transformer.identity());
 	}
 
-	protected ListIteratorWrapper(ListIterator<W> wrapped, Converter<E,W> converter) {
-		super(wrapped, converter);
+	protected TransformListIterator(ListIterator<W> wrapped, Transformer<E,W> transformer) {
+		super(wrapped, transformer);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class ListIteratorWrapper<E,W> extends IteratorWrapper<E,W> implements Li
 
 	@Override
 	public E previous() {
-		return converter.fromWrapped(getWrapped().previous());
+		return transformer.fromWrapped(getWrapped().previous());
 	}
 
 	@Override
@@ -77,11 +77,11 @@ public class ListIteratorWrapper<E,W> extends IteratorWrapper<E,W> implements Li
 
 	@Override
 	public void set(E e) {
-		getWrapped().set(converter.toWrapped(e));
+		getWrapped().set(transformer.toWrapped(e));
 	}
 
 	@Override
 	public void add(E e) {
-		getWrapped().add(converter.toWrapped(e));
+		getWrapped().add(transformer.toWrapped(e));
 	}
 }

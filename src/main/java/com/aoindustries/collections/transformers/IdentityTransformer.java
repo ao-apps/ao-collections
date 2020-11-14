@@ -27,13 +27,13 @@ package com.aoindustries.collections.transformers;
  *
  * @author  AO Industries, Inc.
  *
- * @see  Converter#identity()
+ * @see  Transformer#identity()
  */
-class IdentityConverter<E> implements Converter<E,E> {
+class IdentityTransformer<E> implements Transformer<E,E> {
 
-	static final IdentityConverter<Object> instance = new IdentityConverter<>();
+	static final IdentityTransformer<Object> instance = new IdentityTransformer<>();
 
-	private IdentityConverter() {}
+	private IdentityTransformer() {}
 
 	@Override
 	public E toWrapped(E e) {
@@ -47,12 +47,12 @@ class IdentityConverter<E> implements Converter<E,E> {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Converter<Object,Object> unbounded() {
-		return (Converter<Object,Object>)this;
+	public Transformer<Object,Object> unbounded() {
+		return (Transformer<Object,Object>)this;
 	}
 
 	@Override
-	public Converter<E,E> invert() {
+	public Transformer<E,E> invert() {
 		return this;
 	}
 }

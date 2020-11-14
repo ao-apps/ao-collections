@@ -31,33 +31,33 @@ import java.util.SortedSet;
  * @author  AO Industries, Inc.
  */
 @SuppressWarnings("EqualsAndHashcode")
-public class SetWrapper<E,W> extends CollectionWrapper<E,W> implements Set<E> {
+public class TransformSet<E,W> extends TransformCollection<E,W> implements Set<E> {
 
 	/**
 	 * Wraps a set.
 	 * <ol>
-	 * <li>If the given set is a {@link SortedSet}, then will return a {@link SortedSetWrapper}.</li>
+	 * <li>If the given set is a {@link SortedSet}, then will return a {@link TransformSortedSet}.</li>
 	 * </ol>
 	 *
-	 * @see  SortedSetWrapper#of(java.util.SortedSet, com.aoindustries.collections.transformers.Converter)
+	 * @see  TransformSortedSet#of(java.util.SortedSet, com.aoindustries.collections.transformers.Transformer)
 	 */
-	public static <E,W> SetWrapper<E,W> of(Set<W> set, Converter<E,W> converter) {
+	public static <E,W> TransformSet<E,W> of(Set<W> set, Transformer<E,W> transformer) {
 		if(set instanceof SortedSet) {
-			return SortedSetWrapper.of((SortedSet<W>)set, converter);
+			return TransformSortedSet.of((SortedSet<W>)set, transformer);
 		}
-		return (set == null) ? null : new SetWrapper<>(set, converter);
+		return (set == null) ? null : new TransformSet<>(set, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.Set, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.Set, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> SetWrapper<E,E> of(Set<E> set) {
-		return of(set, Converter.identity());
+	public static <E> TransformSet<E,E> of(Set<E> set) {
+		return of(set, Transformer.identity());
 	}
 
-	protected SetWrapper(Set<W> wrapped, Converter<E,W> converter) {
-		super(wrapped, converter);
+	protected TransformSet(Set<W> wrapped, Transformer<E,W> transformer) {
+		super(wrapped, transformer);
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class SetWrapper<E,W> extends CollectionWrapper<E,W> implements Set<E> {
 	public boolean equals(Object o) {
 		return getWrapped().equals(
 			(o instanceof Set)
-				? of((Set<Object>)o, converter.invert().unbounded())
+				? of((Set<Object>)o, transformer.invert().unbounded())
 				: o
 		);
 	}

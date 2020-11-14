@@ -30,37 +30,37 @@ import java.util.function.Consumer;
  *
  * @author  AO Industries, Inc.
  */
-public class IterableWrapper<E,W> implements Iterable<E> {
+public class TransformIterable<E,W> implements Iterable<E> {
 
 	/**
 	 * Wraps an iterable.
 	 * <ol>
-	 * <li>If the given iterable is a {@link Collection}, then will return a {@link CollectionWrapper}.</li>
+	 * <li>If the given iterable is a {@link Collection}, then will return a {@link TransformCollection}.</li>
 	 * </ol>
 	 *
-	 * @see  CollectionWrapper#of(java.util.Collection, com.aoindustries.collections.transformers.Converter)
+	 * @see  TransformCollection#of(java.util.Collection, com.aoindustries.collections.transformers.Transformer)
 	 */
-	public static <E,W> IterableWrapper<E,W> of(Iterable<W> iterable, Converter<E,W> converter) {
+	public static <E,W> TransformIterable<E,W> of(Iterable<W> iterable, Transformer<E,W> transformer) {
 		if(iterable instanceof Collection) {
-			return CollectionWrapper.of((Collection<W>)iterable, converter);
+			return TransformCollection.of((Collection<W>)iterable, transformer);
 		}
-		return (iterable == null) ? null : new IterableWrapper<>(iterable, converter);
+		return (iterable == null) ? null : new TransformIterable<>(iterable, transformer);
 	}
 
 	/**
-	 * @see  #of(java.lang.Iterable, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.lang.Iterable, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> IterableWrapper<E,E> of(Iterable<E> iterable) {
-		return of(iterable, Converter.identity());
+	public static <E> TransformIterable<E,E> of(Iterable<E> iterable) {
+		return of(iterable, Transformer.identity());
 	}
 
 	private final Iterable<W> wrapped;
-	protected final Converter<E,W> converter;
+	protected final Transformer<E,W> transformer;
 
-	protected IterableWrapper(Iterable<W> wrapped, Converter<E,W> converter) {
+	protected TransformIterable(Iterable<W> wrapped, Transformer<E,W> transformer) {
 		this.wrapped = wrapped;
-		this.converter = converter;
+		this.transformer = transformer;
 	}
 
 	protected Iterable<W> getWrapped() {
@@ -68,13 +68,13 @@ public class IterableWrapper<E,W> implements Iterable<E> {
 	}
 
 	@Override
-	public IteratorWrapper<E,W> iterator() {
-		return IteratorWrapper.of(wrapped.iterator(), converter);
+	public TransformIterator<E,W> iterator() {
+		return TransformIterator.of(wrapped.iterator(), transformer);
 	}
 
 	@Override
 	public void forEach(Consumer<? super E> action) {
-		getWrapped().forEach(w -> action.accept(converter.fromWrapped(w)));
+		getWrapped().forEach(w -> action.accept(transformer.fromWrapped(w)));
 	}
 
 	// TODO: spliterator()?

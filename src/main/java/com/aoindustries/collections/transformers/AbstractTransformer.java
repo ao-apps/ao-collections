@@ -30,33 +30,33 @@ package com.aoindustries.collections.transformers;
  *
  * @author  AO Industries, Inc.
  */
-public abstract class AbstractConverter<E,W> implements Converter<E,W> {
+public abstract class AbstractTransformer<E,W> implements Transformer<E,W> {
 
 	protected final Class<E> eClass;
 	protected final Class<W> wClass;
-	protected final AbstractConverter<W,E> inverted;
+	protected final AbstractTransformer<W,E> inverted;
 
 	/**
 	 * @param eClass The wrapper type
 	 * @param wClass The wrapped type
 	 */
-	public AbstractConverter(
+	public AbstractTransformer(
 		Class<E> eClass,
 		Class<W> wClass
 	) {
 		this.eClass = eClass;
 		this.wClass = wClass;
-		this.inverted = new FunctionalConverter<>(wClass, eClass, e -> fromWrapped(e), w -> toWrapped(w), this);
+		this.inverted = new FunctionalTransformer<>(wClass, eClass, e -> fromWrapped(e), w -> toWrapped(w), this);
 	}
 
 	/**
 	 * @param eClass The wrapper type
 	 * @param wClass The wrapped type
 	 */
-	AbstractConverter(
+	AbstractTransformer(
 		Class<E> eClass,
 		Class<W> wClass,
-		AbstractConverter<W,E> inverted
+		AbstractTransformer<W,E> inverted
 	) {
 		this.eClass = eClass;
 		this.wClass = wClass;
@@ -69,7 +69,7 @@ public abstract class AbstractConverter<E,W> implements Converter<E,W> {
 	@Override
 	public abstract E fromWrapped(W w);
 
-	private final Converter<Object,Object> unbouned = new Converter<Object,Object>() {
+	private final Transformer<Object,Object> unbouned = new Transformer<Object,Object>() {
 		/**
 		 * Unwraps the given object if is of our wrapper type.
 		 *
@@ -77,7 +77,7 @@ public abstract class AbstractConverter<E,W> implements Converter<E,W> {
 		 */
 		@Override
 		public Object toWrapped(Object e) {
-			return eClass.isInstance(e) ? AbstractConverter.this.toWrapped(eClass.cast(e)) : e;
+			return eClass.isInstance(e) ? AbstractTransformer.this.toWrapped(eClass.cast(e)) : e;
 		}
 
 		/**
@@ -87,27 +87,27 @@ public abstract class AbstractConverter<E,W> implements Converter<E,W> {
 		 */
 		@Override
 		public Object fromWrapped(Object w) {
-			return wClass.isInstance(w) ? AbstractConverter.this.fromWrapped(wClass.cast(w)) : w;
+			return wClass.isInstance(w) ? AbstractTransformer.this.fromWrapped(wClass.cast(w)) : w;
 		}
 
 		@Override
-		public Converter<Object,Object> unbounded() {
+		public Transformer<Object,Object> unbounded() {
 			return this;
 		}
 
 		@Override
-		public Converter<Object,Object> invert() {
-			return AbstractConverter.this.invert().unbounded();
+		public Transformer<Object,Object> invert() {
+			return AbstractTransformer.this.invert().unbounded();
 		}
 	};
 
 	@Override
-	public Converter<Object,Object> unbounded() {
+	public Transformer<Object,Object> unbounded() {
 		return unbouned;
 	}
 
 	@Override
-	public AbstractConverter<W,E> invert() {
+	public AbstractTransformer<W,E> invert() {
 		return inverted;
 	}
 }

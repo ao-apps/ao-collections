@@ -22,7 +22,7 @@
  */
 
 /**
- * Performs type conversions on-the-fly while wrapping collections.  Any elements, keys, or values that are converted
+ * Performs type conversions on-the-fly while wrapping collections.  Any elements, keys, or values that are transformed
  * must be considered as value types.
  *
  * @author  AO Industries, Inc.

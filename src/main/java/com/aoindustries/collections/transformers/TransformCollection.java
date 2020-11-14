@@ -34,43 +34,43 @@ import java.util.function.Predicate;
  *
  * @author  AO Industries, Inc.
  */
-public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Collection<E> {
+public class TransformCollection<E,W> extends TransformIterable<E,W> implements Collection<E> {
 
 	/**
 	 * Wraps a collection.
 	 * <ol>
-	 * <li>If the given collection is a {@link List}, then will return a {@link ListWrapper}.</li>
-	 * <li>If the given collection is a {@link Queue}, then will return a {@link QueueWrapper}.</li>
-	 * <li>If the given collection is a {@link Set}, then will return a {@link SetWrapper}.</li>
+	 * <li>If the given collection is a {@link List}, then will return a {@link TransformList}.</li>
+	 * <li>If the given collection is a {@link Queue}, then will return a {@link TransformQueue}.</li>
+	 * <li>If the given collection is a {@link Set}, then will return a {@link TransformSet}.</li>
 	 * </ol>
 	 *
-	 * @see  ListWrapper#of(java.util.List, com.aoindustries.collections.transformers.Converter)
-	 * @see  QueueWrapper#of(java.util.Queue, com.aoindustries.collections.transformers.Converter)
-	 * @see  SetWrapper#of(java.util.Set, com.aoindustries.collections.transformers.Converter)
+	 * @see  TransformList#of(java.util.List, com.aoindustries.collections.transformers.Transformer)
+	 * @see  TransformQueue#of(java.util.Queue, com.aoindustries.collections.transformers.Transformer)
+	 * @see  TransformSet#of(java.util.Set, com.aoindustries.collections.transformers.Transformer)
 	 */
-	public static <E,W> CollectionWrapper<E,W> of(Collection<W> collection, Converter<E,W> converter) {
+	public static <E,W> TransformCollection<E,W> of(Collection<W> collection, Transformer<E,W> transformer) {
 		if(collection instanceof List) {
-			return ListWrapper.of((List<W>)collection, converter);
+			return TransformList.of((List<W>)collection, transformer);
 		}
 		if(collection instanceof Queue) {
-			return QueueWrapper.of((Queue<W>)collection, converter);
+			return TransformQueue.of((Queue<W>)collection, transformer);
 		}
 		if(collection instanceof Set) {
-			return SetWrapper.of((Set<W>)collection, converter);
+			return TransformSet.of((Set<W>)collection, transformer);
 		}
-		return (collection == null) ? null : new CollectionWrapper<>(collection, converter);
+		return (collection == null) ? null : new TransformCollection<>(collection, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.Collection, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.Collection, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> CollectionWrapper<E,E> of(Collection<E> collection) {
-		return of(collection, Converter.identity());
+	public static <E> TransformCollection<E,E> of(Collection<E> collection) {
+		return of(collection, Transformer.identity());
 	}
 
-	protected CollectionWrapper(Collection<W> wrapped, Converter<E,W> converter) {
-		super(wrapped, converter);
+	protected TransformCollection(Collection<W> wrapped, Transformer<E,W> transformer) {
+		super(wrapped, transformer);
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 
 	@Override
 	public boolean contains(Object o) {
-		return getWrapped().contains(converter.unbounded().toWrapped(o));
+		return getWrapped().contains(transformer.unbounded().toWrapped(o));
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 	public <T> T[] toArray(T[] a) {
 		List<E> list = new ArrayList<>(size());
 		for(W w : getWrapped()) {
-			list.add(converter.fromWrapped(w));
+			list.add(transformer.fromWrapped(w));
 		}
 		return list.toArray(a);
 	}
@@ -112,19 +112,19 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 
 	@Override
 	public boolean add(E e) {
-		return getWrapped().add(converter.toWrapped(e));
+		return getWrapped().add(transformer.toWrapped(e));
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		return getWrapped().remove(converter.unbounded().toWrapped(o));
+		return getWrapped().remove(transformer.unbounded().toWrapped(o));
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean containsAll(Collection<?> c) {
 		return getWrapped().containsAll(
-			of((Collection<Object>)c, converter.invert().unbounded())
+			of((Collection<Object>)c, transformer.invert().unbounded())
 		);
 	}
 
@@ -132,7 +132,7 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 	@SuppressWarnings("unchecked")
 	public boolean addAll(Collection<? extends E> c) {
 		return getWrapped().addAll(
-			of((Collection<E>)c, converter.invert())
+			of((Collection<E>)c, transformer.invert())
 		);
 	}
 
@@ -140,20 +140,20 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 	@SuppressWarnings("unchecked")
 	public boolean removeAll(Collection<?> c) {
 		return getWrapped().removeAll(
-			of((Collection<Object>)c, converter.invert().unbounded())
+			of((Collection<Object>)c, transformer.invert().unbounded())
 		);
 	}
 
 	@Override
 	public boolean removeIf(Predicate<? super E> filter) {
-		return getWrapped().removeIf(w -> filter.test(converter.fromWrapped(w)));
+		return getWrapped().removeIf(w -> filter.test(transformer.fromWrapped(w)));
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean retainAll(Collection<?> c) {
 		return getWrapped().retainAll(
-			of((Collection<Object>)c, converter.invert().unbounded())
+			of((Collection<Object>)c, transformer.invert().unbounded())
 		);
 	}
 
@@ -167,7 +167,7 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 	public boolean equals(Object o) {
 		return getWrapped().equals(
 			(o instanceof Collection)
-				? of((Collection<Object>)o, converter.invert().unbounded())
+				? of((Collection<Object>)o, transformer.invert().unbounded())
 				: o
 		);
 	}

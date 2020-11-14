@@ -34,7 +34,7 @@ import java.util.function.UnaryOperator;
  * @author  AO Industries, Inc.
  */
 @SuppressWarnings("EqualsAndHashcode")
-public class ListWrapper<E,W> extends CollectionWrapper<E,W> implements List<E> {
+public class TransformList<E,W> extends TransformCollection<E,W> implements List<E> {
 
 	/**
 	 * Wraps a list.
@@ -42,23 +42,23 @@ public class ListWrapper<E,W> extends CollectionWrapper<E,W> implements List<E> 
 	 * <li>If the given list implements {@link RandomAccess}, then the returned list will also implement {@link RandomAccess}.</li>
 	 * </ol>
 	 */
-	public static <E,W> ListWrapper<E,W> of(List<W> list, Converter<E,W> converter) {
+	public static <E,W> TransformList<E,W> of(List<W> list, Transformer<E,W> transformer) {
 		if(list instanceof RandomAccess) {
-			return new RandomAccessListWrapper<>(list, converter);
+			return new TransformList_RandomAccess<>(list, transformer);
 		}
-		return (list == null) ? null : new ListWrapper<>(list, converter);
+		return (list == null) ? null : new TransformList<>(list, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.List, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.List, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> ListWrapper<E,E> of(List<E> list) {
-		return of(list, Converter.identity());
+	public static <E> TransformList<E,E> of(List<E> list) {
+		return of(list, Transformer.identity());
 	}
 
-	protected ListWrapper(List<W> wrapped, Converter<E,W> converter) {
-		super(wrapped, converter);
+	protected TransformList(List<W> wrapped, Transformer<E,W> transformer) {
+		super(wrapped, transformer);
 	}
 
 	@Override
@@ -71,21 +71,21 @@ public class ListWrapper<E,W> extends CollectionWrapper<E,W> implements List<E> 
 	public boolean addAll(int index, Collection<? extends E> c) {
 		return getWrapped().addAll(
 			index,
-			of((Collection<E>)c, converter.invert())
+			of((Collection<E>)c, transformer.invert())
 		);
 	}
 
 	@Override
 	public void replaceAll(UnaryOperator<E> operator) {
 		getWrapped().replaceAll(
-			w -> converter.toWrapped(operator.apply(converter.fromWrapped(w)))
+			w -> transformer.toWrapped(operator.apply(transformer.fromWrapped(w)))
 		);
 	}
 
 	@Override
 	public void sort(Comparator<? super E> c) {
 		getWrapped().sort(
-			ComparatorWrapper.of(c, converter.invert())
+			TransformComparator.of(c, transformer.invert())
 		);
 	}
 
@@ -94,61 +94,61 @@ public class ListWrapper<E,W> extends CollectionWrapper<E,W> implements List<E> 
 	public boolean equals(Object o) {
 		return getWrapped().equals(
 			(o instanceof List)
-				? of((List<Object>)o, converter.invert().unbounded())
+				? of((List<Object>)o, transformer.invert().unbounded())
 				: o
 		);
 	}
 
 	@Override
 	public E get(int index) {
-		return converter.fromWrapped(getWrapped().get(index));
+		return transformer.fromWrapped(getWrapped().get(index));
 	}
 
 	@Override
 	public E set(int index, E element) {
-		return converter.fromWrapped(getWrapped().set(index, converter.toWrapped(element)));
+		return transformer.fromWrapped(getWrapped().set(index, transformer.toWrapped(element)));
 	}
 
 	@Override
 	public void add(int index, E element) {
-		getWrapped().add(index, converter.toWrapped(element));
+		getWrapped().add(index, transformer.toWrapped(element));
 	}
 
 	@Override
 	public E remove(int index) {
-		return converter.fromWrapped(getWrapped().remove(index));
+		return transformer.fromWrapped(getWrapped().remove(index));
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		return getWrapped().indexOf(converter.unbounded().toWrapped(o));
+		return getWrapped().indexOf(transformer.unbounded().toWrapped(o));
 	}
 
 	@Override
 	public int lastIndexOf(Object o) {
-		return getWrapped().lastIndexOf(converter.unbounded().toWrapped(o));
+		return getWrapped().lastIndexOf(transformer.unbounded().toWrapped(o));
 	}
 
 	@Override
-	public ListIteratorWrapper<E,W> listIterator() {
-		return ListIteratorWrapper.of(getWrapped().listIterator(), converter);
+	public TransformListIterator<E,W> listIterator() {
+		return TransformListIterator.of(getWrapped().listIterator(), transformer);
 	}
 
 	@Override
-	public ListIteratorWrapper<E,W> listIterator(int index) {
-		return ListIteratorWrapper.of(getWrapped().listIterator(index), converter);
+	public TransformListIterator<E,W> listIterator(int index) {
+		return TransformListIterator.of(getWrapped().listIterator(index), transformer);
 	}
 
 	@Override
-	public ListWrapper<E,W> subList(int fromIndex, int toIndex) {
-		return of(getWrapped().subList(fromIndex, toIndex), converter);
+	public TransformList<E,W> subList(int fromIndex, int toIndex) {
+		return of(getWrapped().subList(fromIndex, toIndex), transformer);
 	}
 
 	// TODO: spliterator()?
 
-	private static class RandomAccessListWrapper<E,W> extends ListWrapper<E,W> implements RandomAccess {
-		private RandomAccessListWrapper(List<W> wrapped, Converter<E,W> converter) {
-			super(wrapped, converter);
+	private static class TransformList_RandomAccess<E,W> extends TransformList<E,W> implements RandomAccess {
+		private TransformList_RandomAccess(List<W> wrapped, Transformer<E,W> transformer) {
+			super(wrapped, transformer);
 		}
 	}
 }

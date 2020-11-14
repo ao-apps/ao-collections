@@ -31,37 +31,37 @@ import java.util.function.Consumer;
  *
  * @author  AO Industries, Inc.
  */
-public class IteratorWrapper<E,W> implements Iterator<E> {
+public class TransformIterator<E,W> implements Iterator<E> {
 
 	/**
 	 * Wraps an iterator.
 	 * <ol>
-	 * <li>If the given iterator is a {@link ListIterator}, then will return a {@link ListIteratorWrapper}.</li>
+	 * <li>If the given iterator is a {@link ListIterator}, then will return a {@link TransformListIterator}.</li>
 	 * </ol>
 	 *
-	 * @see  ListIteratorWrapper#of(java.util.ListIterator, com.aoindustries.collections.transformers.Converter)
+	 * @see  TransformListIterator#of(java.util.ListIterator, com.aoindustries.collections.transformers.Transformer)
 	 */
-	public static <E,W> IteratorWrapper<E,W> of(Iterator<W> iterator, Converter<E,W> converter) {
+	public static <E,W> TransformIterator<E,W> of(Iterator<W> iterator, Transformer<E,W> transformer) {
 		if(iterator instanceof ListIterator) {
-			return ListIteratorWrapper.of((ListIterator<W>)iterator, converter);
+			return TransformListIterator.of((ListIterator<W>)iterator, transformer);
 		}
-		return (iterator == null) ? null : new IteratorWrapper<>(iterator, converter);
+		return (iterator == null) ? null : new TransformIterator<>(iterator, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.Iterator, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.Iterator, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> IteratorWrapper<E,E> of(Iterator<E> iterator) {
-		return of(iterator, Converter.identity());
+	public static <E> TransformIterator<E,E> of(Iterator<E> iterator) {
+		return of(iterator, Transformer.identity());
 	}
 
 	private final Iterator<W> wrapped;
-	protected final Converter<E,W> converter;
+	protected final Transformer<E,W> transformer;
 
-	protected IteratorWrapper(Iterator<W> wrapped, Converter<E,W> converter) {
+	protected TransformIterator(Iterator<W> wrapped, Transformer<E,W> transformer) {
 		this.wrapped = wrapped;
-		this.converter = converter;
+		this.transformer = transformer;
 	}
 
 	protected Iterator<W> getWrapped() {
@@ -75,7 +75,7 @@ public class IteratorWrapper<E,W> implements Iterator<E> {
 
 	@Override
 	public E next() {
-		return converter.fromWrapped(getWrapped().next());
+		return transformer.fromWrapped(getWrapped().next());
 	}
 
 	@Override
@@ -85,6 +85,6 @@ public class IteratorWrapper<E,W> implements Iterator<E> {
 
 	@Override
 	public void forEachRemaining(Consumer<? super E> action) {
-		getWrapped().forEachRemaining(w -> action.accept(converter.fromWrapped(w)));
+		getWrapped().forEachRemaining(w -> action.accept(transformer.fromWrapped(w)));
 	}
 }

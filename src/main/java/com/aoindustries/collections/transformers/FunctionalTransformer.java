@@ -27,7 +27,7 @@ import java.util.function.Function;
 /**
  * @author  AO Industries, Inc.
  */
-public class FunctionalConverter<E,W> extends AbstractConverter<E,W> {
+public class FunctionalTransformer<E,W> extends AbstractTransformer<E,W> {
 
 	protected final Function<? super E,? extends W> toWrapped;
 	protected final Function<? super W,? extends E> fromWrapped;
@@ -38,7 +38,7 @@ public class FunctionalConverter<E,W> extends AbstractConverter<E,W> {
 	 * @param toWrapped Converts from wrapper to wrapped type
 	 * @param fromWrapped Converts from wrapped to wrapper type
 	 */
-	public FunctionalConverter(
+	public FunctionalTransformer(
 		Class<E> eClass,
 		Class<W> wClass,
 		Function<? super E,? extends W> toWrapped,
@@ -55,12 +55,12 @@ public class FunctionalConverter<E,W> extends AbstractConverter<E,W> {
 	 * @param toWrapped Converts from wrapper to wrapped type
 	 * @param fromWrapped Converts from wrapped to wrapper type
 	 */
-	FunctionalConverter(
+	FunctionalTransformer(
 		Class<E> eClass,
 		Class<W> wClass,
 		Function<? super E,? extends W> toWrapped,
 		Function<? super W,? extends E> fromWrapped,
-		AbstractConverter<W,E> inverted
+		AbstractTransformer<W,E> inverted
 	) {
 		super(eClass, wClass, inverted);
 		this.toWrapped = toWrapped;

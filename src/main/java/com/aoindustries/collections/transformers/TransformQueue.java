@@ -30,33 +30,33 @@ import java.util.Queue;
  *
  * @author  AO Industries, Inc.
  */
-public class QueueWrapper<E,W> extends CollectionWrapper<E,W> implements Queue<E> {
+public class TransformQueue<E,W> extends TransformCollection<E,W> implements Queue<E> {
 
 	/**
 	 * Wraps a queue.
 	 * <ol>
-	 * <li>If the given queue is a {@link Deque}, then will return a {@link DequeWrapper}.</li>
+	 * <li>If the given queue is a {@link Deque}, then will return a {@link TransformDeque}.</li>
 	 * </ol>
 	 *
-	 * @see  DequeWrapper#of(java.util.Deque, com.aoindustries.collections.transformers.Converter)
+	 * @see  TransformDeque#of(java.util.Deque, com.aoindustries.collections.transformers.Transformer)
 	 */
-	public static <E,W> QueueWrapper<E,W> of(Queue<W> queue, Converter<E,W> converter) {
+	public static <E,W> TransformQueue<E,W> of(Queue<W> queue, Transformer<E,W> transformer) {
 		if(queue instanceof Deque) {
-			return DequeWrapper.of((Deque<W>)queue, converter);
+			return TransformDeque.of((Deque<W>)queue, transformer);
 		}
-		return (queue == null) ? null : new QueueWrapper<>(queue, converter);
+		return (queue == null) ? null : new TransformQueue<>(queue, transformer);
 	}
 
 	/**
-	 * @see  #of(java.util.Queue, com.aoindustries.collections.transformers.Converter)
-	 * @see  Converter#identity()
+	 * @see  #of(java.util.Queue, com.aoindustries.collections.transformers.Transformer)
+	 * @see  Transformer#identity()
 	 */
-	public static <E> QueueWrapper<E,E> of(Queue<E> queue) {
-		return of(queue, Converter.identity());
+	public static <E> TransformQueue<E,E> of(Queue<E> queue) {
+		return of(queue, Transformer.identity());
 	}
 
-	protected QueueWrapper(Queue<W> wrapped, Converter<E,W> converter) {
-		super(wrapped, converter);
+	protected TransformQueue(Queue<W> wrapped, Transformer<E,W> transformer) {
+		super(wrapped, transformer);
 	}
 
 	@Override
@@ -66,26 +66,26 @@ public class QueueWrapper<E,W> extends CollectionWrapper<E,W> implements Queue<E
 
 	@Override
 	public boolean offer(E e) {
-		return getWrapped().offer(converter.toWrapped(e));
+		return getWrapped().offer(transformer.toWrapped(e));
 	}
 
 	@Override
 	public E remove() {
-		return converter.fromWrapped(getWrapped().remove());
+		return transformer.fromWrapped(getWrapped().remove());
 	}
 
 	@Override
 	public E poll() {
-		return converter.fromWrapped(getWrapped().poll());
+		return transformer.fromWrapped(getWrapped().poll());
 	}
 
 	@Override
 	public E element() {
-		return converter.fromWrapped(getWrapped().element());
+		return transformer.fromWrapped(getWrapped().element());
 	}
 
 	@Override
 	public E peek() {
-		return converter.fromWrapped(getWrapped().peek());
+		return transformer.fromWrapped(getWrapped().peek());
 	}
 }

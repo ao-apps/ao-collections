@@ -33,14 +33,14 @@ import java.util.Map;
  *
  * @author  AO Industries, Inc.
  */
-public interface Converter<E,W> {
+public interface Transformer<E,W> {
 
 	W toWrapped(E e);
 
 	E fromWrapped(W w);
 
 	/**
-	 * Gets a converter that wrap and unwrap only when elements are of the wrapper or wrapped types, respectively.
+	 * Gets a transformer that wraps and unwraps only when elements are of the wrapper or wrapped types, respectively.
 	 * This is useful for legacy APIs that use {@link Object} or unbounded generics, such as:
 	 * <ul>
 	 * <li>{@link Collection#contains(java.lang.Object)}</li>
@@ -48,12 +48,12 @@ public interface Converter<E,W> {
 	 * <li>{@link Map#get(java.lang.Object)}</li>
 	 * </ul>
 	 */
-	Converter<Object,Object> unbounded();
+	Transformer<Object,Object> unbounded();
 
-	Converter<W,E> invert();
+	Transformer<W,E> invert();
 
 	@SuppressWarnings("unchecked")
-	static <E> Converter<E,E> identity() {
-		return (Converter<E,E>)IdentityConverter.instance;
+	static <E> Transformer<E,E> identity() {
+		return (Transformer<E,E>)IdentityTransformer.instance;
 	}
 }
