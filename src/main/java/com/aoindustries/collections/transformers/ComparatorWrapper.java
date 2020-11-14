@@ -20,53 +20,49 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
-import java.util.Enumeration;
+import java.util.Comparator;
 
 /**
- * Wraps an {@link Enumeration}, with optional type conversion.
+ * Wraps a {@link Comparator}, with optional type conversion.
  *
  * @author  AO Industries, Inc.
  */
-public class EnumerationWrapper<E,W> implements Enumeration<E> {
+public class ComparatorWrapper<T,W> implements Comparator<T> {
 
 	/**
-	 * Wraps an enumeration.
+	 * Wraps a comparator.
 	 */
-	public static <E,W> EnumerationWrapper<E,W> of(Enumeration<W> enumeration, Converter<E,W> converter) {
-		return (enumeration == null) ? null : new EnumerationWrapper<>(enumeration, converter);
+	public static <T,W> ComparatorWrapper<T,W> of(Comparator<? super W> comparator, Converter<T,W> converter) {
+		return (comparator == null) ? null : new ComparatorWrapper<>(comparator, converter);
 	}
 
 	/**
-	 * @see  #of(java.util.Enumeration, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.Comparator, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
-	public static <E> EnumerationWrapper<E,E> of(Enumeration<E> enumeration) {
-		return of(enumeration, Converter.identity());
+	public static <T> ComparatorWrapper<T,T> of(Comparator<? super T> comparator) {
+		return of(comparator, Converter.identity());
 	}
 
-	private final Enumeration<W> wrapped;
-	protected final Converter<E,W> converter;
+	private final Comparator<? super W> wrapped;
+	protected final Converter<T,W> converter;
 
-	protected EnumerationWrapper(Enumeration<W> wrapped, Converter<E,W> converter) {
+	protected ComparatorWrapper(Comparator<? super W> wrapped, Converter<T,W> converter) {
 		this.wrapped = wrapped;
 		this.converter = converter;
 	}
 
-	protected Enumeration<W> getWrapped() {
+	protected Comparator<? super W> getWrapped() {
 		return wrapped;
 	}
 
 	@Override
-	public boolean hasMoreElements() {
-		return getWrapped().hasMoreElements();
+	public int compare(T t1, T t2) {
+		return getWrapped().compare(
+			converter.toWrapped(t1),
+			converter.toWrapped(t2)
+		);
 	}
-
-	@Override
-	public E nextElement() {
-		return converter.fromWrapped(getWrapped().nextElement());
-	}
-
-	// Java 9: asIterator()
 }

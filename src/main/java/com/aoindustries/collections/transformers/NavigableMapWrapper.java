@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.NavigableMap;
 
@@ -43,7 +43,7 @@ public class NavigableMapWrapper<K,V,KW,VW> extends SortedMapWrapper<K,V,KW,VW> 
 	}
 
 	/**
-	 * @see  #of(java.util.NavigableMap, com.aoindustries.collections.wrapper.Converter, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.NavigableMap, com.aoindustries.collections.transformers.Converter, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <K,V> NavigableMapWrapper<K,V,K,V> of(NavigableMap<K,V> map) {

@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.Deque;
 
@@ -39,7 +39,7 @@ public class DequeWrapper<E,W> extends QueueWrapper<E,W> implements Deque<E> {
 	}
 
 	/**
-	 * @see  #of(java.util.Deque, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.Deque, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> DequeWrapper<E,E> of(Deque<E> deque) {

@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.Set;
 import java.util.SortedSet;
@@ -39,7 +39,7 @@ public class SetWrapper<E,W> extends CollectionWrapper<E,W> implements Set<E> {
 	 * <li>If the given set is a {@link SortedSet}, then will return a {@link SortedSetWrapper}.</li>
 	 * </ol>
 	 *
-	 * @see  SortedSetWrapper#of(java.util.SortedSet, com.aoindustries.collections.wrapper.Converter)
+	 * @see  SortedSetWrapper#of(java.util.SortedSet, com.aoindustries.collections.transformers.Converter)
 	 */
 	public static <E,W> SetWrapper<E,W> of(Set<W> set, Converter<E,W> converter) {
 		if(set instanceof SortedSet) {
@@ -49,7 +49,7 @@ public class SetWrapper<E,W> extends CollectionWrapper<E,W> implements Set<E> {
 	}
 
 	/**
-	 * @see  #of(java.util.Set, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.Set, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> SetWrapper<E,E> of(Set<E> set) {

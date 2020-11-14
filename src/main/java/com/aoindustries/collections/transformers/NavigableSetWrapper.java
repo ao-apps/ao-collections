@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.NavigableSet;
 
@@ -39,7 +39,7 @@ public class NavigableSetWrapper<E,W> extends SortedSetWrapper<E,W> implements N
 	}
 
 	/**
-	 * @see  #of(java.util.NavigableSet, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.NavigableSet, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> NavigableSetWrapper<E,E> of(NavigableSet<E> set) {

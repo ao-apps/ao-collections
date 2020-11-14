@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -50,7 +50,7 @@ public class ListWrapper<E,W> extends CollectionWrapper<E,W> implements List<E> 
 	}
 
 	/**
-	 * @see  #of(java.util.List, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.List, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> ListWrapper<E,E> of(List<E> list) {

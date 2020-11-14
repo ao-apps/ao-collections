@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.NavigableMap;
 import java.util.SortedMap;
@@ -38,7 +38,7 @@ public class SortedMapWrapper<K,V,KW,VW> extends MapWrapper<K,V,KW,VW> implement
 	 * <li>If the given map is a {@link NavigableMap}, then will return a {@link NavigableMapWrapper}.</li>
 	 * </ol>
 	 *
-	 * @see  NavigableMapWrapper#of(java.util.NavigableMap, com.aoindustries.collections.wrapper.Converter, com.aoindustries.collections.wrapper.Converter)
+	 * @see  NavigableMapWrapper#of(java.util.NavigableMap, com.aoindustries.collections.transformers.Converter, com.aoindustries.collections.transformers.Converter)
 	 */
 	public static <K,V,KW,VW> SortedMapWrapper<K,V,KW,VW> of(
 		SortedMap<KW,VW> map,
@@ -52,7 +52,7 @@ public class SortedMapWrapper<K,V,KW,VW> extends MapWrapper<K,V,KW,VW> implement
 	}
 
 	/**
-	 * @see  #of(java.util.SortedMap, com.aoindustries.collections.wrapper.Converter, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.SortedMap, com.aoindustries.collections.transformers.Converter, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <K,V> SortedMapWrapper<K,V,K,V> of(SortedMap<K,V> map) {

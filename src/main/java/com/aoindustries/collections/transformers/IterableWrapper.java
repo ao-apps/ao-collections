@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -38,7 +38,7 @@ public class IterableWrapper<E,W> implements Iterable<E> {
 	 * <li>If the given iterable is a {@link Collection}, then will return a {@link CollectionWrapper}.</li>
 	 * </ol>
 	 *
-	 * @see  CollectionWrapper#of(java.util.Collection, com.aoindustries.collections.wrapper.Converter)
+	 * @see  CollectionWrapper#of(java.util.Collection, com.aoindustries.collections.transformers.Converter)
 	 */
 	public static <E,W> IterableWrapper<E,W> of(Iterable<W> iterable, Converter<E,W> converter) {
 		if(iterable instanceof Collection) {
@@ -48,7 +48,7 @@ public class IterableWrapper<E,W> implements Iterable<E> {
 	}
 
 	/**
-	 * @see  #of(java.lang.Iterable, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.lang.Iterable, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> IterableWrapper<E,E> of(Iterable<E> iterable) {

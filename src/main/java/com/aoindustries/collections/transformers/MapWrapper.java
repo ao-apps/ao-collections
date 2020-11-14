@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.Map;
 import java.util.Objects;
@@ -42,7 +42,7 @@ public class MapWrapper<K,V,KW,VW> implements Map<K,V> {
 	 * <li>If the given map is a {@link SortedMap}, then will return a {@link SortedMapWrapper}.</li>
 	 * </ol>
 	 *
-	 * @see  SortedMapWrapper#of(java.util.SortedMap, com.aoindustries.collections.wrapper.Converter, com.aoindustries.collections.wrapper.Converter)
+	 * @see  SortedMapWrapper#of(java.util.SortedMap, com.aoindustries.collections.transformers.Converter, com.aoindustries.collections.transformers.Converter)
 	 */
 	public static <K,V,KW,VW> MapWrapper<K,V,KW,VW> of(
 		Map<KW,VW> map,
@@ -56,7 +56,7 @@ public class MapWrapper<K,V,KW,VW> implements Map<K,V> {
 	}
 
 	/**
-	 * @see  #of(java.util.Map, com.aoindustries.collections.wrapper.Converter, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.Map, com.aoindustries.collections.transformers.Converter, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <K,V> MapWrapper<K,V,K,V> of(Map<K,V> map) {
@@ -188,7 +188,7 @@ public class MapWrapper<K,V,KW,VW> implements Map<K,V> {
 		}
 
 		/**
-		 * @see  #of(java.util.Map.Entry, com.aoindustries.collections.wrapper.Converter, com.aoindustries.collections.wrapper.Converter)
+		 * @see  #of(java.util.Map.Entry, com.aoindustries.collections.transformers.Converter, com.aoindustries.collections.transformers.Converter)
 		 * @see  Converter#identity()
 		 */
 		public static <K,V> EntryWrapper<K,V,K,V> of(Entry<K,V> entry) {

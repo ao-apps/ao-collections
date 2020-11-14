@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.ListIterator;
 
@@ -39,7 +39,7 @@ public class ListIteratorWrapper<E,W> extends IteratorWrapper<E,W> implements Li
 	}
 
 	/**
-	 * @see  #of(java.util.ListIterator, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.ListIterator, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> ListIteratorWrapper<E,E> of(ListIterator<E> wrapped) {

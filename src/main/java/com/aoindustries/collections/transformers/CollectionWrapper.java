@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,9 +44,9 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 	 * <li>If the given collection is a {@link Set}, then will return a {@link SetWrapper}.</li>
 	 * </ol>
 	 *
-	 * @see  ListWrapper#of(java.util.List, com.aoindustries.collections.wrapper.Converter)
-	 * @see  QueueWrapper#of(java.util.Queue, com.aoindustries.collections.wrapper.Converter)
-	 * @see  SetWrapper#of(java.util.Set, com.aoindustries.collections.wrapper.Converter)
+	 * @see  ListWrapper#of(java.util.List, com.aoindustries.collections.transformers.Converter)
+	 * @see  QueueWrapper#of(java.util.Queue, com.aoindustries.collections.transformers.Converter)
+	 * @see  SetWrapper#of(java.util.Set, com.aoindustries.collections.transformers.Converter)
 	 */
 	public static <E,W> CollectionWrapper<E,W> of(Collection<W> collection, Converter<E,W> converter) {
 		if(collection instanceof List) {
@@ -62,7 +62,7 @@ public class CollectionWrapper<E,W> extends IterableWrapper<E,W> implements Coll
 	}
 
 	/**
-	 * @see  #of(java.util.Collection, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.Collection, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> CollectionWrapper<E,E> of(Collection<E> collection) {

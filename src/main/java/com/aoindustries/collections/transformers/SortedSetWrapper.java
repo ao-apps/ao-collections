@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-collections.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.collections.wrapper;
+package com.aoindustries.collections.transformers;
 
 import java.util.NavigableSet;
 import java.util.SortedSet;
@@ -38,7 +38,7 @@ public class SortedSetWrapper<E,W> extends SetWrapper<E,W> implements SortedSet<
 	 * <li>If the given set is a {@link NavigableSet}, then will return a {@link NavigableSetWrapper}.</li>
 	 * </ol>
 	 *
-	 * @see  NavigableSetWrapper#of(java.util.NavigableSet, com.aoindustries.collections.wrapper.Converter)
+	 * @see  NavigableSetWrapper#of(java.util.NavigableSet, com.aoindustries.collections.transformers.Converter)
 	 */
 	public static <E,W> SortedSetWrapper<E,W> of(SortedSet<W> set, Converter<E,W> converter) {
 		if(set instanceof NavigableSet) {
@@ -48,7 +48,7 @@ public class SortedSetWrapper<E,W> extends SetWrapper<E,W> implements SortedSet<
 	}
 
 	/**
-	 * @see  #of(java.util.SortedSet, com.aoindustries.collections.wrapper.Converter)
+	 * @see  #of(java.util.SortedSet, com.aoindustries.collections.transformers.Converter)
 	 * @see  Converter#identity()
 	 */
 	public static <E> SortedSetWrapper<E,E> of(SortedSet<E> set) {
