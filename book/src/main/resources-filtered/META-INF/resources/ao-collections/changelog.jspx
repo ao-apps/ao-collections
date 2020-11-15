@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2020-09-27T05:34:45-05:00"
+		dateModified="2020-11-14T18:17:19-06:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-collections:pom.version}" />
@@ -62,10 +62,6 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 					<li>
 						<code>IdentityKey</code> now has a <code>NULL</code> constant, along with static factory methods
 						to use this constant for <code>null</code> values.
-					</li>
-					<li>
-						New package <code>com.aoindustries.collections.wrapper</code> that provides a set of collections
-						wrappers that convert objects to and from on-the-fly.
 					</li>
 				</ul>
 			</changelog:release>

@@ -30,6 +30,9 @@ Collections and related utilities for Java.
 * [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-collections)
 * [GitHub](https://github.com/aoindustries/ao-collections)
 
+## Modules
+* [AO Collections Transformers](https://github.com/aoindustries/ao-collections-transformers)
+
 ## Alternatives
 There may be functionality that is also found in other projects.  This project is of a different evolutionary origin.
 * [Apache Commons Collections](https://commons.apache.org/proper/commons-collections/) - A popular and much more full-featured library.
