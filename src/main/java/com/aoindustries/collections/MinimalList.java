@@ -39,6 +39,7 @@ import java.util.List;
  *
  * @author  AO Industries, Inc.
  */
+// TODO: Add assertions throughtout both this and MinimalMap
 public class MinimalList {
 
 	private MinimalList() {
@@ -91,7 +92,7 @@ public class MinimalList {
 	 */
 	public static <E> List<E> copy(List<E> list) {
 		// Still supporting null list for API compatibility
-		if(list==null) {
+		if(list == null || list.isEmpty()) {
 			// Empty
 			return Collections.emptyList();
 		}

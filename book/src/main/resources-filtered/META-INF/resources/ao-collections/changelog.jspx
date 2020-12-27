@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2020-11-17T16:00:58-06:00"
+		dateModified="2020-12-26T12:41:35-06:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -46,7 +46,16 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						<code>MinimalList.copy(List)</code> optimized to return <code>Collections.emptyList()</code>
+						when the list is empty.  This was the intent all along, but was lost in some previous
+						refactoring.  The method still worked correctly, in that it created a safe copy of the original
+						list, but was sub-optimal.
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
