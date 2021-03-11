@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2011, 2013, 2014, 2016, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2014, 2016, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -182,7 +182,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		this.classE = classE;
 		this.methodsByClass = methodsByClass;
 		/*
-		Map<Class<? extends E>, ArrayList<Method<? extends E>>> newAdded = new LinkedHashMap<Class<? extends E>,ArrayList<Method<? extends E>>>();
+		Map<Class<? extends E>, ArrayList<Method<? extends E>>> newAdded = new LinkedHashMap<Class<? extends E>, ArrayList<Method<? extends E>>>();
 		// Build a temporary map by return type
 		for(Method<? extends E> method : methods) {
 			Class<? extends E> returnType = method.getReturnType();

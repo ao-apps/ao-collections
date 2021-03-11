@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -53,21 +53,21 @@ public class MinimalMap {
 	/**
 	 * Gets the empty map representation.
 	 */
-	public static <K,V> Map<K,V> emptyMap() {
+	public static <K, V> Map<K, V> emptyMap() {
 		return Collections.emptyMap();
 	}
 
 	/**
 	 * Puts a new element in a map, returning the (possibly new) map.
 	 */
-	public static <K,V> Map<K,V> put(Map<K,V> map, K key, V value) {
+	public static <K, V> Map<K, V> put(Map<K, V> map, K key, V value) {
 		// Still supporting null map for API compatibility
 		if(map == null || map.isEmpty()) {
 			// The first entry is always a singletonMap
 			map = Collections.singletonMap(key, value);
 		} else if(map.size()==1) {
 			// Is a singleton map
-			Map.Entry<K,V> entry = map.entrySet().iterator().next();
+			Map.Entry<K, V> entry = map.entrySet().iterator().next();
 			K entryKey = entry.getKey();
 			if(Objects.equals(key, entryKey)) {
 				// If have the same key, replace entry
@@ -88,7 +88,7 @@ public class MinimalMap {
 	/**
 	 * Removes an element from a map, returning the (possibly new) map.
 	 */
-	public static <K,V> Map<K,V> remove(final Map<K,V> map, final K key) {
+	public static <K, V> Map<K, V> remove(final Map<K, V> map, final K key) {
 		// Still supporting null map for API compatibility
 		if(map == null || map.isEmpty()) {
 			// Empty map, nothing to remove
@@ -107,7 +107,7 @@ public class MinimalMap {
 			map.remove(key);
 			if(map.size() == 1) {
 				// Convert to singletonMap
-				Map.Entry<K,V> entry = map.entrySet().iterator().next();
+				Map.Entry<K, V> entry = map.entrySet().iterator().next();
 				return Collections.singletonMap(entry.getKey(), entry.getValue());
 			} else {
 				// Still more than one item, use same LinkedHashMap instance
@@ -124,7 +124,7 @@ public class MinimalMap {
 	 *              {@link Map#get(java.lang.Object)} directly now.
 	 */
 	@Deprecated
-	public static <K,V> V get(Map<K,V> map, K key) {
+	public static <K, V> V get(Map<K, V> map, K key) {
 		// Still supporting null map for API compatibility
 		return map==null ? null : map.get(key);
 	}
@@ -136,7 +136,7 @@ public class MinimalMap {
 	 *              {@link Map#containsKey(java.lang.Object)} directly now.
 	 */
 	@Deprecated
-	public static <K,V> boolean containsKey(Map<K,V> map, K key) {
+	public static <K, V> boolean containsKey(Map<K, V> map, K key) {
 		// Still supporting null map for API compatibility
 		return map!=null && map.containsKey(key);
 	}
@@ -148,7 +148,7 @@ public class MinimalMap {
 	 *              {@link Map#values()} directly now.
 	 */
 	@Deprecated
-	public static <K,V> Collection<V> values(Map<K,V> map) {
+	public static <K, V> Collection<V> values(Map<K, V> map) {
 		// Still supporting null map for API compatibility
 		if(map==null) {
 			return Collections.emptyList();
@@ -160,7 +160,7 @@ public class MinimalMap {
 	/**
 	 * Performs a shallow copy of the value collection.
 	 */
-	public static <K,V> Collection<V> valuesCopy(Map<K,V> map) {
+	public static <K, V> Collection<V> valuesCopy(Map<K, V> map) {
 		// Still supporting null map for API compatibility
 		if(map==null || map.isEmpty()) {
 			return Collections.emptyList();
@@ -177,7 +177,7 @@ public class MinimalMap {
 	 * Performs a shallow copy of a map.  The map is assumed to have been
 	 * created by MinimalMap and to be used through MinimalMap.
 	 */
-	public static <K,V> Map<K,V> copy(Map<K,V> map) {
+	public static <K, V> Map<K, V> copy(Map<K, V> map) {
 		// Still supporting null map for API compatibility
 		if(map==null || map.isEmpty()) {
 			// Empty
@@ -195,7 +195,7 @@ public class MinimalMap {
 	 * Gets an unmodifiable wrapper around this map.
 	 * May or may not wrap this map itself.
 	 */
-	public static <K,V> Map<K,V> unmodifiable(Map<K,V> map) {
+	public static <K, V> Map<K, V> unmodifiable(Map<K, V> map) {
 		// Still supporting null map for API compatibility
 		if(map == null) {
 			// Empty

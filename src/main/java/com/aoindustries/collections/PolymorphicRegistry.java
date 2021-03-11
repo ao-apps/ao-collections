@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2018, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2018, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -41,7 +41,7 @@ public class PolymorphicRegistry<U> {
 
 	private final Class<U> upperBound;
 
-	private final ConcurrentMap<Class<? extends U>,List<U>> instancesByClass = new ConcurrentHashMap<>();
+	private final ConcurrentMap<Class<? extends U>, List<U>> instancesByClass = new ConcurrentHashMap<>();
 
 	public PolymorphicRegistry(Class<U> upperBound) {
 		this.upperBound = upperBound;

@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -549,7 +549,7 @@ public class AoCollections {
 	 * If map has one element, uses <code>Collections.singletonMap</code>.
 	 * Otherwise, wraps the map with <code>Collections.unmodifiableMap</code>.
 	 */
-	public static <K,V> Map<K,V> optimalUnmodifiableMap(Map<? extends K,? extends V> map) {
+	public static <K, V> Map<K, V> optimalUnmodifiableMap(Map<? extends K, ? extends V> map) {
 		int size = map.size();
 		if(size == 0) return Collections.emptyMap();
 		Class<?> clazz = map.getClass();
@@ -557,12 +557,12 @@ public class AoCollections {
 			if(unmodifiableMapClasses[i] == clazz) {
 				// Safe change of generic bounds only because returned map is unmodifiable
 				@SuppressWarnings("unchecked")
-				Map<K,V> unmodifiable = (Map<K,V>)map;
+				Map<K, V> unmodifiable = (Map<K, V>)map;
 				return unmodifiable;
 			}
 		}
 		if(size == 1) {
-			Map.Entry<? extends K,? extends V> entry = map.entrySet().iterator().next();
+			Map.Entry<? extends K, ? extends V> entry = map.entrySet().iterator().next();
 			return Collections.singletonMap(entry.getKey(), entry.getValue());
 		}
 		return Collections.unmodifiableMap(map);
@@ -572,7 +572,7 @@ public class AoCollections {
 	 * Performs defensive shallow copy and returns unmodifiable map.
 	 * The iteration order of the original set is maintained.
 	 */
-	public static <K,V> Map<K,V> unmodifiableCopyMap(Map<? extends K, ? extends V> map) {
+	public static <K, V> Map<K, V> unmodifiableCopyMap(Map<? extends K, ? extends V> map) {
 		int size = map.size();
 		if(size==0) return Collections.emptyMap();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -582,7 +582,7 @@ public class AoCollections {
 		//Class<?> clazz = map.getClass();
 		//for(int i=0, len=unmodifiableMapClasses.length; i<len; i++) if(unmodifiableMapClasses[i]==clazz) return map;
 		if(size==1) {
-			Map.Entry<? extends K,? extends V> entry = map.entrySet().iterator().next();
+			Map.Entry<? extends K, ? extends V> entry = map.entrySet().iterator().next();
 			return Collections.singletonMap(entry.getKey(), entry.getValue());
 		}
 		return Collections.unmodifiableMap(new LinkedHashMap<>(map));
@@ -598,7 +598,7 @@ public class AoCollections {
 	 * If sorted map has one element, uses <code>singletonSortedMap</code>.
 	 * Otherwise, wraps the sorted map with <code>Collections.unmodifiableSortedMap</code>.
 	 */
-	public static <K,V> SortedMap<K,V> optimalUnmodifiableSortedMap(SortedMap<K,? extends V> sortedMap) {
+	public static <K, V> SortedMap<K, V> optimalUnmodifiableSortedMap(SortedMap<K, ? extends V> sortedMap) {
 		// TODO: int size = sortedMap.size();
 		// TODO: if(size == 0) return emptySortedMap();
 		Class<?> clazz = sortedMap.getClass();
@@ -606,7 +606,7 @@ public class AoCollections {
 			if(unmodifiableSortedMapClasses[i] == clazz) {
 				// Safe change of generic bounds only because returned map is unmodifiable
 				@SuppressWarnings("unchecked")
-				SortedMap<K,V> unmodifiable = (SortedMap<K,V>)sortedMap;
+				SortedMap<K, V> unmodifiable = (SortedMap<K, V>)sortedMap;
 				return unmodifiable;
 			}
 		}
@@ -620,7 +620,7 @@ public class AoCollections {
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable sorted map.
 	 */
-	public static <K,V> SortedMap<K,V> unmodifiableCopySortedMap(Map<K, ? extends V> map) {
+	public static <K, V> SortedMap<K, V> unmodifiableCopySortedMap(Map<K, ? extends V> map) {
 		// TODO: int size = sortedMap.size();
 		// TODO: if(size==0) return emptySortedMap();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -628,14 +628,14 @@ public class AoCollections {
 		// TODO: to copy repeatedly when different components use this same method for protection.
 		// TODO: Also allow standard Collections singleton
 		//Class<?> clazz = map.getClass();
-		//for(int i=0, len=unmodifiableSortedMapClasses.length; i<len; i++) if(unmodifiableSortedMapClasses[i]==clazz) return (SortedMap<K,V>)map;
+		//for(int i=0, len=unmodifiableSortedMapClasses.length; i<len; i++) if(unmodifiableSortedMapClasses[i]==clazz) return (SortedMap<K, V>)map;
 		// TODO: if(size==1) {
 		// TODO:     K key = sortedMap.firstKey();
 		// TODO:     return singletonSortedMap(key, sortedMap.get(key));
 		// TODO: }
-		SortedMap<K,V> copy;
+		SortedMap<K, V> copy;
 		if(map instanceof SortedMap) {
-			copy = new TreeMap<>((SortedMap<K,? extends V>)map);
+			copy = new TreeMap<>((SortedMap<K, ? extends V>)map);
 		} else {
 			copy = new TreeMap<>(map);
 		}
@@ -869,7 +869,7 @@ public class AoCollections {
 	/**
 	 * Filters a list for all elements of a given class.
 	 */
-	public static <E,R extends E> List<R> filter(List<? extends E> list, Class<? extends R> clazz) {
+	public static <E, R extends E> List<R> filter(List<? extends E> list, Class<? extends R> clazz) {
 		if(list==null) return Collections.emptyList();
 		else {
 			/* Imperative version: */
@@ -891,21 +891,21 @@ public class AoCollections {
 			 */
 		}
 	}
-//	private static <K,S,V extends S> Map<K,V> filter(Map<K,S> map, Class<V> clazz) {
+//	private static <K, S, V extends S> Map<K, V> filter(Map<K, S> map, Class<V> clazz) {
 //		return filter(map, clazz, LinkedHashMap::new);
 //	}
-//	private static <K,V,R extends V> Map<K,R> filter(Map<K,V> map, Class<R> clazz, Supplier<Map<K,R>> mapSupplier) {
+//	private static <K, V, R extends V> Map<K, R> filter(Map<K, V> map, Class<R> clazz, Supplier<Map<K, R>> mapSupplier) {
 //		if(map==null) return Collections.emptyMap();
 //		else {
 //			// Imperative version:
-////			Map<K,R> results = mapSupplier.get();
-////			for(Map.Entry<K,V> entry : map.entrySet()) {
+////			Map<K, R> results = mapSupplier.get();
+////			for(Map.Entry<K, V> entry : map.entrySet()) {
 ////				V value = entry.getValue();
 ////				if(clazz.isInstance(value)) results.put(entry.getKey(), clazz.cast(value));
 ////			}
 ////			return Collections.unmodifiableMap(results);
 //			// Mixed functional/imperative:
-//			Map<K,R> results = mapSupplier.get();
+//			Map<K, R> results = mapSupplier.get();
 //			map.forEach(
 //				(key, value) -> {
 //					if(clazz.isInstance(value)) results.put(key, clazz.cast(value));
@@ -937,9 +937,9 @@ public class AoCollections {
 	 * This is a copy of the keys and will not write-through or be altered by the original map.
 	 * The set will have the same iteration order as the original map.
 	 */
-	public static <K,V> Set<K> filterByValue(Map<? extends K,? extends V> map, V value) {
+	public static <K, V> Set<K> filterByValue(Map<? extends K, ? extends V> map, V value) {
 		Set<K> filtered = new LinkedHashSet<>();
-		for(Map.Entry<? extends K,? extends V> entry : map.entrySet()) {
+		for(Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
 			if(Objects.equals(entry.getValue(), value)) {
 				K key = entry.getKey();
 				if(!filtered.add(key)) throw new AssertionError("Duplicate key: " + key);
@@ -953,9 +953,9 @@ public class AoCollections {
 	 * This is a copy of the keys and will not write-through or be altered by the original map.
 	 * The set uses the same comparator as the original map.
 	 */
-	public static <K,V> SortedSet<K> filterByValue(SortedMap<K,? extends V> map, V value) {
+	public static <K, V> SortedSet<K> filterByValue(SortedMap<K, ? extends V> map, V value) {
 		TreeSet<K> filtered = new TreeSet<>(map.comparator());
-		for(Map.Entry<K,? extends V> entry : map.entrySet()) {
+		for(Map.Entry<K, ? extends V> entry : map.entrySet()) {
 			if(Objects.equals(entry.getValue(), value)) {
 				K key = entry.getKey();
 				if(!filtered.add(key)) throw new AssertionError("Duplicate key: " + key);
@@ -1001,7 +1001,7 @@ public class AoCollections {
 	 *
 	 * @param  elements  The number of elements or {@code -1} when unknown
 	 */
-	public static <K,V> HashMap<K,V> newHashMap(int elements) {
+	public static <K, V> HashMap<K, V> newHashMap(int elements) {
 		return (elements == -1) ? new HashMap<>() : new HashMap<>(getHashInitialCapacity(elements));
 	}
 
@@ -1010,7 +1010,7 @@ public class AoCollections {
 	 *
 	 * @param  elements  The number of elements or {@code null} when unknown
 	 */
-	public static <K,V> HashMap<K,V> newHashMap(Integer elements) {
+	public static <K, V> HashMap<K, V> newHashMap(Integer elements) {
 		return newHashMap(elements == null ? -1 : elements);
 	}
 
@@ -1037,7 +1037,7 @@ public class AoCollections {
 	 *
 	 * @param  elements  The number of elements or {@code -1} when unknown
 	 */
-	public static <K,V> IdentityHashMap<K,V> newIdentityHashMap(int elements) {
+	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(int elements) {
 		return (elements == -1) ? new IdentityHashMap<>() : new IdentityHashMap<>(elements);
 	}
 
@@ -1046,7 +1046,7 @@ public class AoCollections {
 	 *
 	 * @param  elements  The number of elements or {@code null} when unknown
 	 */
-	public static <K,V> IdentityHashMap<K,V> newIdentityHashMap(Integer elements) {
+	public static <K, V> IdentityHashMap<K, V> newIdentityHashMap(Integer elements) {
 		return newIdentityHashMap(elements == null ? -1 : elements);
 	}
 
@@ -1073,7 +1073,7 @@ public class AoCollections {
 	 *
 	 * @param  elements  The number of elements or {@code -1} when unknown
 	 */
-	public static <K,V> LinkedHashMap<K,V> newLinkedHashMap(int elements) {
+	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int elements) {
 		return (elements == -1) ? new LinkedHashMap<>() : new LinkedHashMap<>(getHashInitialCapacity(elements));
 	}
 
@@ -1082,7 +1082,7 @@ public class AoCollections {
 	 *
 	 * @param  elements  The number of elements or {@code null} when unknown
 	 */
-	public static <K,V> LinkedHashMap<K,V> newLinkedHashMap(Integer elements) {
+	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Integer elements) {
 		return newLinkedHashMap(elements == null ? -1 : elements);
 	}
 
