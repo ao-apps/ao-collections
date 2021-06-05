@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2021-05-31T01:04:26-05:00"
+		dateModified="2021-06-03T22:53:21-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -56,6 +56,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 						list, but was sub-optimal.
 					</li>
 					<li>Maven artifact relocated from <code>com.aoindustries:ao-collections</code> to <code>com.aoapps:ao-collections</code>.</li>
+					<li>Package renamed from <code>com.aoindustries.collections</code> to <code>com.aoapps.collections</code>.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
@@ -92,7 +93,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 			<ul>
 				<li>
 					<p>
-						Fixed <code><ao:a href="apidocs/com/aoindustries/collections/SortedProperties.html">SortedProperties</ao:a></code>
+						Fixed <code><ao:a href="apidocs/com/aoapps/collections/SortedProperties.html">SortedProperties</ao:a></code>
 						compatibility with Java 9+ by also sorting <code>entrySet()</code>.
 					</p>
 					<p>
@@ -116,7 +117,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 					and <core:link book="/hodgepodge" page="/index.jspx" />.
 				</li>
 				<li>
-					New utility class <code><ao:a href="apidocs/com/aoindustries/collections/Sets.html">Sets</ao:a></code>
+					New utility class <code><ao:a href="apidocs/com/aoapps/collections/Sets.html">Sets</ao:a></code>
 					for working with sets.  Prefer functionality in
 					<ao:a href="https://commons.apache.org/proper/commons-collections/">Commons Collections</ao:a>
 					or other more mainstream places.  These methods are things not so concisely
