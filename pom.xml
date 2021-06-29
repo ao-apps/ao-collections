@@ -33,6 +33,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>bundle</packaging>
 
 	<properties>
+		<module.name>com.aoapps.collections</module.name>
 		<!-- Java 1.8 -->
 		<javase.version>1.8</javase.version>
 		<javase.release>8</javase.release>
@@ -97,14 +98,42 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<usedDependencies>
+						<!-- Javadoc-only -->
+						<dependency>org.apache.commons:commons-collections4</dependency>
+					</usedDependencies>
+				</configuration>
+			</plugin>
+			<!-- Java 1.8: see https://maven.apache.org/plugins/maven-compiler-plugin/examples/module-info.html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<!-- compile everything to ensure module-info contains right entries -->
+					<execution>
+						<id>default-compile</id>
+						<configuration>
+							<release>9</release>
+						</configuration>
+					</execution>
+					<!-- recompile everything for target VM except the module-info.java -->
+					<execution>
+						<id>base-compile</id><goals><goal>compile</goal></goals>
+						<configuration>
+							<excludes>
+								<exclude>module-info.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
-					<additionalDependencies>
-						<!-- Javadoc-only -->
-						<additionalDependency>
-							<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections4.version}</version>
-						</additionalDependency>
-					</additionalDependencies>
+					<!-- Java 1.8: generate future-proof modular javadocs -->
+					<source>11</source>
+					<release>11</release>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -117,12 +146,6 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
-						<dependencies>
-							<!-- Javadoc-only -->
-							<dependency>
-								<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections4.version}</version>
-							</dependency>
-						</dependencies>
 						<executions>
 							<execution>
 								<id>unpack.offlineLinks</id><phase>generate-sources</phase><goals><goal>unpack</goal></goals>
@@ -130,7 +153,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 									<artifactItems>
 										<!-- Javadoc-only -->
 										<artifactItem>
-											<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections4.version}</version><classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><classifier>javadoc</classifier><includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/org.apache.commons/commons-collections4</outputDirectory>
 										</artifactItem>
 										<!-- Direct -->
@@ -184,6 +207,11 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Javadoc-only -->
+			<dependency>
+				<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections4.version}</version>
+				<exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
+			</dependency>
 			<!-- Direct -->
 			<dependency>
 				<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><version>5.0.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
@@ -204,6 +232,11 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Javadoc-only -->
+		<dependency>
+			<groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
