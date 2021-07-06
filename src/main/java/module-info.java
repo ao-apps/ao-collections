@@ -22,8 +22,7 @@
  */
 module com.aoapps.collections {
 	exports com.aoapps.collections;
-	// Javadoc-only
-	requires static org.apache.commons.collections4; // <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId>
 	// Direct
 	requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+	requires static org.apache.commons.collections4; // <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId>
 }
