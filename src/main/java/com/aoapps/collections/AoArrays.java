@@ -108,7 +108,7 @@ public class AoArrays {
 	 * Merges multiple already-sorted collections into one big array.
 	 *
 	 * Worst-case Complexity:
-	 * 
+	 *
 	 *     0 collections: constant
 	 *
 	 *     1 collection: O(n), where n is the number of elements in the collection
@@ -349,19 +349,29 @@ public class AoArrays {
 	 * and passing in an array with duplicate values will result in duplicate
 	 * values on iteration and a size that doesn't match the number of unique values.
 	 * </p>
+	 *
+	 * @param  array  may be {@code null}, which will return {@code null}
+	 *
+	 * @return  an unmodifiable set or {@code null} when {@code array == null}
 	 */
 	@SafeVarargs
 	@SuppressWarnings("varargs")
 	public static <E> Set<E> asUnmodifiableSet(final E... array) {
-		final int len = array.length;
-		if(len==0) return Collections.emptySet();
-		if(len==1) return Collections.singleton(array[0]);
-		return new UnmodifiableArraySet<>(array);
+		if(array == null) {
+			return null;
+		} else {
+			final int len = array.length;
+			if(len==0) return Collections.emptySet();
+			if(len==1) return Collections.singleton(array[0]);
+			return new UnmodifiableArraySet<>(array);
+		}
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (Object[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E> int indexOf(E[] array, E element) {
 		return indexOf(array, element, 0);
@@ -369,27 +379,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E> int indexOf(E[] array, E element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(Objects.equals(array[i], element)) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(Objects.equals(array[i], element)) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E> int lastIndexOf(E[] array, E element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E> int lastIndexOf(E[] array, E element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(Objects.equals(array[i], element)) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(Objects.equals(array[i], element)) return i;
+			}
 		}
 		return -1;
 	}
@@ -398,6 +422,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (Enum[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E extends Enum<E>> int indexOf(E[] array, E element) {
 		return indexOf(array, element, 0);
@@ -405,27 +431,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E extends Enum<E>> int indexOf(E[] array, E element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E extends Enum<E>> int lastIndexOf(E[] array, E element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static <E extends Enum<E>> int lastIndexOf(E[] array, E element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -434,6 +474,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (byte[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(byte[] array, byte element) {
 		return indexOf(array, element, 0);
@@ -441,27 +483,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(byte[] array, byte element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(byte[] array, byte element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(byte[] array, byte element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -470,6 +526,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (short[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(short[] array, short element) {
 		return indexOf(array, element, 0);
@@ -477,27 +535,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(short[] array, short element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(short[] array, short element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(short[] array, short element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -506,6 +578,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (int[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(int[] array, int element) {
 		return indexOf(array, element, 0);
@@ -513,27 +587,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(int[] array, int element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(int[] array, int element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(int[] array, int element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -542,6 +630,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (long[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(long[] array, long element) {
 		return indexOf(array, element, 0);
@@ -549,27 +639,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(long[] array, long element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(long[] array, long element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(long[] array, long element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -578,6 +682,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (float[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(float[] array, float element) {
 		return indexOf(array, element, 0);
@@ -585,27 +691,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(float[] array, float element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(float[] array, float element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(float[] array, float element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -614,6 +734,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (double[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(double[] array, double element) {
 		return indexOf(array, element, 0);
@@ -621,27 +743,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(double[] array, double element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(double[] array, double element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(double[] array, double element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -650,6 +786,8 @@ public class AoArrays {
 	// <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (char[])">
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(char[] array, char element) {
 		return indexOf(array, element, 0);
@@ -657,27 +795,41 @@ public class AoArrays {
 
 	/**
 	 * Finds the first index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int indexOf(char[] array, char element, int fromIndex) {
-		for(int i=fromIndex, len=array.length; i<len; i++) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex, len=array.length; i<len; i++) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(char[] array, char element) {
-		return lastIndexOf(array, element, array.length-1);
+		if(array != null) {
+			return lastIndexOf(array, element, array.length-1);
+		} else {
+			return -1;
+		}
 	}
 
 	/**
 	 * Finds the last index of an element or <code>-1</code> if not found.
+	 *
+	 * @param  array  may be {@code null}, in which the element is never found
 	 */
 	public static int lastIndexOf(char[] array, char element, int fromIndex) {
-		for(int i=fromIndex; i>=0; i--) {
-			if(array[i] == element) return i;
+		if(array != null) {
+			for(int i=fromIndex; i>=0; i--) {
+				if(array[i] == element) return i;
+			}
 		}
 		return -1;
 	}
@@ -687,7 +839,9 @@ public class AoArrays {
 	 * Computes hashCode compatible with Arrays.hashCode, but only across the
 	 * given subset of the array.
 	 *
-	 * @see  Arrays#hashCode(byte[]) 
+	 * @param  a  may be {@code null}, which will return {@code 0}
+	 *
+	 * @see  Arrays#hashCode(byte[])
 	 */
 	public static int hashCode(byte a[], int off, int len) {
 		if(a == null) return 0;
@@ -703,18 +857,22 @@ public class AoArrays {
 
 	/**
 	 * Gets the maximum non-null value, or {@code null} if no non-null value.
+	 *
+	 * @param  values  may be {@code null}, which will return {@code null}
 	 */
 	@SafeVarargs
 	public static <T extends Comparable<? super T>> T maxNonNull(T ... values) {
 		T max = null;
-		for(T value : values) {
-			if(
-				value != null
-				&& (
-					max == null
-					|| value.compareTo(max) > 0
-				)
-			) max = value;
+		if(values != null) {
+			for(T value : values) {
+				if(
+					value != null
+					&& (
+						max == null
+						|| value.compareTo(max) > 0
+					)
+				) max = value;
+			}
 		}
 		return max;
 	}

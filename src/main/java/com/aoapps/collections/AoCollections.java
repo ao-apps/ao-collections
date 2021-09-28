@@ -234,8 +234,11 @@ public class AoCollections {
 	 * If collection is empty, uses <code>Collections.emptyList</code>.
 	 * If collection has one element, uses <code>Collections.singletonList</code>.
 	 * Otherwise, wraps the collection with <code>Collections.unmodifiableCollection</code>.
+	 *
+	 * @param  collection  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> Collection<T> optimalUnmodifiableCollection(Collection<? extends T> collection) {
+		if(collection == null) return null;
 		int size = collection.size();
 		if(size == 0) return Collections.emptyList();
 		Class<?> clazz = collection.getClass();
@@ -255,9 +258,11 @@ public class AoCollections {
 	 * Gets a collection from an iterable.
 	 * Casts the iterable to collection, if possible.
 	 * Otherwise builds a new list from the iterable, maintaining iteration order.
+	 *
+	 * @param  iterable  may be {@code null}, which will return {@code null}
 	 */
-	@SuppressWarnings("null")
 	public static <E> Collection<E> asCollection(Iterable<E> iterable) {
+		if(iterable == null) return null;
 		if(iterable instanceof Collection) return (Collection<E>)iterable;
 		List<E> list = new ArrayList<>();
 		for(E elem : iterable) {
@@ -267,6 +272,7 @@ public class AoCollections {
 	}
 
 	private static <T> Collection<T> unmodifiableCopyCollection(Collection<? extends T> collection, boolean copyNeeded) {
+		if(collection == null) return null;
 		int size = collection.size();
 		if(size==0) return Collections.emptyList();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -281,6 +287,8 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable collection.
+	 *
+	 * @param  collection  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> Collection<T> unmodifiableCopyCollection(Collection<? extends T> collection) {
 		return unmodifiableCopyCollection(collection, true);
@@ -288,8 +296,11 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable collection.
+	 *
+	 * @param  iter  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> Collection<T> unmodifiableCopyCollection(Iterable<? extends T> iter) {
+		if(iter == null) return null;
 		if(iter instanceof Collection) return unmodifiableCopyCollection((Collection<? extends T>)iter, true);
 		return unmodifiableCopyCollection(asCollection(iter), false);
 	}
@@ -307,12 +318,15 @@ public class AoCollections {
 	 * Otherwise, wraps the list with <code>Collections.unmodifiableList</code>,
 	 * and will also call "trimToSize" if the list is an ArrayList.
 	 *
+	 * @param  list  may be {@code null}, which will return {@code null}
+	 *
 	 * @see Collections#emptyList()
 	 * @see Collections#singletonList(java.lang.Object)
 	 * @see ArrayList#trimToSize()
 	 * @see Collections#unmodifiableList(java.util.List)
 	 */
 	public static <T> List<T> optimalUnmodifiableList(List<? extends T> list) {
+		if(list == null) return null;
 		int size = list.size();
 		if(size == 0) return Collections.emptyList();
 		Class<?> clazz = list.getClass();
@@ -333,9 +347,11 @@ public class AoCollections {
 	 * Gets a list from an iterable.
 	 * Casts the iterable to list, if possible.
 	 * Otherwise builds a new list from the iterable, maintaining iteration order.
+	 *
+	 * @param  iterable  may be {@code null}, which will return {@code null}
 	 */
-	@SuppressWarnings("null")
 	public static <E> List<E> asList(Iterable<E> iterable) {
+		if(iterable == null) return null;
 		if(iterable instanceof List) return (List<E>)iterable;
 		List<E> list = new ArrayList<>();
 		for(E elem : iterable) {
@@ -346,6 +362,7 @@ public class AoCollections {
 
 	@SuppressWarnings("unchecked")
 	private static <T> List<T> unmodifiableCopyList(Collection<? extends T> collection, boolean copyNeeded) {
+		if(collection == null) return null;
 		int size = collection.size();
 		if(size==0) return Collections.emptyList();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -361,6 +378,8 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable list.
+	 *
+	 * @param  collection  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> List<T> unmodifiableCopyList(Collection<? extends T> collection) {
 		return unmodifiableCopyList(collection, true);
@@ -368,8 +387,11 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable list.
+	 *
+	 * @param  iter  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> List<T> unmodifiableCopyList(Iterable<? extends T> iter) {
+		if(iter == null) return null;
 		if(iter instanceof Collection) return unmodifiableCopyList((Collection<? extends T>)iter, true);
 		return unmodifiableCopyList(asList(iter), false);
 	}
@@ -392,8 +414,11 @@ public class AoCollections {
 	 * If set is empty, uses <code>Collections.emptySet</code>.
 	 * If set has one element, uses <code>Collections.singleton</code>.
 	 * Otherwise, wraps the set with <code>Collections.unmodifiableSet</code>.
+	 *
+	 * @param  set  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> Set<T> optimalUnmodifiableSet(Set<? extends T> set) {
+		if(set == null) return null;
 		int size = set.size();
 		if(size == 0) return Collections.emptySet();
 		Class<?> clazz = set.getClass();
@@ -413,9 +438,11 @@ public class AoCollections {
 	 * Gets a set from an iterable.
 	 * Casts the iterable to set, if possible.
 	 * Otherwise builds a new set from the iterable, maintaining iteration order.
+	 *
+	 * @param  iterable   may be {@code null}, which will return {@code null}
 	 */
-	@SuppressWarnings("null")
 	public static <E> Set<E> asSet(Iterable<E> iterable) {
+		if(iterable == null) return null;
 		if(iterable instanceof Set) return (Set<E>)iterable;
 		Set<E> set = new LinkedHashSet<>();
 		for(E elem : iterable) {
@@ -426,6 +453,7 @@ public class AoCollections {
 
 	@SuppressWarnings("unchecked")
 	private static <T> Set<T> unmodifiableCopySet(Collection<? extends T> collection, boolean copyNeeded) {
+		if(collection == null) return null;
 		int size = collection.size();
 		if(size==0) return Collections.emptySet();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -444,6 +472,8 @@ public class AoCollections {
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable set.
 	 * The iteration order of the original set is maintained.
+	 *
+	 * @param  collection  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> Set<T> unmodifiableCopySet(Collection<? extends T> collection) {
 		return unmodifiableCopySet(collection, true);
@@ -452,8 +482,11 @@ public class AoCollections {
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable set.
 	 * The iteration order of the original set is maintained.
+	 *
+	 * @param  iter  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> Set<T> unmodifiableCopySet(Iterable<? extends T> iter) {
+		if(iter == null) return null;
 		if(iter instanceof Collection) return unmodifiableCopySet((Collection<? extends T>)iter, true);
 		return unmodifiableCopySet(asSet(iter), false);
 	}
@@ -469,8 +502,11 @@ public class AoCollections {
 	 * If sorted set is empty, uses <code>emptySortedSet</code>.
 	 * If sorted set has one element, uses <code>singletonSortedSet</code>.
 	 * Otherwise, wraps the sorted set with <code>Collections.unmodifiableSortedSet</code>.
+	 *
+	 * @param  sortedSet  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> SortedSet<T> optimalUnmodifiableSortedSet(SortedSet<T> sortedSet) {
+		if(sortedSet == null) return null;
 		int size = sortedSet.size();
 		if(size==0) return emptySortedSet();
 		Class<?> clazz = sortedSet.getClass();
@@ -485,9 +521,11 @@ public class AoCollections {
 	 * Gets a sorted set from an iterable.
 	 * Casts the iterable to sorted set, if possible.
 	 * Otherwise builds a new sorted set from the iterable, in natural ordering.
+	 *
+	 * @param  iterable  may be {@code null}, which will return {@code null}
 	 */
-	@SuppressWarnings("null")
 	public static <E> SortedSet<E> asSortedSet(Iterable<E> iterable) {
+		if(iterable == null) return null;
 		if(iterable instanceof SortedSet) return (SortedSet<E>)iterable;
 		SortedSet<E> sortedSet = new TreeSet<>();
 		for(E elem : iterable) {
@@ -498,6 +536,7 @@ public class AoCollections {
 
 	@SuppressWarnings("unchecked")
 	private static <T> SortedSet<T> unmodifiableCopySortedSet(Collection<? extends T> collection, boolean copyNeeded) {
+		if(collection == null) return null;
 		int size = collection.size();
 		if(size==0) return emptySortedSet();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -520,6 +559,8 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable sorted set.
+	 *
+	 * @param  collection  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> SortedSet<T> unmodifiableCopySortedSet(Collection<? extends T> collection) {
 		return unmodifiableCopySortedSet(collection, true);
@@ -527,8 +568,11 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable sorted set.
+	 *
+	 * @param  iter  may be {@code null}, which will return {@code null}
 	 */
 	public static <T> SortedSet<T> unmodifiableCopySortedSet(Iterable<? extends T> iter) {
+		if(iter == null) return null;
 		if(iter instanceof Collection) return unmodifiableCopySortedSet((Collection<? extends T>)iter, true);
 		return unmodifiableCopySortedSet(asSortedSet(iter), false);
 	}
@@ -548,8 +592,11 @@ public class AoCollections {
 	 * If map is empty, uses <code>Collections.emptyMap</code>.
 	 * If map has one element, uses <code>Collections.singletonMap</code>.
 	 * Otherwise, wraps the map with <code>Collections.unmodifiableMap</code>.
+	 *
+	 * @param  map  may be {@code null}, which will return {@code null}
 	 */
 	public static <K, V> Map<K, V> optimalUnmodifiableMap(Map<? extends K, ? extends V> map) {
+		if(map == null) return null;
 		int size = map.size();
 		if(size == 0) return Collections.emptyMap();
 		Class<?> clazz = map.getClass();
@@ -571,8 +618,11 @@ public class AoCollections {
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable map.
 	 * The iteration order of the original set is maintained.
+	 *
+	 * @param  map  may be {@code null}, which will return {@code null}
 	 */
 	public static <K, V> Map<K, V> unmodifiableCopyMap(Map<? extends K, ? extends V> map) {
+		if(map == null) return null;
 		int size = map.size();
 		if(size==0) return Collections.emptyMap();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -597,8 +647,11 @@ public class AoCollections {
 	 * If sorted map is empty, uses <code>emptySortedMap</code>.
 	 * If sorted map has one element, uses <code>singletonSortedMap</code>.
 	 * Otherwise, wraps the sorted map with <code>Collections.unmodifiableSortedMap</code>.
+	 *
+	 * @param  sortedMap  may be {@code null}, which will return {@code null}
 	 */
 	public static <K, V> SortedMap<K, V> optimalUnmodifiableSortedMap(SortedMap<K, ? extends V> sortedMap) {
+		if(sortedMap == null) return null;
 		// TODO: int size = sortedMap.size();
 		// TODO: if(size == 0) return emptySortedMap();
 		Class<?> clazz = sortedMap.getClass();
@@ -619,8 +672,11 @@ public class AoCollections {
 
 	/**
 	 * Performs defensive shallow copy and returns unmodifiable sorted map.
+	 *
+	 * @param  map  may be {@code null}, which will return {@code null}
 	 */
 	public static <K, V> SortedMap<K, V> unmodifiableCopySortedMap(Map<K, ? extends V> map) {
+		if(map == null) return null;
 		// TODO: int size = sortedMap.size();
 		// TODO: if(size==0) return emptySortedMap();
 		// TODO: Create an unmodifiable collection that can only be populated here, and reused.
@@ -722,8 +778,11 @@ public class AoCollections {
 
 	/**
 	 * Wraps an iterator to make it unmodifiable.
+	 *
+	 * @param  iter  may be {@code null}, which will return {@code null}
 	 */
 	public static <E> Iterator<E> unmodifiableIterator(Iterator<? extends E> iter) {
+		if(iter == null) return null;
 		// Don't wrap already unmodifiable iterator types.
 		if(
 			(iter instanceof UnmodifiableIterator)
@@ -813,7 +872,7 @@ public class AoCollections {
 	/**
 	 * Two collections are considered equal when they are the same size and have the same
 	 * elements in the same iteration order.
-	 * 
+	 *
 	 * If both collections are null they are also considered equal.
 	 */
 	public static boolean equals(Collection<?> collection1, Collection<?> collection2) {
@@ -853,10 +912,13 @@ public class AoCollections {
 	/**
 	 * Computes the hashCode of a collection in a manner consistent with
 	 * AbstractList.
-	 * 
-	 * @see  AbstractList#hashCode() 
+	 *
+	 * @param  iterable  may be {@code null}, which will return {@code 0}
+	 *
+	 * @see  AbstractList#hashCode()
 	 */
 	public static int hashCode(Iterable<?> iterable) {
+		if(iterable == null) return 0;
 		int hashCode = 1;
 		Iterator<?> iter = iterable.iterator();
 		while(iter.hasNext()) {
@@ -868,28 +930,28 @@ public class AoCollections {
 
 	/**
 	 * Filters a list for all elements of a given class.
+	 *
+	 * @param  list  may be {@code null}, which will return {@code null}
 	 */
 	public static <E, R extends E> List<R> filter(List<? extends E> list, Class<? extends R> clazz) {
-		if(list==null) return Collections.emptyList();
-		else {
-			/* Imperative version: */
-			List<R> results = MinimalList.emptyList();
-			for(E element : list) {
-				if(clazz.isInstance(element)) {
-					results = MinimalList.add(results, clazz.cast(element));
-				}
+		if(list == null) return null;
+		/* Imperative version: */
+		List<R> results = MinimalList.emptyList();
+		for(E element : list) {
+			if(clazz.isInstance(element)) {
+				results = MinimalList.add(results, clazz.cast(element));
 			}
-			return MinimalList.unmodifiable(results);
-			/* Functional version:
-			return Collections.unmodifiableList(
-				list
-					.stream()
-					.filter(e -> clazz.isInstance(e))
-					.map(e -> clazz.cast(e))
-					.collect(Collectors.toList())
-			);
-			 */
 		}
+		return MinimalList.unmodifiable(results);
+		/* Functional version:
+		return Collections.unmodifiableList(
+			list
+				.stream()
+				.filter(e -> clazz.isInstance(e))
+				.map(e -> clazz.cast(e))
+				.collect(Collectors.toList())
+		);
+		 */
 	}
 //	private static <K, S, V extends S> Map<K, V> filter(Map<K, S> map, Class<V> clazz) {
 //		return filter(map, clazz, LinkedHashMap::new);
@@ -936,8 +998,11 @@ public class AoCollections {
 	 * Returns a modifiable set of all the keys in a map that match the given value.
 	 * This is a copy of the keys and will not write-through or be altered by the original map.
 	 * The set will have the same iteration order as the original map.
+	 *
+	 * @param  map  may be {@code null}, which will return {@code null}
 	 */
 	public static <K, V> Set<K> filterByValue(Map<? extends K, ? extends V> map, V value) {
+		if(map == null) return null;
 		Set<K> filtered = new LinkedHashSet<>();
 		for(Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
 			if(Objects.equals(entry.getValue(), value)) {
@@ -952,8 +1017,11 @@ public class AoCollections {
 	 * Returns a modifiable sorted set of all the keys in a sorted map that match the given value.
 	 * This is a copy of the keys and will not write-through or be altered by the original map.
 	 * The set uses the same comparator as the original map.
+	 *
+	 * @param  map  may be {@code null}, which will return {@code null}
 	 */
 	public static <K, V> SortedSet<K> filterByValue(SortedMap<K, ? extends V> map, V value) {
+		if(map == null) return null;
 		TreeSet<K> filtered = new TreeSet<>(map.comparator());
 		for(Map.Entry<K, ? extends V> entry : map.entrySet()) {
 			if(Objects.equals(entry.getValue(), value)) {

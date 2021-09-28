@@ -37,7 +37,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2020-03-24T00:28:49-05:00"
-		dateModified="2021-07-04T00:10:53-05:00"
+		dateModified="2021-09-27T22:21:10-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -47,7 +47,20 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 				artifactId="@{documented.artifactId}"
 				repository="@{nexusUrl}content/repositories/snapshots/"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						<strong>Breaking change:</strong> <code>AoCollections.filter(List, Class)</code> now returns
+						<code>null</code> when <code>list == null</code>, instead of an empty list.  This is for
+						consistency with other methods.
+					</li>
+					<li>
+						<code>AoArrays</code>, <code>AoCollections</code>, and <code>Sets</code> now accept
+						<code>null</code> parameters instead of throwing NPE, where it makes sense.  An example is
+						unmodifiable wrappers: <code>null</code> is arguably already unmodifiable.
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
