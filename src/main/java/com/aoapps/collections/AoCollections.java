@@ -138,7 +138,7 @@ public class AoCollections {
 
 		private static final long serialVersionUID = -6732971044735913580L;
 
-		final private E element;
+		private final E element;
 
 		SingletonSortedSet(E e) {element = e;}
 

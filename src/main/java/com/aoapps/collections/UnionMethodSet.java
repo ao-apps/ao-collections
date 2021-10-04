@@ -70,7 +70,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		Set<? extends E> getSet(Object target);
 	}
 
-	abstract public static class ReflectionMethod<E> implements Method<E> {
+	public abstract static class ReflectionMethod<E> implements Method<E> {
 
 		protected final java.lang.reflect.Method method;
 
@@ -82,7 +82,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 			this.method = method;
 		}
 
-		final public java.lang.reflect.Method getMethod() {
+		public final java.lang.reflect.Method getMethod() {
 			return method;
 		}
 	}
