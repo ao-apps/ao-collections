@@ -375,7 +375,7 @@ public class IntArrayList extends AbstractList<Integer>
 	 */
 	@Override
 	public Integer set(int index, Integer element) {
-		return set(index,element.intValue());
+		return set(index, element.intValue());
 	}
 
 	/**

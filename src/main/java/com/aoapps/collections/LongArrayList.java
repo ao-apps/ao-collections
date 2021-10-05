@@ -375,7 +375,7 @@ public class LongArrayList extends AbstractList<Long>
 	 */
 	@Override
 	public Long set(int index, Long element) {
-		return set(index,element.longValue());
+		return set(index, element.longValue());
 	}
 
 	/**
