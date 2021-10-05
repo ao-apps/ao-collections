@@ -51,7 +51,7 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 		</div>]]></javadoc.modules>
 		<!-- SonarQube -->
 		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
-		<sonar.organization>aoindustries</sonar.organization>
+		<sonar.organization>ao-apps</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<!-- Dependencies -->
 		<commons-collections4.version>4.4</commons-collections4.version>
@@ -88,20 +88,20 @@ along with ao-collections.  If not, see <http://www.gnu.org/licenses />.
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/aoindustries/ao-collections.git</connection>
-		<developerConnection>scm:git:git@github.com:aoindustries/ao-collections.git</developerConnection>
-		<url>https://github.com/aoindustries/ao-collections</url>
+		<connection>scm:git:git://github.com/ao-apps/ao-collections.git</connection>
+		<developerConnection>scm:git:git@github.com:ao-apps/ao-collections.git</developerConnection>
+		<url>https://github.com/ao-apps/ao-collections</url>
 		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/aoindustries/ao-collections/issues</url>
+		<url>https://github.com/ao-apps/ao-collections/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/aoindustries/ao-collections/actions</url>
+		<url>https://github.com/ao-apps/ao-collections/actions</url>
 	</ciManagement>
 
 	<repositories>
