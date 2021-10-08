@@ -843,7 +843,7 @@ public class AoArrays {
 	 *
 	 * @see  Arrays#hashCode(byte[])
 	 */
-	public static int hashCode(byte a[], int off, int len) {
+	public static int hashCode(byte[] a, int off, int len) {
 		if(a == null) return 0;
 
 		int result = 1;
