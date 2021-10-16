@@ -208,6 +208,7 @@ public class AoCollections {
 		}
 	}
 
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	private static final Class<?>[] unmodifiableCollectionClasses = {
 		// Collection
 		Collections.unmodifiableCollection(Collections.emptyList()).getClass(),
@@ -230,13 +231,14 @@ public class AoCollections {
 
 	/**
 	 * Gets the optimal implementation for unmodifiable collection.
-	 * If the collection is already unmodifiable, returns the same collection.
 	 * If collection is empty, uses <code>Collections.emptyList</code>.
+	 * If the collection is already unmodifiable, returns the same collection.
 	 * If collection has one element, uses <code>Collections.singletonList</code>.
 	 * Otherwise, wraps the collection with <code>Collections.unmodifiableCollection</code>.
 	 *
 	 * @param  collection  may be {@code null}, which will return {@code null}
 	 */
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	public static <T> Collection<T> optimalUnmodifiableCollection(Collection<? extends T> collection) {
 		if(collection == null) return null;
 		int size = collection.size();
@@ -305,6 +307,7 @@ public class AoCollections {
 		return unmodifiableCopyCollection(asCollection(iter), false);
 	}
 
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	private static final Class<?>[] unmodifiableListClasses = {
 		Collections.singletonList(null).getClass(),
 		Collections.unmodifiableList(new ArrayList<>(0)).getClass(), // RandomAccess
@@ -314,6 +317,7 @@ public class AoCollections {
 	/**
 	 * Gets the optimal implementation for unmodifiable list.
 	 * If list is empty, uses <code>Collections.emptyList</code>.
+	 * If the list is already unmodifiable, returns the same list.
 	 * If list has one element, uses <code>Collections.singletonList</code>.
 	 * Otherwise, wraps the list with <code>Collections.unmodifiableList</code>,
 	 * and will also call "trimToSize" if the list is an ArrayList.
@@ -325,6 +329,7 @@ public class AoCollections {
 	 * @see ArrayList#trimToSize()
 	 * @see Collections#unmodifiableList(java.util.List)
 	 */
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	public static <T> List<T> optimalUnmodifiableList(List<? extends T> list) {
 		if(list == null) return null;
 		int size = list.size();
@@ -396,6 +401,7 @@ public class AoCollections {
 		return unmodifiableCopyList(asList(iter), false);
 	}
 
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	private static final Class<?>[] unmodifiableSetClasses = {
 		// Set
 		Collections.singleton(null).getClass(),
@@ -412,11 +418,13 @@ public class AoCollections {
 	/**
 	 * Gets the optimal implementation for unmodifiable set.
 	 * If set is empty, uses <code>Collections.emptySet</code>.
+	 * If the set is already unmodifiable, returns the same set.
 	 * If set has one element, uses <code>Collections.singleton</code>.
 	 * Otherwise, wraps the set with <code>Collections.unmodifiableSet</code>.
 	 *
 	 * @param  set  may be {@code null}, which will return {@code null}
 	 */
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	public static <T> Set<T> optimalUnmodifiableSet(Set<? extends T> set) {
 		if(set == null) return null;
 		int size = set.size();
@@ -491,6 +499,7 @@ public class AoCollections {
 		return unmodifiableCopySet(asSet(iter), false);
 	}
 
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	private static final Class<?>[] unmodifiableSortedSetClasses = {
 		// SortedSet
 		SingletonSortedSet.class,
@@ -500,11 +509,13 @@ public class AoCollections {
 	/**
 	 * Gets the optimal implementation for unmodifiable sorted set.
 	 * If sorted set is empty, uses <code>emptySortedSet</code>.
+	 * If the sorted set is already unmodifiable, returns the same sorted set.
 	 * If sorted set has one element, uses <code>singletonSortedSet</code>.
 	 * Otherwise, wraps the sorted set with <code>Collections.unmodifiableSortedSet</code>.
 	 *
 	 * @param  sortedSet  may be {@code null}, which will return {@code null}
 	 */
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	public static <T> SortedSet<T> optimalUnmodifiableSortedSet(SortedSet<T> sortedSet) {
 		if(sortedSet == null) return null;
 		int size = sortedSet.size();
@@ -577,6 +588,7 @@ public class AoCollections {
 		return unmodifiableCopySortedSet(asSortedSet(iter), false);
 	}
 
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	private static final Class<?>[] unmodifiableMapClasses = {
 		// Map
 		Collections.emptyMap().getClass(),
@@ -590,11 +602,13 @@ public class AoCollections {
 	/**
 	 * Gets the optimal implementation for unmodifiable map.
 	 * If map is empty, uses <code>Collections.emptyMap</code>.
+	 * If the map is already unmodifiable, returns the same map.
 	 * If map has one element, uses <code>Collections.singletonMap</code>.
 	 * Otherwise, wraps the map with <code>Collections.unmodifiableMap</code>.
 	 *
 	 * @param  map  may be {@code null}, which will return {@code null}
 	 */
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	public static <K, V> Map<K, V> optimalUnmodifiableMap(Map<? extends K, ? extends V> map) {
 		if(map == null) return null;
 		int size = map.size();
@@ -638,6 +652,7 @@ public class AoCollections {
 		return Collections.unmodifiableMap(new LinkedHashMap<>(map));
 	}
 
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	private static final Class<?>[] unmodifiableSortedMapClasses = {
 		Collections.unmodifiableSortedMap(new TreeMap<>()).getClass()
 	};
@@ -645,11 +660,13 @@ public class AoCollections {
 	/**
 	 * Gets the optimal implementation for unmodifiable sorted map.
 	 * If sorted map is empty, uses <code>emptySortedMap</code>.
+	 * If the sorted map is already unmodifiable, returns the same sorted map.
 	 * If sorted map has one element, uses <code>singletonSortedMap</code>.
 	 * Otherwise, wraps the sorted map with <code>Collections.unmodifiableSortedMap</code>.
 	 *
 	 * @param  sortedMap  may be {@code null}, which will return {@code null}
 	 */
+	// Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
 	public static <K, V> SortedMap<K, V> optimalUnmodifiableSortedMap(SortedMap<K, ? extends V> sortedMap) {
 		if(sortedMap == null) return null;
 		// TODO: int size = sortedMap.size();
@@ -778,6 +795,7 @@ public class AoCollections {
 
 	/**
 	 * Wraps an iterator to make it unmodifiable.
+	 * If the iterator is already unmodifiable, returns the same iterator.
 	 *
 	 * @param  iter  may be {@code null}, which will return {@code null}
 	 */
