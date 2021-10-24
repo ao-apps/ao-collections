@@ -84,20 +84,20 @@ public class SortedArrayList<E> extends ArrayList<E> {
 	 */
 	@Override
 	public int indexOf(Object elem) {
-		int elemHash=elem.hashCode();
+		int elemHash = elem.hashCode();
 
 		// Find the location to insert the object at
-		int elemHashPos=binarySearchHashCode(elemHash);
+		int elemHashPos = binarySearchHashCode(elemHash);
 
 		// Not found
-		if(elemHashPos<0) return -1;
+		if(elemHashPos < 0) return -1;
 
 		// Try backwards until found or different hashCode
-		int pos=elemHashPos;
-		while(pos>=0) {
-			E T=get(pos);
-			if(T.hashCode()!=elemHash) break;
-			if(T.equals(elem)) {
+		int pos = elemHashPos;
+		while(pos >= 0) {
+			E t = get(pos);
+			if(t.hashCode() != elemHash) break;
+			if(t.equals(elem)) {
 				// Found one, iterate backwards to the first one
 				while(pos > 0 && get(pos - 1).equals(elem)) {
 					pos--;
@@ -108,12 +108,12 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		}
 
 		// Try forwards until found or different hashCode
-		pos=elemHashPos+1;
-		int size=size();
-		while(pos<size) {
-			E T=get(pos);
-			if(T.hashCode()!=elemHash) break;
-			if(T.equals(elem)) return pos;
+		pos = elemHashPos + 1;
+		int size = size();
+		while(pos < size) {
+			E t = get(pos);
+			if(t.hashCode() != elemHash) break;
+			if(t.equals(elem)) return pos;
 			pos++;
 		}
 
@@ -145,21 +145,21 @@ public class SortedArrayList<E> extends ArrayList<E> {
 	 */
 	@Override
 	public int lastIndexOf(Object elem) {
-		int elemHash=elem.hashCode();
+		int elemHash = elem.hashCode();
 
 		// Find the location to insert the object at
-		int elemHashPos=binarySearchHashCode(elemHash);
+		int elemHashPos = binarySearchHashCode(elemHash);
 
 		// Not found
-		if(elemHashPos<0) return -1;
+		if(elemHashPos < 0) return -1;
 
 		// Try forwards until found or different hashCode
-		int pos=elemHashPos;
-		int size=size();
-		while(pos<size) {
-			E T=get(pos);
-			if(T.hashCode()!=elemHash) break;
-			if(T.equals(elem)) {
+		int pos = elemHashPos;
+		int size = size();
+		while(pos < size) {
+			E t = get(pos);
+			if(t.hashCode() != elemHash) break;
+			if(t.equals(elem)) {
 				// Found one, iterate backwards to the first one
 				while(pos < (size - 1) && get(pos + 1).equals(elem)) {
 					pos++;
@@ -170,11 +170,11 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		}
 
 		// Try backwards until found or different hashCode
-		pos=elemHashPos-1;
-		while(pos>=0) {
-			E T=get(pos);
-			if(T.hashCode()!=elemHash) break;
-			if(T.equals(elem)) return pos;
+		pos = elemHashPos - 1;
+		while(pos >= 0) {
+			E t = get(pos);
+			if(t.hashCode() != elemHash) break;
+			if(t.equals(elem)) return pos;
 			pos--;
 		}
 
@@ -201,23 +201,23 @@ public class SortedArrayList<E> extends ArrayList<E> {
 	@Override
 	public boolean add(E o) {
 		// Shortcut for empty
-		int size=size();
-		if(size==0) {
+		int size = size();
+		if(size == 0) {
 			super.add(o);
 		} else {
-			int Ohash=o.hashCode();
+			int oHash = o.hashCode();
 
 			// Shortcut for adding to end (makes imports of already-sorted data operate at constant-time instead of logarithmic complexity)
-			if(Ohash>=get(size-1).hashCode()) {
+			if(oHash >= get(size - 1).hashCode()) {
 				super.add(o);
 			} else {
-				int index=binarySearchHashCode(Ohash);
-				if(index<0) {
+				int index = binarySearchHashCode(oHash);
+				if(index < 0) {
 					// Not found in list
-					super.add(-(index+1), o);
+					super.add(-(index + 1), o);
 				} else {
 					// Add after the last item with matching hashCodes
-					while(index < (size - 1) && get(index + 1).hashCode() == Ohash) {
+					while(index < (size - 1) && get(index + 1).hashCode() == oHash) {
 						index++;
 					}
 					super.add(index+1, o);
