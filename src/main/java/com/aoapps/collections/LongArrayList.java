@@ -113,7 +113,7 @@ public class LongArrayList extends AbstractList<Long>
 		modCount++;
 		int oldCapacity = elementData.length;
 		if (size < oldCapacity) {
-			long oldData[] = elementData;
+			long[] oldData = elementData;
 			elementData = new long[size];
 			System.arraycopy(oldData, 0, elementData, 0, size);
 		}
@@ -130,7 +130,7 @@ public class LongArrayList extends AbstractList<Long>
 		modCount++;
 		int oldCapacity = elementData.length;
 		if (minCapacity > oldCapacity) {
-			long oldData[] = elementData;
+			long[] oldData = elementData;
 			int newCapacity = (oldCapacity * 3)/2 + 1;
 				if (newCapacity < minCapacity)
 				newCapacity = minCapacity;
