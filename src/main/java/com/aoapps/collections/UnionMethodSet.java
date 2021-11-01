@@ -345,17 +345,12 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 			}
 
 			@Override
-			public E next() {
+			public E next() throws NoSuchElementException {
 				prepareNextValue();
 				E element = nextElement;
-				if(element==null) throw new NoSuchElementException();
+				if(element == null) throw new NoSuchElementException();
 				nextElement = null; // Consume value
 				return element;
-			}
-
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
 			}
 		};
 	}

@@ -107,8 +107,8 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 			}
 
 			@Override
-			public E next() {
-				if(valIter==null) {
+			public E next() throws NoSuchElementException {
+				if(valIter == null) {
 					if(setIter.hasNext()) {
 						valIter = setIter.next().iterator();
 					} else {
@@ -119,12 +119,6 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 				if(!valIter.hasNext()) valIter = null;
 				return val;
 			}
-
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-
 		};
 	}
 

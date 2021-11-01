@@ -25,6 +25,7 @@ package com.aoapps.collections;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Bridges the gap between Enumeration and Iterator in the opposite direction of Collections.enumeration(Collection);
@@ -47,12 +48,7 @@ public class EnumerationIterator<E> implements Iterator<E> {
 	}
 
 	@Override
-	public E next() {
+	public E next() throws NoSuchElementException {
 		return enumerator.nextElement();
-	}
-
-	@Override
-	public void remove() {
-		throw new UnsupportedOperationException();
 	}
 }

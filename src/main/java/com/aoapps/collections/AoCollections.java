@@ -77,12 +77,8 @@ public class AoCollections {
 					return false;
 				}
 				@Override
-				public Object next() {
+				public Object next() throws NoSuchElementException {
 					throw new NoSuchElementException();
-				}
-				@Override
-				public void remove() {
-					throw new UnsupportedOperationException();
 				}
 			};
 		}
@@ -151,16 +147,10 @@ public class AoCollections {
 					return hasNext;
 				}
 				@Override
-				public E next() {
-					if (hasNext) {
-						hasNext = false;
-						return element;
-					}
-					throw new NoSuchElementException();
-				}
-				@Override
-				public void remove() {
-					throw new UnsupportedOperationException();
+				public E next() throws NoSuchElementException {
+					if (!hasNext) throw new NoSuchElementException();
+					hasNext = false;
+					return element;
 				}
 			};
 		}
@@ -746,15 +736,10 @@ public class AoCollections {
 		}
 
 		@Override
-		public E next() {
+		public E next() throws NoSuchElementException {
 			if(!hasNext) throw new NoSuchElementException();
 			hasNext = false;
 			return value;
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -783,13 +768,8 @@ public class AoCollections {
 		}
 
 		@Override
-		public E next() {
+		public E next() throws NoSuchElementException {
 			return iter.next();
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -855,16 +835,11 @@ public class AoCollections {
 		}
 
 		@Override
-		public E next() {
+		public E next() throws NoSuchElementException {
 			E value = next;
-			if(value==null) throw new NoSuchElementException();
+			if(value == null) throw new NoSuchElementException();
 			next = iter.hasNext() ? iter.next() : null;
 			return value;
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
 		}
 
 		/**

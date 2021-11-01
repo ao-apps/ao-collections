@@ -219,18 +219,16 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 		return new Iterator<E>() {
 			private int index = 0;
 			final E[] elems = UnmodifiableArraySet.this.elements; // Local fast reference
+
 			@Override
 			public boolean hasNext() {
 				return index<elems.length;
 			}
+
 			@Override
-			public E next() {
-				if(index<elems.length) return elems[index++];
-				else throw new NoSuchElementException();
-			}
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
+			public E next() throws NoSuchElementException {
+				if(index >= elems.length) throw new NoSuchElementException();
+				return elems[index++];
 			}
 		};
 	}

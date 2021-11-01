@@ -263,13 +263,8 @@ public class AoArrays {
 
 				@Override
 				public E next() throws NoSuchElementException {
-					if(pos < array.length) return array[pos++];
-					throw new NoSuchElementException();
-				}
-
-				@Override
-				public void remove() throws UnsupportedOperationException {
-					throw new UnsupportedOperationException();
+					if(pos >= array.length) throw new NoSuchElementException();
+					return array[pos++];
 				}
 			};
 		}
