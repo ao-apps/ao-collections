@@ -89,6 +89,7 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 	@Override
 	public Iterator<E> iterator() {
 		final Iterator<Set<? extends E>> setIter = added.values().iterator();
+		// Java 9: new Iterator<>
 		return new Iterator<E>() {
 			private Iterator<? extends E> valIter = null;
 

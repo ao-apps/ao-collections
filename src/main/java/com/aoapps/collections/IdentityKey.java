@@ -38,7 +38,7 @@ import java.util.WeakHashMap;
  */
 public class IdentityKey<T> {
 
-	public static final IdentityKey<?> NULL = new IdentityKey<Object>(null);
+	public static final IdentityKey<?> NULL = new IdentityKey<>(null);
 
 	/**
 	 * Gets the identity key that represents {@code null}.

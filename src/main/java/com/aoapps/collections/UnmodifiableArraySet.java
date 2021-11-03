@@ -186,6 +186,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 
 	@Override
 	public Iterator<E> iterator() {
+		// Java 9: new Iterator<>
 		return new Iterator<E>() {
 			private int index = 0;
 			final E[] elems = UnmodifiableArraySet.this.elements; // Local fast reference

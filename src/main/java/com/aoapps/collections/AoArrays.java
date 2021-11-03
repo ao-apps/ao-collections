@@ -254,6 +254,7 @@ public class AoArrays {
 
 		@Override
 		public Iterator<E> iterator() {
+			// Java 9: new Iterator<>
 			return new Iterator<E>() {
 				private int pos = 0;
 				@Override

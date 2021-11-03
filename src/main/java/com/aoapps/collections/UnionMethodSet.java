@@ -182,12 +182,12 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 		this.classE = classE;
 		this.methodsByClass = methodsByClass;
 		/*
-		Map<Class<? extends E>, ArrayList<Method<? extends E>>> newAdded = new LinkedHashMap<Class<? extends E>, ArrayList<Method<? extends E>>>();
+		Map<Class<? extends E>, ArrayList<Method<? extends E>>> newAdded = new LinkedHashMap<>();
 		// Build a temporary map by return type
 		for(Method<? extends E> method : methods) {
 			Class<? extends E> returnType = method.getReturnType();
 			ArrayList<Method<? extends E>> list = newAdded.get(returnType);
-			if(list==null) newAdded.put(returnType, list = new ArrayList<Method<? extends E>>());
+			if(list==null) newAdded.put(returnType, list = new ArrayList<>());
 			list.add(method);
 		}
 		// Build final map with trimmed array lists or singletonList
@@ -253,6 +253,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
 	public Iterator<E> iterator() {
 		// Iterating through all lists of methods per class
 		final Iterator<? extends List<? extends Method<? extends E>>> classIter = methodsByClass.values().iterator();
+		// Java 9: Iterator<>
 		return new Iterator<E>() {
 			// Iterating through methods
 			private List<? extends Method<? extends E>> methods;

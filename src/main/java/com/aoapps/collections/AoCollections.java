@@ -71,6 +71,7 @@ public class AoCollections {
 
 		@Override
 		public Iterator<Object> iterator() {
+			// Java 9: new Iterator<>
 			return new Iterator<Object>() {
 				@Override
 				public boolean hasNext() {
@@ -140,6 +141,7 @@ public class AoCollections {
 
 		@Override
 		public Iterator<E> iterator() {
+			// Java 9: new Iterator<>
 			return new Iterator<E>() {
 				private boolean hasNext = true;
 				@Override
@@ -550,6 +552,7 @@ public class AoCollections {
 		if(!copyNeeded && collection instanceof SortedSet) return Collections.unmodifiableSortedSet((SortedSet<T>)collection);
 		SortedSet<T> copy;
 		if(collection instanceof SortedSet) {
+			// Java 9: copy = new TreeSet<>((SortedSet<>)collection);
 			copy = new TreeSet<T>((SortedSet<? extends T>)collection);
 		} else {
 			copy = new TreeSet<>(collection);
@@ -799,7 +802,7 @@ public class AoCollections {
 
 	/*
 	private static void test() {
-		List<Object> list = new ArrayList<Object>();
+		List<Object> list = new ArrayList<>();
 		list.add("One");
 		list.add("Two");
 		list = optimalUnmodifiableList(list);

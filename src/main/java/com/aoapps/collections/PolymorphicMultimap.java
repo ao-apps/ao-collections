@@ -79,6 +79,7 @@ public class PolymorphicMultimap<K, V> {
 		Class<? extends K> keyClass = key.getClass().asSubclass(upperBound);
 		for(Class<?> clazz : Classes.getAllClasses(keyClass, upperBound)) {
 			Class<? extends K> uClass = clazz.asSubclass(upperBound);
+			// Java 9: new Entry<>
 			Entry<K, V> newEntry = new Entry<K, V>() {
 				@Override
 				public K getKey() {
