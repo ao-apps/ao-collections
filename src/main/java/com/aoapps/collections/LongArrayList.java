@@ -512,7 +512,7 @@ public class LongArrayList extends AbstractList<Long>
 	 */
 	@Override
 	public boolean remove(Object o) {
-		if (o != null && (o instanceof Number)) return removeByValue(((Number)o).longValue());
+		if (o instanceof Number) return removeByValue(((Number)o).longValue());
 		return false;
 	}
 

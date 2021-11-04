@@ -512,7 +512,7 @@ public class IntArrayList extends AbstractList<Integer>
 	 */
 	@Override
 	public boolean remove(Object o) {
-		if (o != null && (o instanceof Number)) return removeByValue(((Number)o).intValue());
+		if (o instanceof Number) return removeByValue(((Number)o).intValue());
 		return false;
 	}
 
