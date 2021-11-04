@@ -81,9 +81,9 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 
 	@Override
 	public boolean contains(Object o) {
-		if(o==null) return false;
+		if(o == null) return false;
 		Set<? extends E> set = added.get(o.getClass());
-		return set==null ? false : set.contains(o);
+		return set != null && set.contains(o);
 	}
 
 	@Override
