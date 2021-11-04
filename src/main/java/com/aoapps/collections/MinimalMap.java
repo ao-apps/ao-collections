@@ -164,7 +164,7 @@ public class MinimalMap {
 		// Still supporting null map for API compatibility
 		if(map==null || map.isEmpty()) {
 			return Collections.emptyList();
-		} if(map.size() == 1) {
+		} else if(map.size() == 1) {
 			// singletonMap is unmodifiable: no wrapping required
 			return map.values();
 		} else {
