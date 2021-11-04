@@ -552,8 +552,8 @@ public class AoCollections {
 		if(!copyNeeded && collection instanceof SortedSet) return Collections.unmodifiableSortedSet((SortedSet<T>)collection);
 		SortedSet<T> copy;
 		if(collection instanceof SortedSet) {
-			// Java 9: copy = new TreeSet<>((SortedSet<>)collection);
-			copy = new TreeSet<T>((SortedSet<? extends T>)collection);
+			// Java 9: copy = new TreeSet<>((SortedSet<>)collection), but make sure still calls SortedSet constructor
+			copy = new TreeSet<T>((SortedSet)collection);
 		} else {
 			copy = new TreeSet<>(collection);
 		}
