@@ -65,7 +65,7 @@ public class AoCollections {
 		return (SortedSet<T>) EMPTY_SORTED_SET;
 	}
 
-	private static class EmptySortedSet extends AbstractSet<Object> implements SortedSet<Object>, Serializable {
+	private static final class EmptySortedSet extends AbstractSet<Object> implements SortedSet<Object>, Serializable {
 
 		private static final long serialVersionUID = 5914343416838268017L;
 
@@ -131,7 +131,7 @@ public class AoCollections {
 		return new SingletonSortedSet<>(o);
 	}
 
-	private static class SingletonSortedSet<E> extends AbstractSet<E> implements SortedSet<E>, Serializable {
+	private static final class SingletonSortedSet<E> extends AbstractSet<E> implements SortedSet<E>, Serializable {
 
 		private static final long serialVersionUID = -6732971044735913580L;
 
