@@ -132,7 +132,7 @@ public class IntArrayList extends AbstractList<Integer>
 		if (minCapacity > oldCapacity) {
 			int[] oldData = elementData;
 			int newCapacity = (oldCapacity * 3)/2 + 1;
-				if (newCapacity < minCapacity)
+			if (newCapacity < minCapacity)
 				newCapacity = minCapacity;
 			elementData = new int[newCapacity];
 			System.arraycopy(oldData, 0, elementData, 0, size);
