@@ -31,10 +31,10 @@ import java.util.Set;
  *
  * @author  AO Industries, Inc.
  */
-public class Sets {
+public abstract class Sets {
 
-	private Sets() {
-	}
+	/** Make no instances. */
+	private Sets() {throw new AssertionError();}
 
 	/**
 	 * Combines two sets, maintaining order.

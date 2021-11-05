@@ -41,6 +41,7 @@ public final class HashCodeComparator implements Comparator<Object>, Serializabl
 	}
 
 	private HashCodeComparator() {
+		// Do nothing
 	}
 
 	private Object readResolve() {

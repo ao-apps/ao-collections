@@ -45,10 +45,10 @@ import java.util.Objects;
  *
  * @author  AO Industries, Inc.
  */
-public class MinimalMap {
+public abstract class MinimalMap {
 
-	private MinimalMap() {
-	}
+	/** Make no instances. */
+	private MinimalMap() {throw new AssertionError();}
 
 	/**
 	 * Gets the empty map representation.

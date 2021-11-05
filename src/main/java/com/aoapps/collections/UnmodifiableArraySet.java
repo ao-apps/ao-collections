@@ -259,10 +259,17 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 		throw new UnsupportedOperationException();
 	}
 
-	// <editor-fold defaultstate="collapsed" desc="FastExternalizable">
+	// <editor-fold defaultstate="collapsed" desc="Externalizable">
 	private static final long serialVersionUID = 5725680713634634667L;
 
+	/**
+	 * @deprecated  Only required for implementation, do not use directly.
+	 *
+	 * @see  Externalizable
+	 */
+	@Deprecated/* Java 9: (forRemoval = false) */
 	public UnmodifiableArraySet() {
+		// Do nothing
 	}
 
 	@Override

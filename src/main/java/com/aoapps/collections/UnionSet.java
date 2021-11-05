@@ -58,6 +58,7 @@ public class UnionSet<E> extends AbstractSet<E> {
 	private final List<Set<? extends E>> added = new ArrayList<>();
 
 	public UnionSet() {
+		// Do nothing
 	}
 
 	@SuppressWarnings("OverridableMethodCallInConstructor")

@@ -47,10 +47,10 @@ import java.util.TreeMap;
  *
  * @author  AO Industries, Inc.
  */
-public class AoArrays {
+public abstract class AoArrays {
 
-	private AoArrays() {
-	}
+	/** Make no instances. */
+	private AoArrays() {throw new AssertionError();}
 
 	/**
 	 * Checks if the subrange of two byte arrays is equal.

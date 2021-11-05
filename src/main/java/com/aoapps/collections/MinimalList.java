@@ -40,10 +40,10 @@ import java.util.List;
  * @author  AO Industries, Inc.
  */
 // TODO: Add assertions throughtout both this and MinimalMap
-public class MinimalList {
+public abstract class MinimalList {
 
-	private MinimalList() {
-	}
+	/** Make no instances. */
+	private MinimalList() {throw new AssertionError();}
 
 	/**
 	 * Gets the empty list representation.

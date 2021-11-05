@@ -62,6 +62,7 @@ public class UnionClassSet<E> extends AbstractSet<E> {
 	private final Map<Class<?>, Set<? extends E>> added = new LinkedHashMap<>();
 
 	public UnionClassSet() {
+		// Do nothing
 	}
 
 	@SuppressWarnings("OverridableMethodCallInConstructor")

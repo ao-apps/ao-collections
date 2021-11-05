@@ -52,10 +52,10 @@ import java.util.TreeSet;
  *
  * @author  AO Industries, Inc.
  */
-public class AoCollections {
+public abstract class AoCollections {
 
-	private AoCollections() {
-	}
+	/** Make no instances. */
+	private AoCollections() {throw new AssertionError();}
 
 	public static final SortedSet<?> EMPTY_SORTED_SET = new EmptySortedSet();
 
