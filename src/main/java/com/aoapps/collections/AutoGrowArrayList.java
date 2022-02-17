@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2007, 2008, 2009, 2010, 2011, 2016, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2007, 2008, 2009, 2010, 2011, 2016, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,7 +24,6 @@ package com.aoapps.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
-// import org.checkthread.annotations.NotThreadSafe;
 
 /**
  * Automatically extends the size of the list instead of throwing exceptions on set, add, and addAll.
@@ -48,7 +47,6 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 		super(c);
 	}
 
-	// @NotThreadSafe
 	@Override
 	public E set(int index, E element) {
 		int minSize = index+1;
@@ -59,7 +57,6 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 		return super.set(index, element);
 	}
 
-	// @NotThreadSafe
 	@Override
 	public void add(int index, E element) {
 		ensureCapacity(index+1);
@@ -69,7 +66,6 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 		super.add(index, element);
 	}
 
-	// @NotThreadSafe
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		ensureCapacity(index+c.size());
