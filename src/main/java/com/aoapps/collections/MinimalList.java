@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -40,7 +40,7 @@ import java.util.List;
  * @author  AO Industries, Inc.
  */
 // TODO: Add assertions throughtout both this and MinimalMap
-public abstract class MinimalList {
+public final class MinimalList {
 
 	/** Make no instances. */
 	private MinimalList() {throw new AssertionError();}

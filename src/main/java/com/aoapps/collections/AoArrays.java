@@ -46,7 +46,7 @@ import java.util.TreeMap;
  *
  * @author  AO Industries, Inc.
  */
-public abstract class AoArrays {
+public final class AoArrays {
 
 	/** Make no instances. */
 	private AoArrays() {throw new AssertionError();}
