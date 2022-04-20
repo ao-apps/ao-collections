@@ -30,32 +30,34 @@ package com.aoapps.collections;
  */
 public class IntsAndLongs {
 
-	private IntList ints;
-	private LongList longs;
+  private IntList ints;
+  private LongList longs;
 
-	public IntsAndLongs(IntList ints, LongList longs) {
-		if(ints.size()!=longs.size()) throw new AssertionError("ints.size()!=longs.size()");
-		this.ints=ints;
-		this.longs=longs;
-	}
+  public IntsAndLongs(IntList ints, LongList longs) {
+    if (ints.size() != longs.size()) {
+      throw new AssertionError("ints.size() != longs.size()");
+    }
+    this.ints=ints;
+    this.longs=longs;
+  }
 
-	public int size() {
-		return ints.size();
-	}
+  public int size() {
+    return ints.size();
+  }
 
-	public int getInt(int index) {
-		return ints.getInt(index);
-	}
+  public int getInt(int index) {
+    return ints.getInt(index);
+  }
 
-	public long getLong(int index) {
-		return longs.getLong(index);
-	}
+  public long getLong(int index) {
+    return longs.getLong(index);
+  }
 
-	public boolean contains(int value) {
-		return ints.contains(value);
-	}
+  public boolean contains(int value) {
+    return ints.contains(value);
+  }
 
-	public int indexOf(int value) {
-		return ints.indexOf(value);
-	}
+  public int indexOf(int value) {
+    return ints.indexOf(value);
+  }
 }

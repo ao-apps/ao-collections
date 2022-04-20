@@ -40,138 +40,142 @@ import java.util.function.Predicate;
  */
 public class PolymorphicRegistry<U> {
 
-	private final Class<U> upperBound;
+  private final Class<U> upperBound;
 
-	private final ConcurrentMap<Class<? extends U>, List<U>> instancesByClass = new ConcurrentHashMap<>();
+  private final ConcurrentMap<Class<? extends U>, List<U>> instancesByClass = new ConcurrentHashMap<>();
 
-	public PolymorphicRegistry(Class<U> upperBound) {
-		this.upperBound = upperBound;
-	}
+  public PolymorphicRegistry(Class<U> upperBound) {
+    this.upperBound = upperBound;
+  }
 
-	/**
-	 * Adds a instance to the registry.
-	 * The instance is registered under {@link Classes#getAllClasses(java.lang.Class, java.lang.Class) all classes and interfaces}
-	 * it extends and implements, up to and including the upper bound {@code U}.
-	 * <p>
-	 * This implementation favors lookup speed at O(1), and pays the price during {@link #add(java.lang.Object)}.
-	 * </p>
-	 */
-	public void add(U instance) {
-		// Add the entry under all classes, up to U, that it implements
-		Class<? extends U> instanceClass = instance.getClass().asSubclass(upperBound);
-		for(Class<?> clazz : Classes.getAllClasses(instanceClass, upperBound)) {
-			Class<? extends U> uClass = clazz.asSubclass(upperBound);
-			boolean replaced;
-			do {
-				List<U> oldList = instancesByClass.get(uClass);
-				List<U> newList;
-				if(oldList == null) {
-					newList = Collections.singletonList(instance);
-				} else {
-					int newSize = oldList.size() + 1;
-					List<U> newListTemp = new ArrayList<>(newSize);
-					newListTemp.addAll(oldList);
-					newListTemp.add(instance);
-					newList = Collections.unmodifiableList(newListTemp);
-				}
-				if(oldList == null) {
-					replaced = instancesByClass.putIfAbsent(uClass, newList) == null;
-				} else {
-					replaced = instancesByClass.replace(uClass, oldList, newList);
-				}
-			} while(!replaced);
-		}
-	}
+  /**
+   * Adds a instance to the registry.
+   * The instance is registered under {@link Classes#getAllClasses(java.lang.Class, java.lang.Class) all classes and interfaces}
+   * it extends and implements, up to and including the upper bound {@code U}.
+   * <p>
+   * This implementation favors lookup speed at O(1), and pays the price during {@link #add(java.lang.Object)}.
+   * </p>
+   */
+  public void add(U instance) {
+    // Add the entry under all classes, up to U, that it implements
+    Class<? extends U> instanceClass = instance.getClass().asSubclass(upperBound);
+    for (Class<?> clazz : Classes.getAllClasses(instanceClass, upperBound)) {
+      Class<? extends U> uClass = clazz.asSubclass(upperBound);
+      boolean replaced;
+      do {
+        List<U> oldList = instancesByClass.get(uClass);
+        List<U> newList;
+        if (oldList == null) {
+          newList = Collections.singletonList(instance);
+        } else {
+          int newSize = oldList.size() + 1;
+          List<U> newListTemp = new ArrayList<>(newSize);
+          newListTemp.addAll(oldList);
+          newListTemp.add(instance);
+          newList = Collections.unmodifiableList(newListTemp);
+        }
+        if (oldList == null) {
+          replaced = instancesByClass.putIfAbsent(uClass, newList) == null;
+        } else {
+          replaced = instancesByClass.replace(uClass, oldList, newList);
+        }
+      } while (!replaced);
+    }
+  }
 
-	/**
-	 * Gets all instances registered of the given class.
-	 * They are returned in the order registered.
-	 * When an object is registered more than once, it will appear in the list multiple times.
-	 * The list is a snapshot and will not change over time.
-	 *
-	 * @return  the unmodifiable list of all objects registered of the given class, or an empty list when none registered
-	 */
-	@SuppressWarnings("unchecked")
-	public <T extends U> List<T> get(Class<T> clazz) {
-		List<? extends U> instances = instancesByClass.get(clazz);
-		if(instances == null) {
-			return Collections.emptyList();
-		} else {
-			return (List<T>)instances;
-		}
-	}
+  /**
+   * Gets all instances registered of the given class.
+   * They are returned in the order registered.
+   * When an object is registered more than once, it will appear in the list multiple times.
+   * The list is a snapshot and will not change over time.
+   *
+   * @return  the unmodifiable list of all objects registered of the given class, or an empty list when none registered
+   */
+  @SuppressWarnings("unchecked")
+  public <T extends U> List<T> get(Class<T> clazz) {
+    List<? extends U> instances = instancesByClass.get(clazz);
+    if (instances == null) {
+      return Collections.emptyList();
+    } else {
+      return (List<T>)instances;
+    }
+  }
 
-	/**
-	 * Gets all instances registered of the given class that match the given filter.
-	 * They are returned in the order registered.
-	 * When an object is registered more than once, it will appear in the list multiple times.
-	 * The list is a snapshot and will not change over time.
-	 *
-	 * @return  the unmodifiable list of all objects registered of the given class that match the filter, or an empty list when none registered
-	 */
-	public <T extends U> List<T> get(Class<T> clazz, Predicate<? super T> filter) {
-		List<T> instances = get(clazz);
-		List<T> matches = MinimalList.emptyList();
-		for(T instance : instances) {
-			if(filter.test(instance)) {
-				matches = MinimalList.add(matches, instance);
-			}
-		}
-		return (matches.size() == instances.size())
-			? instances
-			: MinimalList.unmodifiable(matches);
-	}
+  /**
+   * Gets all instances registered of the given class that match the given filter.
+   * They are returned in the order registered.
+   * When an object is registered more than once, it will appear in the list multiple times.
+   * The list is a snapshot and will not change over time.
+   *
+   * @return  the unmodifiable list of all objects registered of the given class that match the filter, or an empty list when none registered
+   */
+  public <T extends U> List<T> get(Class<T> clazz, Predicate<? super T> filter) {
+    List<T> instances = get(clazz);
+    List<T> matches = MinimalList.emptyList();
+    for (T instance : instances) {
+      if (filter.test(instance)) {
+        matches = MinimalList.add(matches, instance);
+      }
+    }
+    return (matches.size() == instances.size())
+      ? instances
+      : MinimalList.unmodifiable(matches);
+  }
 
-	/**
-	 * Gets the first instance registered of the given class.
-	 *
-	 * @return  the first instance registered or {@code null} for none registered
-	 */
-	public <T extends U> T getFirst(Class<T> clazz) {
-		List<T> instances = get(clazz);
-		return instances.isEmpty() ? null : instances.get(0);
-	}
+  /**
+   * Gets the first instance registered of the given class.
+   *
+   * @return  the first instance registered or {@code null} for none registered
+   */
+  public <T extends U> T getFirst(Class<T> clazz) {
+    List<T> instances = get(clazz);
+    return instances.isEmpty() ? null : instances.get(0);
+  }
 
-	/**
-	 * Gets the first instance registered of the given class that match the given filter.
-	 *
-	 * @return  the first instance registered that matches the filter or {@code null} for none registered
-	 */
-	public <T extends U> T getFirst(Class<T> clazz, Predicate<? super T> filter) {
-		for(T instance : get(clazz)) {
-			if(filter.test(instance)) return instance;
-		}
-		return null;
-	}
+  /**
+   * Gets the first instance registered of the given class that match the given filter.
+   *
+   * @return  the first instance registered that matches the filter or {@code null} for none registered
+   */
+  public <T extends U> T getFirst(Class<T> clazz, Predicate<? super T> filter) {
+    for (T instance : get(clazz)) {
+      if (filter.test(instance)) {
+        return instance;
+      }
+    }
+    return null;
+  }
 
-	/**
-	 * Gets the last instance registered of the given class.
-	 *
-	 * @return  the last instance registered or {@code null} for none registered
-	 */
-	public <T extends U> T getLast(Class<T> clazz) {
-		List<T> instances = get(clazz);
-		int size = instances.size();
-		return size == 0 ? null : instances.get(size - 1);
-	}
+  /**
+   * Gets the last instance registered of the given class.
+   *
+   * @return  the last instance registered or {@code null} for none registered
+   */
+  public <T extends U> T getLast(Class<T> clazz) {
+    List<T> instances = get(clazz);
+    int size = instances.size();
+    return size == 0 ? null : instances.get(size - 1);
+  }
 
-	/**
-	 * Gets the last instance registered of the given class that match the given filter.
-	 *
-	 * @return  the last instance registered that matches the filter or {@code null} for none registered
-	 */
-	public <T extends U> T getLast(Class<T> clazz, Predicate<? super T> filter) {
-		List<T> instances = get(clazz);
-		for(int i = instances.size() - 1; i >= 0; i--) {
-			T instance = instances.get(i);
-			if(filter.test(instance)) return instance;
-		}
-		return null;
-	}
+  /**
+   * Gets the last instance registered of the given class that match the given filter.
+   *
+   * @return  the last instance registered that matches the filter or {@code null} for none registered
+   */
+  public <T extends U> T getLast(Class<T> clazz, Predicate<? super T> filter) {
+    List<T> instances = get(clazz);
+    for (int i = instances.size() - 1; i >= 0; i--) {
+      T instance = instances.get(i);
+      if (filter.test(instance)) {
+        return instance;
+      }
+    }
+    return null;
+  }
 
-	// TODO: Remove methods when first needed
+  // TODO: Remove methods when first needed
 
-	// TODO: When first needed: getAny with round-robin distribution, with and without filtered.  Maintain level of concurrency.
-	//       This could be simple underpinnings for when multiple instance of a service are registered, and requests can be
-	//       distributed between them.
+  // TODO: When first needed: getAny with round-robin distribution, with and without filtered.  Maintain level of concurrency.
+  //       This could be simple underpinnings for when multiple instance of a service are registered, and requests can be
+  //       distributed between them.
 }

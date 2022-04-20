@@ -43,197 +43,216 @@ import java.util.Set;
  */
 public class UnionSet<E> extends AbstractSet<E> {
 
-	/**
-	 * Any set added with fewer or equal to this many items will just be added to
-	 * the internal combined set.
-	 *
-	 * TODO: This value is arbitrary.  Benchmark other values.
-	 */
-	private static final int MAXIMUM_COMBINE_SIZE = 10;
+  /**
+   * Any set added with fewer or equal to this many items will just be added to
+   * the internal combined set.
+   *
+   * TODO: This value is arbitrary.  Benchmark other values.
+   */
+  private static final int MAXIMUM_COMBINE_SIZE = 10;
 
-	private Set<E> combined;
+  private Set<E> combined;
 
-	/**
-	 * Will never contain any empty sets.
-	 */
-	private final List<Set<? extends E>> added = new ArrayList<>();
+  /**
+   * Will never contain any empty sets.
+   */
+  private final List<Set<? extends E>> added = new ArrayList<>();
 
-	public UnionSet() {
-		// Do nothing
-	}
+  public UnionSet() {
+    // Do nothing
+  }
 
-	@SuppressWarnings("OverridableMethodCallInConstructor")
-	public UnionSet(Collection<? extends E> c) {
-		combined = AoCollections.newHashSet(c.size());
-		addAll(c);
-	}
+  @SuppressWarnings("OverridableMethodCallInConstructor")
+  public UnionSet(Collection<? extends E> c) {
+    combined = AoCollections.newHashSet(c.size());
+    addAll(c);
+  }
 
-	@SuppressWarnings("OverridableMethodCallInConstructor")
-	public UnionSet(Set<? extends E> set) {
-		addAll(set);
-	}
+  @SuppressWarnings("OverridableMethodCallInConstructor")
+  public UnionSet(Set<? extends E> set) {
+    addAll(set);
+  }
 
-	private void combine() {
-		if(!added.isEmpty()) {
-			if(combined==null) {
-				// Avoid rehash at the expense of possibly allocating more than needed when there are duplicates
-				int totalSize = 0;
-				for(Set<? extends E> set : added) {
-					totalSize += set.size();
-				}
-				combined = AoCollections.newHashSet(totalSize);
-			}
-			for(Set<? extends E> set : added) {
-				combined.addAll(set);
-			}
-			added.clear();
-		}
-	}
+  private void combine() {
+    if (!added.isEmpty()) {
+      if (combined == null) {
+        // Avoid rehash at the expense of possibly allocating more than needed when there are duplicates
+        int totalSize = 0;
+        for (Set<? extends E> set : added) {
+          totalSize += set.size();
+        }
+        combined = AoCollections.newHashSet(totalSize);
+      }
+      for (Set<? extends E> set : added) {
+        combined.addAll(set);
+      }
+      added.clear();
+    }
+  }
 
-	/**
-	 * Triggers combining.
-	 */
-	@Override
-	public int size() {
-		combine();
-		return combined==null ? 0 : combined.size();
-	}
+  /**
+   * Triggers combining.
+   */
+  @Override
+  public int size() {
+    combine();
+    return combined == null ? 0 : combined.size();
+  }
 
-	@Override
-	public boolean isEmpty() {
-		return (combined==null || combined.isEmpty()) && added.isEmpty();
-	}
+  @Override
+  public boolean isEmpty() {
+    return (combined == null || combined.isEmpty()) && added.isEmpty();
+  }
 
-	@Override
-	public boolean contains(Object o) {
-		if(combined!=null && combined.contains(o)) return true;
-		for(Set<? extends E> set : added) {
-			if(set.contains(o)) return true;
-		}
-		return false;
-	}
+  @Override
+  public boolean contains(Object o) {
+    if (combined != null && combined.contains(o)) {
+      return true;
+    }
+    for (Set<? extends E> set : added) {
+      if (set.contains(o)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	/**
-	 * Triggers combining.
-	 *
-	 * TODO: Iterate without combining - benchmark speed versus complexity
-	 */
-	@Override
-	public Iterator<E> iterator() {
-		combine();
-		if(combined==null) {
-			Set<E> emptySet = java.util.Collections.emptySet();
-			return emptySet.iterator();
-		}
-		return combined.iterator();
-	}
+  /**
+   * Triggers combining.
+   *
+   * TODO: Iterate without combining - benchmark speed versus complexity
+   */
+  @Override
+  public Iterator<E> iterator() {
+    combine();
+    if (combined == null) {
+      Set<E> emptySet = java.util.Collections.emptySet();
+      return emptySet.iterator();
+    }
+    return combined.iterator();
+  }
 
-	/**
-	 * Triggers combining.
-	 */
-	@Override
-	public Object[] toArray() {
-		combine();
-		if(combined==null) {
-			Set<E> emptySet = java.util.Collections.emptySet();
-			return emptySet.toArray();
-		}
-		return combined.toArray();
-	}
+  /**
+   * Triggers combining.
+   */
+  @Override
+  public Object[] toArray() {
+    combine();
+    if (combined == null) {
+      Set<E> emptySet = java.util.Collections.emptySet();
+      return emptySet.toArray();
+    }
+    return combined.toArray();
+  }
 
-	/**
-	 * Triggers combining.
-	 */
-	@Override
-	@SuppressWarnings("SuspiciousToArrayCall")
-	public <T> T[] toArray(T[] a) {
-		combine();
-		if(combined==null) {
-			Set<E> emptySet = java.util.Collections.emptySet();
-			return emptySet.toArray(a);
-		}
-		return combined.toArray(a);
-	}
+  /**
+   * Triggers combining.
+   */
+  @Override
+  @SuppressWarnings("SuspiciousToArrayCall")
+  public <T> T[] toArray(T[] a) {
+    combine();
+    if (combined == null) {
+      Set<E> emptySet = java.util.Collections.emptySet();
+      return emptySet.toArray(a);
+    }
+    return combined.toArray(a);
+  }
 
-	@Override
-	public boolean add(E e) {
-		if(combined==null) combined = new HashSet<>();
-		return combined.add(e);
-	}
+  @Override
+  public boolean add(E e) {
+    if (combined == null) {
+      combined = new HashSet<>();
+    }
+    return combined.add(e);
+  }
 
-	/**
-	 * Triggers combining.
-	 */
-	@Override
-	public boolean remove(Object o) {
-		combine();
-		return combined!=null && combined.remove(o);
-	}
+  /**
+   * Triggers combining.
+   */
+  @Override
+  public boolean remove(Object o) {
+    combine();
+    return combined != null && combined.remove(o);
+  }
 
-	@Override
-	@SuppressWarnings("element-type-mismatch")
-	public boolean containsAll(Collection<?> c) {
-		for(Object o : c) {
-			if(!contains(o)) return false;
-		}
-		return true;
-	}
+  @Override
+  @SuppressWarnings("element-type-mismatch")
+  public boolean containsAll(Collection<?> c) {
+    for (Object o : c) {
+      if (!contains(o)) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-	/**
-	 * Triggers combining.
-	 *
-	 * @see  #addAll(java.util.Set)
-	 */
-	@Override
-	public boolean addAll(Collection<? extends E> c) {
-		if(c.isEmpty()) return false;
-		combine();
-		if(combined==null) {
-			combined = new HashSet<>(c);
-			return true;
-		} else {
-			return combined.addAll(c);
-		}
-	}
+  /**
+   * Triggers combining.
+   *
+   * @see  #addAll(java.util.Set)
+   */
+  @Override
+  public boolean addAll(Collection<? extends E> c) {
+    if (c.isEmpty()) {
+      return false;
+    }
+    combine();
+    if (combined == null) {
+      combined = new HashSet<>(c);
+      return true;
+    } else {
+      return combined.addAll(c);
+    }
+  }
 
-	/**
-	 * If the set has size &gt; MAXIMUM_COMBINE_SIZE, the set will be added to the
-	 * <code>added</code> list, which may then be later combined only when needed.
-	 * Because of this potentially delayed combining, any set added should not be
-	 * subsequently altered.
-	 */
-	public void addAll(Set<? extends E> set) {
-		if(set.size()<=MAXIMUM_COMBINE_SIZE) {
-			if(combined==null) combined = new HashSet<>(set);
-			else combined.addAll(set);
-		} else {
-			added.add(set);
-		}
-	}
+  /**
+   * If the set has size &gt; MAXIMUM_COMBINE_SIZE, the set will be added to the
+   * <code>added</code> list, which may then be later combined only when needed.
+   * Because of this potentially delayed combining, any set added should not be
+   * subsequently altered.
+   */
+  public void addAll(Set<? extends E> set) {
+    if (set.size() <= MAXIMUM_COMBINE_SIZE) {
+      if (combined == null) {
+        combined = new HashSet<>(set);
+      } else {
+        combined.addAll(set);
+      }
+    } else {
+      added.add(set);
+    }
+  }
 
-	/**
-	 * Triggers combining.
-	 */
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		combine();
-		if(combined==null) combined = new HashSet<>();
-		return combined.retainAll(c);
-	}
+  /**
+   * Triggers combining.
+   */
+  @Override
+  public boolean retainAll(Collection<?> c) {
+    combine();
+    if (combined == null) {
+      combined = new HashSet<>();
+    }
+    return combined.retainAll(c);
+  }
 
-	/**
-	 * Triggers combining.
-	 */
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		combine();
-		if(combined==null) combined = new HashSet<>();
-		return combined.removeAll(c);
-	}
+  /**
+   * Triggers combining.
+   */
+  @Override
+  public boolean removeAll(Collection<?> c) {
+    combine();
+    if (combined == null) {
+      combined = new HashSet<>();
+    }
+    return combined.removeAll(c);
+  }
 
-	@Override
-	public void clear() {
-		if(combined!=null) combined.clear();
-		added.clear();
-	}
+  @Override
+  public void clear() {
+    if (combined != null) {
+      combined.clear();
+    }
+    added.clear();
+  }
 }

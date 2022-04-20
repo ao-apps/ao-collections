@@ -37,19 +37,19 @@ import java.util.NoSuchElementException;
  */
 public class EnumerationIterator<E> implements Iterator<E> {
 
-	private final Enumeration<E> enumerator;
+  private final Enumeration<E> enumerator;
 
-	public EnumerationIterator(Enumeration<E> enumerator) {
-		this.enumerator = enumerator;
-	}
+  public EnumerationIterator(Enumeration<E> enumerator) {
+    this.enumerator = enumerator;
+  }
 
-	@Override
-	public boolean hasNext() {
-		return enumerator.hasMoreElements();
-	}
+  @Override
+  public boolean hasNext() {
+    return enumerator.hasMoreElements();
+  }
 
-	@Override
-	public E next() throws NoSuchElementException {
-		return enumerator.nextElement();
-	}
+  @Override
+  public E next() throws NoSuchElementException {
+    return enumerator.nextElement();
+  }
 }

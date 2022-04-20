@@ -39,57 +39,57 @@ import java.util.WeakHashMap;
  */
 public class IdentityKey<T> {
 
-	public static final IdentityKey<?> NULL = new IdentityKey<>(null);
+  public static final IdentityKey<?> NULL = new IdentityKey<>(null);
 
-	/**
-	 * Gets the identity key that represents {@code null}.
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T> IdentityKey<T> ofNull() {
-		return (IdentityKey<T>)NULL;
-	}
+  /**
+   * Gets the identity key that represents {@code null}.
+   */
+  @SuppressWarnings("unchecked")
+  public static <T> IdentityKey<T> ofNull() {
+    return (IdentityKey<T>)NULL;
+  }
 
-	/**
-	 * Gets the identity key for the given value or {@link #NULL} for a {@code null} value.
-	 */
-	public static <T> IdentityKey<T> of(T value) {
-		if(value == null) {
-			return ofNull();
-		} else {
-			return new IdentityKey<>(value);
-		}
-	}
+  /**
+   * Gets the identity key for the given value or {@link #NULL} for a {@code null} value.
+   */
+  public static <T> IdentityKey<T> of(T value) {
+    if (value == null) {
+      return ofNull();
+    } else {
+      return new IdentityKey<>(value);
+    }
+  }
 
-	private final T value;
+  private final T value;
 
-	/**
-	 * @deprecated  Please use {@link #of(java.lang.Object)}, which may return {@link #NULL} for {@code null} values.
-	 */
-	@Deprecated
-	public IdentityKey(T value) {
-		this.value = value;
-	}
+  /**
+   * @deprecated  Please use {@link #of(java.lang.Object)}, which may return {@link #NULL} for {@code null} values.
+   */
+  @Deprecated
+  public IdentityKey(T value) {
+    this.value = value;
+  }
 
-	@Override
-	public String toString() {
-		return (value == null) ? "null" : value.toString();
-	}
+  @Override
+  public String toString() {
+    return (value == null) ? "null" : value.toString();
+  }
 
-	/**
-	 * @see System#identityHashCode(java.lang.Object)
-	 */
-	@Override
-	public int hashCode() {
-		return System.identityHashCode(value);
-	}
+  /**
+   * @see System#identityHashCode(java.lang.Object)
+   */
+  @Override
+  public int hashCode() {
+    return System.identityHashCode(value);
+  }
 
-	@Override
-	@SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-	public boolean equals(Object obj) {
-		return this == obj;
-	}
+  @Override
+  @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+  public boolean equals(Object obj) {
+    return this == obj;
+  }
 
-	public T getValue() {
-		return value;
-	}
+  public T getValue() {
+    return value;
+  }
 }

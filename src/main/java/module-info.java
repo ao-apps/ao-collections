@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2021  AO Industries, Inc.
+ * Copyright (C) 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -21,8 +21,8 @@
  * along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
  */
 module com.aoapps.collections {
-	exports com.aoapps.collections;
-	// Direct
-	requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
-	requires static org.apache.commons.collections4; // <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId>
+  exports com.aoapps.collections;
+  // Direct
+  requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+  requires static org.apache.commons.collections4; // <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId>
 }

@@ -33,11 +33,11 @@ import java.util.Collection;
 // TODO: Support LongStream
 public interface LongCollection extends Collection<Long> {
 
-	boolean contains(long elem);
+  boolean contains(long elem);
 
-	long[] toArrayLong();
+  long[] toArrayLong();
 
-	boolean add(long o);
+  boolean add(long o);
 
-	boolean removeByValue(long value);
+  boolean removeByValue(long value);
 }

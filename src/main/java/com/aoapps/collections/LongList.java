@@ -33,15 +33,15 @@ import java.util.List;
 // TODO: Support LongStream
 public interface LongList extends LongCollection, List<Long> {
 
-	int indexOf(long elem);
+  int indexOf(long elem);
 
-	int lastIndexOf(long elem);
+  int lastIndexOf(long elem);
 
-	long getLong(int index);
+  long getLong(int index);
 
-	long set(int index, long element);
+  long set(int index, long element);
 
-	void add(int index, long element);
+  void add(int index, long element);
 
-	long removeAtIndex(int index);
+  long removeAtIndex(int index);
 }

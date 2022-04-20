@@ -51,46 +51,46 @@ import java.util.TreeSet;
 // Java 18: Remove this class entirely
 public class SortedProperties extends Properties {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	public SortedProperties() {
-		super();
-	}
+  public SortedProperties() {
+    super();
+  }
 
-	public SortedProperties(Properties defaults) {
-		super(defaults);
-	}
+  public SortedProperties(Properties defaults) {
+    super(defaults);
+  }
 
-	/**
-	 * Gets the comparator used to sort the keys.
-	 * <p>
-	 * Defaults to {@link Collator#getInstance(java.util.Locale)}
-	 * in {@link Locale#ROOT}.
-	 * </p>
-	 */
-	public Comparator<Object> getKeyComparator() {
-		return Collator.getInstance(Locale.ROOT);
-	}
+  /**
+   * Gets the comparator used to sort the keys.
+   * <p>
+   * Defaults to {@link Collator#getInstance(java.util.Locale)}
+   * in {@link Locale#ROOT}.
+   * </p>
+   */
+  public Comparator<Object> getKeyComparator() {
+    return Collator.getInstance(Locale.ROOT);
+  }
 
-	// Java <= 1.8: Properties.save uses keys()
-	@Override
-	public Enumeration<Object> keys() {
-		SortedSet<Object> sortedSet = new TreeSet<>(getKeyComparator());
-		Enumeration<Object> e = super.keys();
-		while(e.hasMoreElements()) {
-			sortedSet.add(e.nextElement());
-		}
-		return Collections.enumeration(sortedSet);
-	}
+  // Java <= 1.8: Properties.save uses keys()
+  @Override
+  public Enumeration<Object> keys() {
+    SortedSet<Object> sortedSet = new TreeSet<>(getKeyComparator());
+    Enumeration<Object> e = super.keys();
+    while (e.hasMoreElements()) {
+      sortedSet.add(e.nextElement());
+    }
+    return Collections.enumeration(sortedSet);
+  }
 
-	// Java >= 9: Properties.save uses entrySet()
-	@Override
-	public Set<Map.Entry<Object, Object>> entrySet() {
-		Comparator<Object> keyComparator = getKeyComparator();
-		SortedSet<Map.Entry<Object, Object>> sortedSet = new TreeSet<>(
-			(Map.Entry<Object, Object> e1, Map.Entry<Object, Object> e2) -> keyComparator.compare(e1.getKey(), e2.getKey())
-		);
-		sortedSet.addAll(super.entrySet());
-		return sortedSet;
-	}
+  // Java >= 9: Properties.save uses entrySet()
+  @Override
+  public Set<Map.Entry<Object, Object>> entrySet() {
+    Comparator<Object> keyComparator = getKeyComparator();
+    SortedSet<Map.Entry<Object, Object>> sortedSet = new TreeSet<>(
+      (Map.Entry<Object, Object> e1, Map.Entry<Object, Object> e2) -> keyComparator.compare(e1.getKey(), e2.getKey())
+    );
+    sortedSet.addAll(super.entrySet());
+    return sortedSet;
+  }
 }

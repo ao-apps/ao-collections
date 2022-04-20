@@ -38,53 +38,53 @@ import junit.framework.TestSuite;
 @SuppressWarnings("UseOfSystemOutOrSystemErr")
 public class UnmodifiableArraySetTest extends TestCase {
 
-	private static final int NUM_TESTS = 1;
+  private static final int NUM_TESTS = 1;
 
-	public UnmodifiableArraySetTest(String testName) {
-		super(testName);
-	}
+  public UnmodifiableArraySetTest(String testName) {
+    super(testName);
+  }
 
-	public static Test suite() {
-		return new TestSuite(UnmodifiableArraySetTest.class);
-	}
+  public static Test suite() {
+    return new TestSuite(UnmodifiableArraySetTest.class);
+  }
 
-	/**
-	 * A fast pseudo-random number generator for non-cryptographic purposes.
-	 */
-	private static final Random fastRandom = new Random(IoUtils.bufferToLong(new SecureRandom().generateSeed(Long.BYTES)));
+  /**
+   * A fast pseudo-random number generator for non-cryptographic purposes.
+   */
+  private static final Random fastRandom = new Random(IoUtils.bufferToLong(new SecureRandom().generateSeed(Long.BYTES)));
 
-	/**
-	 * Used to find {@link UnmodifiableArraySet#BINARY_SEARCH_THRESHOLD}
-	 */
-	private void doTestBinarySearchThreshold() {
-		final int numSearches = 10000;
-		final int searchPasses = 100;
-		Integer[] searches = new Integer[numSearches];
-		for(int size = 0; size <= 32; size++) {
-			ArrayList<Integer> values = new ArrayList<>(size);
-			int range = 0;
-			for(int i = 0; i < size; i++) {
-				values.add(range);
-				range += 1 + fastRandom.nextInt(10);
-			}
-			UnmodifiableArraySet<Integer> set = new UnmodifiableArraySet<>(values);
-			for(int i = 0; i < numSearches; i++) {
-				searches[i] = range == 0 ? 0 : fastRandom.nextInt(range);
-			}
-			long startNanos = System.nanoTime();
-			for(int pass = 0; pass < searchPasses; pass++) {
-				for(int i = 0; i < numSearches; i++) {
-					set.contains(searches[i]);
-				}
-			}
-			long timeNanos = System.nanoTime() - startNanos;
-			System.out.println(size + ":" + BigDecimal.valueOf(timeNanos / 1000, 3) + " ms");
-		}
-	}
+  /**
+   * Used to find {@link UnmodifiableArraySet#BINARY_SEARCH_THRESHOLD}
+   */
+  private void doTestBinarySearchThreshold() {
+    final int numSearches = 10000;
+    final int searchPasses = 100;
+    Integer[] searches = new Integer[numSearches];
+    for (int size = 0; size <= 32; size++) {
+      ArrayList<Integer> values = new ArrayList<>(size);
+      int range = 0;
+      for (int i = 0; i < size; i++) {
+        values.add(range);
+        range += 1 + fastRandom.nextInt(10);
+      }
+      UnmodifiableArraySet<Integer> set = new UnmodifiableArraySet<>(values);
+      for (int i = 0; i < numSearches; i++) {
+        searches[i] = range == 0 ? 0 : fastRandom.nextInt(range);
+      }
+      long startNanos = System.nanoTime();
+      for (int pass = 0; pass < searchPasses; pass++) {
+        for (int i = 0; i < numSearches; i++) {
+          set.contains(searches[i]);
+        }
+      }
+      long timeNanos = System.nanoTime() - startNanos;
+      System.out.println(size + ":" + BigDecimal.valueOf(timeNanos / 1000, 3) + " ms");
+    }
+  }
 
-	public void testBinarySearchThreshold() {
-		for(int c = 0; c < NUM_TESTS; c++) {
-			doTestBinarySearchThreshold();
-		}
-	}
+  public void testBinarySearchThreshold() {
+    for (int c = 0; c < NUM_TESTS; c++) {
+      doTestBinarySearchThreshold();
+    }
+  }
 }

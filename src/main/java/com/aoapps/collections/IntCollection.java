@@ -33,11 +33,11 @@ import java.util.Collection;
 // TODO: Support IntStream
 public interface IntCollection extends Collection<Integer> {
 
-	boolean contains(int elem);
+  boolean contains(int elem);
 
-	int[] toArrayInt();
+  int[] toArrayInt();
 
-	boolean add(int o);
+  boolean add(int o);
 
-	boolean removeByValue(int value);
+  boolean removeByValue(int value);
 }

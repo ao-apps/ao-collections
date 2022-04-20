@@ -33,15 +33,15 @@ import java.util.List;
 // TODO: Support IntStream
 public interface IntList extends IntCollection, List<Integer> {
 
-	int indexOf(int elem);
+  int indexOf(int elem);
 
-	int lastIndexOf(int elem);
+  int lastIndexOf(int elem);
 
-	int getInt(int index);
+  int getInt(int index);
 
-	int set(int index, int element);
+  int set(int index, int element);
 
-	void add(int index, int element);
+  void add(int index, int element);
 
-	int removeAtIndex(int index);
+  int removeAtIndex(int index);
 }

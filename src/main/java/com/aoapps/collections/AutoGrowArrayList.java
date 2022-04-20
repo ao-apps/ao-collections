@@ -34,45 +34,45 @@ import java.util.Collection;
 @SuppressWarnings("CloneableImplementsClone")
 public class AutoGrowArrayList<E> extends ArrayList<E> {
 
-	private static final long serialVersionUID = 4698056683308968140L;
+  private static final long serialVersionUID = 4698056683308968140L;
 
-	public AutoGrowArrayList() {
-		super();
-	}
+  public AutoGrowArrayList() {
+    super();
+  }
 
-	public AutoGrowArrayList(int initialCapacity) {
-		super(initialCapacity);
-	}
+  public AutoGrowArrayList(int initialCapacity) {
+    super(initialCapacity);
+  }
 
-	public AutoGrowArrayList(Collection<E> c) {
-		super(c);
-	}
+  public AutoGrowArrayList(Collection<E> c) {
+    super(c);
+  }
 
-	@Override
-	public E set(int index, E element) {
-		int minSize = index+1;
-		ensureCapacity(minSize);
-		while(size() < minSize) {
-			add(null);
-		}
-		return super.set(index, element);
-	}
+  @Override
+  public E set(int index, E element) {
+    int minSize = index+1;
+    ensureCapacity(minSize);
+    while (size() < minSize) {
+      add(null);
+    }
+    return super.set(index, element);
+  }
 
-	@Override
-	public void add(int index, E element) {
-		ensureCapacity(index+1);
-		while(size() < index) {
-			add(null);
-		}
-		super.add(index, element);
-	}
+  @Override
+  public void add(int index, E element) {
+    ensureCapacity(index+1);
+    while (size() < index) {
+      add(null);
+    }
+    super.add(index, element);
+  }
 
-	@Override
-	public boolean addAll(int index, Collection<? extends E> c) {
-		ensureCapacity(index+c.size());
-		while(size() < index) {
-			add(null);
-		}
-		return super.addAll(index, c);
-	}
+  @Override
+  public boolean addAll(int index, Collection<? extends E> c) {
+    ensureCapacity(index+c.size());
+    while (size() < index) {
+      add(null);
+    }
+    return super.addAll(index, c);
+  }
 }

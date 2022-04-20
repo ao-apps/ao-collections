@@ -43,78 +43,82 @@ import java.util.List;
 // TODO: Add assertions throughtout both this and MinimalMap
 public final class MinimalList {
 
-	/** Make no instances. */
-	private MinimalList() {throw new AssertionError();}
+  /** Make no instances. */
+  private MinimalList() {
+    throw new AssertionError();
+  }
 
-	/**
-	 * Gets the empty list representation.
-	 */
-	public static <E> List<E> emptyList() {
-		return Collections.emptyList();
-	}
+  /**
+   * Gets the empty list representation.
+   */
+  public static <E> List<E> emptyList() {
+    return Collections.emptyList();
+  }
 
-	/**
-	 * Adds a new element to a list, returning the (possibly new) list.
-	 */
-	public static <E> List<E> add(List<E> list, E elem) {
-		// Still supporting null list for API compatibility
-		if(list == null || list.isEmpty()) {
-			// The first element is always a singletonList
-			list = Collections.singletonList(elem);
-		} else if(list.size()==1) {
-			// Is a singleton list
-			List<E> newList = new ArrayList<>(8);
-			newList.add(list.get(0));
-			newList.add(elem);
-			list = newList;
-		} else {
-			// Is an ArrayList
-			list.add(elem);
-		}
-		return list;
-	}
+  /**
+   * Adds a new element to a list, returning the (possibly new) list.
+   */
+  public static <E> List<E> add(List<E> list, E elem) {
+    // Still supporting null list for API compatibility
+    if (list == null || list.isEmpty()) {
+      // The first element is always a singletonList
+      list = Collections.singletonList(elem);
+    } else if (list.size() == 1) {
+      // Is a singleton list
+      List<E> newList = new ArrayList<>(8);
+      newList.add(list.get(0));
+      newList.add(elem);
+      list = newList;
+    } else {
+      // Is an ArrayList
+      list.add(elem);
+    }
+    return list;
+  }
 
-	/**
-	 * Gets an element from a list.
-	 *
-	 * @deprecated  Since empty lists are no longer represented by {@code null}, invoke
-	 *              {@link List#get(int)} directly now.
-	 */
-	@Deprecated
-	public static <E> E get(List<E> list, int index) throws IndexOutOfBoundsException {
-		// Still supporting null list for API compatibility
-		if(list==null) throw new IndexOutOfBoundsException();
-		return list.get(index);
-	}
+  /**
+   * Gets an element from a list.
+   *
+   * @deprecated  Since empty lists are no longer represented by {@code null}, invoke
+   *              {@link List#get(int)} directly now.
+   */
+  @Deprecated
+  public static <E> E get(List<E> list, int index) throws IndexOutOfBoundsException {
+    // Still supporting null list for API compatibility
+    if (list == null) {
+      throw new IndexOutOfBoundsException();
+    }
+    return list.get(index);
+  }
 
-	/**
-	 * Performs a shallow copy of a list.  The list is assumed to have been
-	 * created by MinimalList and to be used through MinimalList.
-	 */
-	public static <E> List<E> copy(List<E> list) {
-		// Still supporting null list for API compatibility
-		if(list == null || list.isEmpty()) {
-			// Empty
-			return Collections.emptyList();
-		}
-		if(list.size()==1) {
-			// Is a singletonList (unmodifiable) - safe to share instance.
-			return list;
-		}
-		// Create copy of list
-		return new ArrayList<>(list);
-	}
+  /**
+   * Performs a shallow copy of a list.  The list is assumed to have been
+   * created by MinimalList and to be used through MinimalList.
+   */
+  public static <E> List<E> copy(List<E> list) {
+    // Still supporting null list for API compatibility
+    if (list == null || list.isEmpty()) {
+      // Empty
+      return Collections.emptyList();
+    }
+    if (list.size() == 1) {
+      // Is a singletonList (unmodifiable) - safe to share instance.
+      return list;
+    }
+    // Create copy of list
+    return new ArrayList<>(list);
+  }
 
-	/**
-	 * Gets an unmodifiable wrapper around this list.
-	 * May or may not wrap this list itself.
-	 */
-	public static <E> List<E> unmodifiable(List<E> list) {
-		// Still supporting null list for API compatibility
-		if(list == null) {
-			// Empty
-			return Collections.emptyList();
-		}
-		return AoCollections.optimalUnmodifiableList(list);
-	}
+  /**
+   * Gets an unmodifiable wrapper around this list.
+   * May or may not wrap this list itself.
+   */
+  public static <E> List<E> unmodifiable(List<E> list) {
+    // Still supporting null list for API compatibility
+    if (list == null) {
+      // Empty
+      return Collections.emptyList();
+    }
+    return AoCollections.optimalUnmodifiableList(list);
+  }
 }
