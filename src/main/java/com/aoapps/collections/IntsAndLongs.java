@@ -37,8 +37,8 @@ public class IntsAndLongs {
     if (ints.size() != longs.size()) {
       throw new AssertionError("ints.size() != longs.size()");
     }
-    this.ints=ints;
-    this.longs=longs;
+    this.ints = ints;
+    this.longs = longs;
   }
 
   public int size() {

@@ -97,7 +97,7 @@ public class PolymorphicRegistry<U> {
     if (instances == null) {
       return Collections.emptyList();
     } else {
-      return (List<T>)instances;
+      return (List<T>) instances;
     }
   }
 
@@ -118,8 +118,8 @@ public class PolymorphicRegistry<U> {
       }
     }
     return (matches.size() == instances.size())
-      ? instances
-      : MinimalList.unmodifiable(matches);
+        ? instances
+        : MinimalList.unmodifiable(matches);
   }
 
   /**

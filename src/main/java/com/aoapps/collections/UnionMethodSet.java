@@ -111,7 +111,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
     public E getSingleton(Object target) {
       try {
         try {
-          return (E)method.invoke(target);
+          return (E) method.invoke(target);
         } catch (InvocationTargetException e) {
           // Unwrap cause for more direct stack traces
           Throwable cause = e.getCause();
@@ -160,7 +160,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
     public Set<? extends E> getSet(Object target) {
       try {
         try {
-          return (Set<E>)method.invoke(target);
+          return (Set<E>) method.invoke(target);
         } catch (InvocationTargetException e) {
           // Unwrap cause for more direct stack traces
           Throwable cause = e.getCause();
@@ -249,13 +249,13 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
       @SuppressWarnings("element-type-mismatch")
       List<? extends Method<? extends E>> methods = methodsByClass.get(clazz);
       if (methods != null) {
-        for (int i=0, size=methods.size(); i<size; i++) {
+        for (int i = 0, size = methods.size(); i < size; i++) {
           if (methods.get(i).contains(target, element)) {
             return true;
           }
         }
       }
-      clazz=clazz.getSuperclass();
+      clazz = clazz.getSuperclass();
     } while (clazz != classE && clazz != null);
     return false;
   }
@@ -353,7 +353,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
             if (previousSingletons != null && previousSingletons.contains(nextElement)) {
               nextElement = null;
             } else if (previousSets != null) {
-              for (int i=0, size=previousSets.size(); i<size; i++) {
+              for (int i = 0, size = previousSets.size(); i < size; i++) {
                 if (previousSets.get(i).contains(nextElement)) {
                   nextElement = null;
                   break;

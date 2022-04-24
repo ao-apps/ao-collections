@@ -46,7 +46,7 @@ public class IdentityKey<T> {
    */
   @SuppressWarnings("unchecked")
   public static <T> IdentityKey<T> ofNull() {
-    return (IdentityKey<T>)NULL;
+    return (IdentityKey<T>) NULL;
   }
 
   /**

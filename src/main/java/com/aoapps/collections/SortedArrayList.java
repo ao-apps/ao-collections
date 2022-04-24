@@ -63,20 +63,20 @@ public class SortedArrayList<E> extends ArrayList<E> {
    */
   protected int binarySearchHashCode(int elemHash) {
     int left = 0;
-    int right = size()-1;
+    int right = size() - 1;
     while (left <= right) {
-      int mid = (left + right)>>1;
+      int mid = (left + right) >> 1;
       int midHash = get(mid).hashCode();
       if (elemHash == midHash) {
         return mid;
       }
-      if (elemHash<midHash) {
-        right = mid-1;
+      if (elemHash < midHash) {
+        right = mid - 1;
       } else {
-        left = mid+1;
+        left = mid + 1;
       }
     }
-    return -(left+1);
+    return -(left + 1);
   }
 
   /**
@@ -139,8 +139,8 @@ public class SortedArrayList<E> extends ArrayList<E> {
    * Finds the first index where the object has the provided hashCode
    */
   public int indexOf(int hashCode) {
-    int pos=binarySearchHashCode(hashCode);
-    if (pos<0) {
+    int pos = binarySearchHashCode(hashCode);
+    if (pos < 0) {
       return -1;
     }
 
@@ -244,7 +244,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
           while (index < (size - 1) && get(index + 1).hashCode() == oHash) {
             index++;
           }
-          super.add(index+1, o);
+          super.add(index + 1, o);
         }
       }
     }
@@ -273,7 +273,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
    */
   @Override
   public boolean remove(Object o) {
-    int index=lastIndexOf(o);
+    int index = lastIndexOf(o);
     if (index == -1) {
       return false;
     }
@@ -288,11 +288,11 @@ public class SortedArrayList<E> extends ArrayList<E> {
    */
   @Override
   public boolean addAll(Collection<? extends E> c) {
-    Iterator<? extends E>iter=c.iterator();
-    boolean didOne=false;
+    Iterator<? extends E>iter = c.iterator();
+    boolean didOne = false;
     while (iter.hasNext()) {
       add(iter.next());
-      didOne=true;
+      didOne = true;
     }
     return didOne;
   }

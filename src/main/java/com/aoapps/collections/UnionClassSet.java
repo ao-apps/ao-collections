@@ -141,7 +141,7 @@ public class UnionClassSet<E> extends AbstractSet<E> {
       return false;
     }
     if (c instanceof Set) {
-      return addAll((Set<? extends E>)c);
+      return addAll((Set<? extends E>) c);
     } else {
       throw new UnsupportedOperationException("May only add sets");
     }
@@ -167,7 +167,7 @@ public class UnionClassSet<E> extends AbstractSet<E> {
       assert allSameClass(clazz, iter) : "Not all objects are of the same exact class";
     }
     if (added.containsKey(clazz)) {
-      throw new IllegalArgumentException("Set already added for class: "+clazz);
+      throw new IllegalArgumentException("Set already added for class: " + clazz);
     }
     size += setSize;
     added.put(clazz, set);

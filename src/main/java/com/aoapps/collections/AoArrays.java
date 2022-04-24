@@ -58,7 +58,7 @@ public final class AoArrays {
    * Checks if the subrange of two byte arrays is equal.
    */
   public static boolean equals(byte[] b1, byte[] b2, int off, int len) {
-    for (int end=off+len; off<end; off++) {
+    for (int end = off + len; off < end; off++) {
       if (b1[off] != b2[off]) {
         return false;
       }
@@ -70,7 +70,7 @@ public final class AoArrays {
    * Checks if the subrange of two byte arrays is equal.
    */
   public static boolean equals(byte[] b1, int off1, byte[] b2, int off2, int len) {
-    for (int end=off1+len; off1<end; off1++, off2++) {
+    for (int end = off1 + len; off1 < end; off1++, off2++) {
       if (b1[off1] != b2[off2]) {
         return false;
       }
@@ -82,7 +82,7 @@ public final class AoArrays {
    * Checks if all the values in the provided range are equal to <code>value</code>.
    */
   public static boolean allEquals(byte[] b, int off, int len, byte value) {
-    for (int end=off+len; off<end; off++) {
+    for (int end = off + len; off < end; off++) {
       if (b[off] != value) {
         return false;
       }
@@ -97,20 +97,20 @@ public final class AoArrays {
    */
   public static int compare(byte[] ba1, byte[] ba2) {
     int len = Math.min(ba1.length, ba2.length);
-    for (int i=0; i<len; i++) {
-      int b1 = ba1[i]&255;
-      int b2 = ba2[i]&255;
-      if (b1<b2) {
+    for (int i = 0; i < len; i++) {
+      int b1 = ba1[i] & 255;
+      int b2 = ba2[i] & 255;
+      if (b1 < b2) {
         return -1;
       }
-      if (b1>b2) {
+      if (b1 > b2) {
         return 1;
       }
     }
-    if (ba1.length>len) {
+    if (ba1.length > len) {
       return 1;
     }
-    if (ba2.length>len) {
+    if (ba2.length > len) {
       return -1;
     }
     return 0;
@@ -136,11 +136,11 @@ public final class AoArrays {
     final int numCollections = collections.size();
     if (numCollections == 0) {
       // Zero is easy
-      return (V[])Array.newInstance(clazz, 0);
+      return (V[]) Array.newInstance(clazz, 0);
     } else if (numCollections == 1) {
       // One collection - just use toArray
       Collection<? extends V> collection = collections.iterator().next();
-      return collection.toArray((V[])Array.newInstance(clazz, collection.size()));
+      return collection.toArray((V[]) Array.newInstance(clazz, collection.size()));
     } else if (numCollections == 2) {
       // Two collections - use very simple merge
       Iterator<? extends Collection<? extends V>> collIter = collections.iterator();
@@ -152,7 +152,7 @@ public final class AoArrays {
       final int totalSize = c1.size() + c2.size();
 
       @SuppressWarnings("unchecked")
-      final V[] results = (V[])Array.newInstance(clazz, totalSize);
+      final V[] results = (V[]) Array.newInstance(clazz, totalSize);
       V next1 = i1.hasNext() ? i1.next() : null;
       V next2 = i2.hasNext() ? i2.next() : null;
       int pos = 0;
@@ -195,8 +195,8 @@ public final class AoArrays {
     } else {
       // 3+ collections, use priority queue
       PriorityQueue<AoCollections.PeekIterator<? extends V>> pq = new PriorityQueue<>(
-        numCollections,
-        (i1, i2) -> comparator.compare(i1.peek(), i2.peek())
+          numCollections,
+          (i1, i2) -> comparator.compare(i1.peek(), i2.peek())
       );
       int totalSize = 0;
       for (Collection<? extends V> collection : collections) {
@@ -204,10 +204,10 @@ public final class AoArrays {
         totalSize += collection.size();
       }
       @SuppressWarnings("unchecked")
-      final V[] results = (V[])Array.newInstance(clazz, totalSize);
+      final V[] results = (V[]) Array.newInstance(clazz, totalSize);
       int pos = 0;
       PeekIterator<? extends V> pi;
-      while ((pi=pq.poll()) != null) {
+      while ((pi = pq.poll()) != null) {
         results[pos++] = pi.next();
         if (pi.hasNext()) {
           pq.offer(pi);
@@ -245,7 +245,7 @@ public final class AoArrays {
       final E[] a = this.array;
       final int len = a.length;
       if (o == null) {
-        for (int i=0; i<len; i++) {
+        for (int i = 0; i < len; i++) {
           if (a[i] == null) {
             return true;
           }
@@ -260,7 +260,7 @@ public final class AoArrays {
         }
         /* */
         /* 205 ms */
-        int i=len-1;
+        int i = len - 1;
         while (i >= 0) {
           if (o.equals(a[i--])) {
             return true;
@@ -285,7 +285,7 @@ public final class AoArrays {
         private int pos = 0;
         @Override
         public boolean hasNext() {
-          return pos<array.length;
+          return pos < array.length;
         }
 
         @Override
@@ -311,9 +311,9 @@ public final class AoArrays {
     public <T> T[] toArray(T[] resultArray) {
       int len = array.length;
       resultArray =
-        resultArray.length >= len
-        ? resultArray
-        : (T[])java.lang.reflect.Array.newInstance(resultArray.getClass().getComponentType(), len)
+          resultArray.length >= len
+              ? resultArray
+              : (T[]) java.lang.reflect.Array.newInstance(resultArray.getClass().getComponentType(), len)
       ;
       System.arraycopy(array, 0, resultArray, 0, len);
       // Null terminate
@@ -416,7 +416,7 @@ public final class AoArrays {
    */
   public static <E> int indexOf(E[] array, E element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (Objects.equals(array[i], element)) {
           return i;
         }
@@ -432,7 +432,7 @@ public final class AoArrays {
    */
   public static <E> int lastIndexOf(E[] array, E element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -445,7 +445,7 @@ public final class AoArrays {
    */
   public static <E> int lastIndexOf(E[] array, E element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (Objects.equals(array[i], element)) {
           return i;
         }
@@ -453,6 +453,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (Enum[])">
@@ -472,7 +473,7 @@ public final class AoArrays {
    */
   public static <E extends Enum<E>> int indexOf(E[] array, E element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -488,7 +489,7 @@ public final class AoArrays {
    */
   public static <E extends Enum<E>> int lastIndexOf(E[] array, E element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -501,7 +502,7 @@ public final class AoArrays {
    */
   public static <E extends Enum<E>> int lastIndexOf(E[] array, E element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -509,6 +510,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (byte[])">
@@ -528,7 +530,7 @@ public final class AoArrays {
    */
   public static int indexOf(byte[] array, byte element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -544,7 +546,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(byte[] array, byte element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -557,7 +559,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(byte[] array, byte element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -565,6 +567,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (short[])">
@@ -584,7 +587,7 @@ public final class AoArrays {
    */
   public static int indexOf(short[] array, short element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -600,7 +603,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(short[] array, short element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -613,7 +616,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(short[] array, short element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -621,6 +624,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (int[])">
@@ -640,7 +644,7 @@ public final class AoArrays {
    */
   public static int indexOf(int[] array, int element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -656,7 +660,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(int[] array, int element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -669,7 +673,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(int[] array, int element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -677,6 +681,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (long[])">
@@ -696,7 +701,7 @@ public final class AoArrays {
    */
   public static int indexOf(long[] array, long element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -712,7 +717,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(long[] array, long element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -725,7 +730,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(long[] array, long element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -733,6 +738,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (float[])">
@@ -752,7 +758,7 @@ public final class AoArrays {
    */
   public static int indexOf(float[] array, float element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -768,7 +774,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(float[] array, float element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -781,7 +787,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(float[] array, float element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -789,6 +795,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (double[])">
@@ -808,7 +815,7 @@ public final class AoArrays {
    */
   public static int indexOf(double[] array, double element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -824,7 +831,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(double[] array, double element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -837,7 +844,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(double[] array, double element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -845,6 +852,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc="indexOf and lastIndexOf (char[])">
@@ -864,7 +872,7 @@ public final class AoArrays {
    */
   public static int indexOf(char[] array, char element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex, len=array.length; i<len; i++) {
+      for (int i = fromIndex, len = array.length; i < len; i++) {
         if (array[i] == element) {
           return i;
         }
@@ -880,7 +888,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(char[] array, char element) {
     if (array != null) {
-      return lastIndexOf(array, element, array.length-1);
+      return lastIndexOf(array, element, array.length - 1);
     } else {
       return -1;
     }
@@ -893,7 +901,7 @@ public final class AoArrays {
    */
   public static int lastIndexOf(char[] array, char element, int fromIndex) {
     if (array != null) {
-      for (int i=fromIndex; i >= 0; i--) {
+      for (int i = fromIndex; i >= 0; i--) {
         if (array[i] == element) {
           return i;
         }
@@ -901,6 +909,7 @@ public final class AoArrays {
     }
     return -1;
   }
+
   // </editor-fold>
 
   /**
@@ -918,7 +927,7 @@ public final class AoArrays {
 
     int result = 1;
     // while (len-- > 0) result = 31 * result + a[off++];
-    for (int end=off+len; off<end; off++) {
+    for (int end = off + len; off < end; off++) {
       result = 31 * result + a[off];
     }
 
@@ -936,11 +945,11 @@ public final class AoArrays {
     if (values != null) {
       for (T value : values) {
         if (
-          value != null
-          && (
-            max == null
-            || value.compareTo(max) > 0
-          )
+            value != null
+                && (
+                max == null
+                    || value.compareTo(max) > 0
+            )
         ) {
           max = value;
         }
@@ -969,8 +978,8 @@ public final class AoArrays {
    *                      different that the keys array.
    */
   public static <E extends Comparable<? super E>> void sortParallelArrays(
-    E[] keys,
-    Object[] ... otherArrays
+      E[] keys,
+      Object[] ... otherArrays
   ) {
     int numKeys = keys.length;
     int numOtherArrays = otherArrays.length;
@@ -1018,9 +1027,9 @@ public final class AoArrays {
     // Copy back to original arrays for in-place sort
     for (int ooIndex = 0; ooIndex < numOtherArrays; ooIndex++) {
       System.arraycopy(
-        sortedOtherArrays[ooIndex], 0,
-        otherArrays[ooIndex], 0,
-        numKeys);
+          sortedOtherArrays[ooIndex], 0,
+          otherArrays[ooIndex], 0,
+          numKeys);
     }
   }
 }

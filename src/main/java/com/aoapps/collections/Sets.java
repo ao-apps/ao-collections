@@ -50,8 +50,8 @@ public final class Sets {
   // TODO:? https://commons.apache.org/proper/commons-collections/apidocs/org/apache/commons/collections4/SetUtils.html#union-java.util.Set-java.util.Set-
   public static <E> Set<E> union(Set<? extends E> set1, Set<? extends E> set2) {
     Set<E> union = AoCollections.newLinkedHashSet(
-      (set1 == null ? 0 : set1.size())
-      + (set2 == null ? 0 : set2.size())
+        (set1 == null ? 0 : set1.size())
+            + (set2 == null ? 0 : set2.size())
     );
     if (set1 != null) {
       union.addAll(set1);
@@ -103,8 +103,8 @@ public final class Sets {
   @SuppressWarnings("varargs")
   public static <E> Set<E> union(Set<? extends E> set, E ... elements) {
     int size =
-      (set == null ? 0 : set.size())
-      + (elements == null ? 0 : elements.length);
+        (set == null ? 0 : set.size())
+            + (elements == null ? 0 : elements.length);
     Set<E> union = AoCollections.newLinkedHashSet(size);
     if (set != null) {
       union.addAll(set);

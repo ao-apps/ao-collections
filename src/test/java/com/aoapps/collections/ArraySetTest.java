@@ -61,7 +61,7 @@ public class ArraySetTest extends TestCase {
     Set<Integer> randomValues = AoCollections.newHashSet(endTestSize);
     for (int testSize = 1; testSize <= endTestSize; testSize *= 10) {
       // Generate testSize random ints
-      while (randomValues.size()<testSize) {
+      while (randomValues.size() < testSize) {
         randomValues.add(fastRandom.nextInt());
       }
       List<Integer> randomList = new ArrayList<>(randomValues);

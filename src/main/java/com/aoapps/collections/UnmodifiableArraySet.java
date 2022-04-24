@@ -74,13 +74,13 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
   private static boolean inOrderAndUnique(Object[] elements) {
     // Make sure all elements are in hashCode order and unique
     int size = elements.length;
-    if (size>1) {
+    if (size > 1) {
       Object prev = elements[0];
       int prevHash = prev.hashCode();
-      for (int index=1; index<size; index++) {
+      for (int index = 1; index < size; index++) {
         Object elem = elements[index];
         int elemHash = elem.hashCode();
-        if (elemHash<prevHash) {
+        if (elemHash < prevHash) {
           return false; //throw new AssertionError("elements not sorted by hashCode: "+elemHash+"<"+prevHash+": "+elem+"<"+prev);
         }
         if (elemHash == prevHash) {
@@ -89,7 +89,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
             return false; //throw new AssertionError("Element not unique: "+elem);
           }
           // Look backward until different hashCode
-          for (int i=index-2; i >= 0; i--) {
+          for (int i = index - 2; i >= 0; i--) {
             Object morePrev = elements[i];
             if (morePrev.hashCode() != elemHash) {
               break;
@@ -132,12 +132,13 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
    */
   @SuppressWarnings("unchecked")
   public UnmodifiableArraySet(Collection<E> elements) {
-    this((E[])elements.toArray());
+    this((E[]) elements.toArray());
   }
 
   private static int binarySearch(Object[] elements, int oHash) {
     return binarySearch0(elements, 0, elements.length, oHash);
   }
+
   private static int binarySearch0(Object[] elements, int fromIndex, int toIndex, int oHash) {
     int low = fromIndex;
     int high = toIndex - 1;
@@ -173,7 +174,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
     if (size == 0 || o == null) {
       return false;
     }
-    if (size<BINARY_SEARCH_THRESHOLD) {
+    if (size < BINARY_SEARCH_THRESHOLD) {
       // Simple search
       for (int i = 0; i < size; i++) {
         if (elems[i].equals(o)) {
@@ -182,7 +183,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
       }
     } else {
       int index = binarySearch(elems, o.hashCode());
-      if (index<0) {
+      if (index < 0) {
         return false;
       }
       // Matches at index?
@@ -192,7 +193,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
       }
       // Look forward until different hashCode
       int oHash = o.hashCode();
-      for (int i=index+1; i<size; i++) {
+      for (int i = index + 1; i < size; i++) {
         elem = elems[i];
         if (elem.hashCode() != oHash) {
           break;
@@ -202,7 +203,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
         }
       }
       // Look backward until different hashCode
-      for (int i=index-1; i >= 0; i--) {
+      for (int i = index - 1; i >= 0; i--) {
         elem = elems[i];
         if (elem.hashCode() != oHash) {
           break;
@@ -224,7 +225,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 
       @Override
       public boolean hasNext() {
-        return index<elems.length;
+        return index < elems.length;
       }
 
       @Override
@@ -306,7 +307,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
    *
    * @see  Externalizable
    */
-  @Deprecated/* Java 9: (forRemoval = false) */
+  @Deprecated // Java 9: (forRemoval = false)
   public UnmodifiableArraySet() {
     // Do nothing
   }
@@ -317,9 +318,9 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
     try {
       int len = elements.length;
       fastOut.writeInt(len);
-      if (len>0) {
+      if (len > 0) {
         E[] elems = UnmodifiableArraySet.this.elements; // Local fast reference
-        for (int i=0; i<len; i++) {
+        for (int i = 0; i < len; i++) {
           fastOut.writeObject(elems[i]);
         }
       }
@@ -338,11 +339,11 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
     try {
       final int len = fastIn.readInt();
       if (len == 0) {
-        elements = (E[])EmptyArrays.EMPTY_OBJECT_ARRAY;
+        elements = (E[]) EmptyArrays.EMPTY_OBJECT_ARRAY;
       } else {
-        E[] newElements = (E[])new Object[len];
-        for (int i=0; i<len; i++) {
-          newElements[i] = (E)fastIn.readObject();
+        E[] newElements = (E[]) new Object[len];
+        for (int i = 0; i < len; i++) {
+          newElements[i] = (E) fastIn.readObject();
         }
         if (ASSERTIONS_ENABLED) {
           assert inOrderAndUnique(newElements);

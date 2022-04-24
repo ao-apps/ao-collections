@@ -88,7 +88,7 @@ public class SortedProperties extends Properties {
   public Set<Map.Entry<Object, Object>> entrySet() {
     Comparator<Object> keyComparator = getKeyComparator();
     SortedSet<Map.Entry<Object, Object>> sortedSet = new TreeSet<>(
-      (Map.Entry<Object, Object> e1, Map.Entry<Object, Object> e2) -> keyComparator.compare(e1.getKey(), e2.getKey())
+        (Map.Entry<Object, Object> e1, Map.Entry<Object, Object> e2) -> keyComparator.compare(e1.getKey(), e2.getKey())
     );
     sortedSet.addAll(super.entrySet());
     return sortedSet;

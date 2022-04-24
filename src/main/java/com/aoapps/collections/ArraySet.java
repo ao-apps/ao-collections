@@ -107,28 +107,28 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   private boolean assertInOrderAndUnique(ArrayList<E> elements) {
     // Make sure all elements are in hashCode order and unique
     int size = elements.size();
-    if (size>1) {
+    if (size > 1) {
       E prev = elements.get(0);
       int prevHash = prev.hashCode();
-      for (int index=1; index<size; index++) {
+      for (int index = 1; index < size; index++) {
         E elem = elements.get(index);
         int elemHash = elem.hashCode();
-        if (elemHash<prevHash) {
-          throw new AssertionError("elements not sorted by hashCode: "+elemHash+"<"+prevHash+": "+elem+"<"+prev);
+        if (elemHash < prevHash) {
+          throw new AssertionError("elements not sorted by hashCode: " + elemHash + "<" + prevHash + ": " + elem + "<" + prev);
         }
         if (elemHash == prevHash) {
           // Make sure not equal to prev
           if (elem.equals(prev)) {
-            throw new AssertionError("Element not unique: "+elem);
+            throw new AssertionError("Element not unique: " + elem);
           }
           // Look backward until different hashCode
-          for (int i=index-2; i >= 0; i--) {
+          for (int i = index - 2; i >= 0; i--) {
             E morePrev = elements.get(i);
             if (morePrev.hashCode() != elemHash) {
               break;
             }
             if (elem.equals(morePrev)) {
-              throw new AssertionError("Element not unique: "+elem);
+              throw new AssertionError("Element not unique: " + elem);
             }
           }
         }
@@ -203,7 +203,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
     if (size == 0 || o == null) {
       return false;
     }
-    if (size<BINARY_SEARCH_THRESHOLD) {
+    if (size < BINARY_SEARCH_THRESHOLD) {
       // Simple search
       for (int i = 0; i < size; i++) {
         if (elements.get(i).equals(o)) {
@@ -211,8 +211,8 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
         }
       }
     } else {
-      int index = binarySearch((E)o);
-      if (index<0) {
+      int index = binarySearch((E) o);
+      if (index < 0) {
         return false;
       }
       // Matches at index?
@@ -222,7 +222,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
       }
       // Look forward until different hashCode
       int oHash = o.hashCode();
-      for (int i=index+1; i<size; i++) {
+      for (int i = index + 1; i < size; i++) {
         elem = elements.get(i);
         if (elem.hashCode() != oHash) {
           break;
@@ -232,7 +232,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
         }
       }
       // Look backward until different hashCode
-      for (int i=index-1; i >= 0; i--) {
+      for (int i = index - 1; i >= 0; i--) {
         elem = elements.get(i);
         if (elem.hashCode() != oHash) {
           break;
@@ -291,9 +291,9 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
     } else {
       // Shortcut for adding last element
       int eHash = e.hashCode();
-      E last = elements.get(size-1);
+      E last = elements.get(size - 1);
       int lastHash = last.hashCode();
-      if (eHash>lastHash) {
+      if (eHash > lastHash) {
         elements.add(e);
         return true;
       } else if (eHash == lastHash) {
@@ -302,7 +302,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
           return false;
         }
         // Look backward until different hashCode
-        for (int i=size-2; i >= 0; i--) {
+        for (int i = size - 2; i >= 0; i--) {
           E elem = elements.get(i);
           if (elem.hashCode() != eHash) {
             break;
@@ -341,9 +341,9 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
       return false;
     }
     // Shortcut for removing last element
-    Object lastElem = elements.get(size-1);
+    Object lastElem = elements.get(size - 1);
     if (lastElem.equals(o)) {
-      elements.remove(size-1);
+      elements.remove(size - 1);
       return true;
     } else {
       if (contains(o)) {

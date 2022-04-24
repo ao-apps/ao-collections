@@ -97,18 +97,18 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
   @SuppressWarnings("unchecked")
   private int binarySearch(E elem) {
     return
-      comparator == null
-      ? java.util.Collections.binarySearch((List)elements, elem)
-      : java.util.Collections.binarySearch(elements, elem, comparator)
+        comparator == null
+            ? java.util.Collections.binarySearch((List) elements, elem)
+            : java.util.Collections.binarySearch(elements, elem, comparator)
     ;
   }
 
   @SuppressWarnings("unchecked")
   private int compare(E elem1, E elem2) {
     return
-      comparator == null
-      ? ((Comparable)elem1).compareTo(elem2)
-      : comparator.compare(elem1, elem2)
+        comparator == null
+            ? ((Comparable) elem1).compareTo(elem2)
+            : comparator.compare(elem1, elem2)
     ;
   }
 
@@ -150,7 +150,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
     if (size == 0) {
       throw new NoSuchElementException();
     }
-    return elements.get(size-1);
+    return elements.get(size - 1);
   }
 
   @Override
@@ -172,7 +172,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
     // TODO: How can we check if the passed-in object is of an unrelated, unexpected class
     // TODO: without passing around Class objects?
     // TODO: with equals - just like ArraySet.
-    return binarySearch((E)o) >= 0;
+    return binarySearch((E) o) >= 0;
   }
 
   @Override
@@ -199,9 +199,9 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
       return true;
     } else {
       // Shortcut for adding last element
-      E last = elements.get(size-1);
+      E last = elements.get(size - 1);
       int diff = compare(e, last);
-      if (diff>0) {
+      if (diff > 0) {
         elements.add(e);
         return true;
       } else if (diff == 0) {
@@ -227,11 +227,11 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
       return false;
     }
     // Shortcut for removing last element
-    E lastElem = elements.get(size-1);
+    E lastElem = elements.get(size - 1);
     // TODO: How can we check if the passed-in object is of an unrelated, unexpected class
     // TODO: without passing around Class objects?
-    if (compare(lastElem, (E)o) == 0) {
-      elements.remove(size-1);
+    if (compare(lastElem, (E) o) == 0) {
+      elements.remove(size - 1);
       return true;
     } else {
       if (contains(o)) {

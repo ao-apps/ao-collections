@@ -53,10 +53,10 @@ public final class HashCodeComparator implements Comparator<Object>, Serializabl
   public int compare(Object o1, Object o2) {
     int hash1 = o1.hashCode();
     int hash2 = o2.hashCode();
-    if (hash1<hash2) {
+    if (hash1 < hash2) {
       return -1;
     }
-    if (hash1>hash2) {
+    if (hash1 > hash2) {
       return 1;
     }
     return 0;

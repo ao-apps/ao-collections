@@ -63,8 +63,8 @@ public class LongArrayList extends AbstractList<Long>
   public LongArrayList(int initialCapacity) {
     super();
     if (initialCapacity < 0) {
-      throw new IllegalArgumentException("Illegal Capacity: "+
-                         initialCapacity);
+      throw new IllegalArgumentException("Illegal Capacity: " +
+          initialCapacity);
     }
     this.elementData = new long[initialCapacity];
   }
@@ -89,10 +89,10 @@ public class LongArrayList extends AbstractList<Long>
     size = c.size();
     // Allow 10% room for growth
     elementData = new long[
-      (int)Math.min((size*110L)/100,Integer.MAX_VALUE)
+    (int) Math.min((size * 110L) / 100, Integer.MAX_VALUE)
     ];
     Iterator<? extends Number> iter = c.iterator();
-    int pos=0;
+    int pos = 0;
     while (iter.hasNext()) {
       elementData[pos++] = iter.next().longValue();
     }
@@ -102,7 +102,7 @@ public class LongArrayList extends AbstractList<Long>
     size = elements.length;
     // Allow 10% room for growth
     elementData = new long[
-            (int)Math.min((size*110L)/100,Integer.MAX_VALUE)];
+    (int) Math.min((size * 110L) / 100, Integer.MAX_VALUE)];
     System.arraycopy(elements, 0, elementData, 0, size);
   }
 
@@ -133,7 +133,7 @@ public class LongArrayList extends AbstractList<Long>
     int oldCapacity = elementData.length;
     if (minCapacity > oldCapacity) {
       long[] oldData = elementData;
-      int newCapacity = (oldCapacity * 3)/2 + 1;
+      int newCapacity = (oldCapacity * 3) / 2 + 1;
       if (newCapacity < minCapacity) {
         newCapacity = minCapacity;
       }
@@ -176,7 +176,7 @@ public class LongArrayList extends AbstractList<Long>
       return false;
     }
     if (elem instanceof Number) {
-      return contains(((Number)elem).longValue());
+      return contains(((Number) elem).longValue());
     }
     return false;
   }
@@ -208,7 +208,7 @@ public class LongArrayList extends AbstractList<Long>
       return -1;
     }
     if (elem instanceof Number) {
-      return indexOf(((Number)elem).longValue());
+      return indexOf(((Number) elem).longValue());
     }
     return -1;
   }
@@ -246,7 +246,7 @@ public class LongArrayList extends AbstractList<Long>
       return -1;
     }
     if (elem instanceof Number) {
-      return lastIndexOf(((Number)elem).longValue());
+      return lastIndexOf(((Number) elem).longValue());
     }
     return -1;
   }
@@ -261,7 +261,7 @@ public class LongArrayList extends AbstractList<Long>
    */
   @Override
   public int lastIndexOf(long elem) {
-    for (int i = size-1; i >= 0; i--) {
+    for (int i = size - 1; i >= 0; i--) {
       if (elem == elementData[i]) {
         return i;
       }
@@ -344,8 +344,8 @@ public class LongArrayList extends AbstractList<Long>
   @Override
   public <T> T[] toArray(T[] a) {
     if (a.length < size) {
-      a = (T[])java.lang.reflect.Array.
-        newInstance(a.getClass().getComponentType(), size);
+      a = (T[]) java.lang.reflect.Array.
+          newInstance(a.getClass().getComponentType(), size);
     }
     System.arraycopy(elementData, 0, a, 0, size);
     if (a.length > size) {
@@ -471,12 +471,12 @@ public class LongArrayList extends AbstractList<Long>
   public void add(int index, long element) {
     if (index > size || index < 0) {
       throw new IndexOutOfBoundsException(
-        "Index: "+index+", Size: "+size);
+          "Index: " + index + ", Size: " + size);
     }
 
-    ensureCapacity(size+1);  // Increments modCount!!
+    ensureCapacity(size + 1);  // Increments modCount!!
     System.arraycopy(elementData, index, elementData, index + 1,
-             size - index);
+        size - index);
     elementData[index] = element;
     size++;
   }
@@ -513,8 +513,8 @@ public class LongArrayList extends AbstractList<Long>
 
     int numMoved = size - index - 1;
     if (numMoved > 0) {
-      System.arraycopy(elementData, index+1, elementData, index,
-               numMoved);
+      System.arraycopy(elementData, index + 1, elementData, index,
+          numMoved);
     }
     elementData[--size] = 0; // Let gc do its work
 
@@ -536,7 +536,7 @@ public class LongArrayList extends AbstractList<Long>
   @Override
   public boolean remove(Object o) {
     if (o instanceof Number) {
-      return removeByValue(((Number)o).longValue());
+      return removeByValue(((Number) o).longValue());
     }
     return false;
   }
@@ -572,8 +572,8 @@ public class LongArrayList extends AbstractList<Long>
     modCount++;
     int numMoved = size - index - 1;
     if (numMoved > 0) {
-      System.arraycopy(elementData, index+1, elementData, index,
-               numMoved);
+      System.arraycopy(elementData, index + 1, elementData, index,
+          numMoved);
     }
     elementData[--size] = 0; // Let gc do its work
   }
@@ -611,7 +611,7 @@ public class LongArrayList extends AbstractList<Long>
   public boolean addAll(Collection<? extends Long> c) {
     int numNew = c.size();
     ensureCapacity(size + numNew);  // Increments modCount
-    Iterator<? extends Long> iter=c.iterator();
+    Iterator<? extends Long> iter = c.iterator();
     while (iter.hasNext()) {
       elementData[size++] = iter.next();
     }
@@ -637,7 +637,7 @@ public class LongArrayList extends AbstractList<Long>
   public boolean addAll(int index, Collection<? extends Long> c) {
     if (index > size || index < 0) {
       throw new IndexOutOfBoundsException(
-        "Index: " + index + ", Size: " + size);
+          "Index: " + index + ", Size: " + size);
     }
 
     int numNew = c.size();
@@ -646,10 +646,10 @@ public class LongArrayList extends AbstractList<Long>
     int numMoved = size - index;
     if (numMoved > 0) {
       System.arraycopy(elementData, index, elementData, index + numNew,
-               numMoved);
+          numMoved);
     }
 
-    Iterator<? extends Long> iter=c.iterator();
+    Iterator<? extends Long> iter = c.iterator();
     int pos = index;
     while (iter.hasNext()) {
       elementData[pos++] = iter.next();
@@ -673,10 +673,10 @@ public class LongArrayList extends AbstractList<Long>
     modCount++;
     int numMoved = size - toIndex;
     System.arraycopy(elementData, toIndex, elementData, fromIndex,
-             numMoved);
+        numMoved);
 
     // Let gc do its work
-    int newSize = size - (toIndex-fromIndex);
+    int newSize = size - (toIndex - fromIndex);
     while (size != newSize) {
       elementData[--size] = 0;
     }
@@ -691,7 +691,7 @@ public class LongArrayList extends AbstractList<Long>
   private void RangeCheck(int index) {
     if (index >= size) {
       throw new IndexOutOfBoundsException(
-        "Index: "+index+", Size: "+size);
+          "Index: " + index + ", Size: " + size);
     }
   }
 
@@ -704,7 +704,7 @@ public class LongArrayList extends AbstractList<Long>
    *             (each an {@link Object}) in the proper order.
    */
   private void writeObject(java.io.ObjectOutputStream s)
-    throws java.io.IOException{
+      throws java.io.IOException {
     int expectedModCount = modCount;
     // Write out element count, and any hidden stuff
     s.defaultWriteObject();
@@ -713,7 +713,7 @@ public class LongArrayList extends AbstractList<Long>
     s.writeInt(elementData.length);
 
     // Write out all elements in the proper order.
-    for (int i=0; i<size; i++) {
+    for (int i = 0; i < size; i++) {
       s.writeLong(elementData[i]);
     }
 
@@ -727,7 +727,7 @@ public class LongArrayList extends AbstractList<Long>
    * deserialize it).
    */
   private void readObject(java.io.ObjectInputStream s)
-    throws java.io.IOException, ClassNotFoundException {
+      throws java.io.IOException, ClassNotFoundException {
     // Read in size, and any hidden stuff
     s.defaultReadObject();
 
@@ -737,7 +737,7 @@ public class LongArrayList extends AbstractList<Long>
     elementData = a;
 
     // Read in all elements in the proper order.
-    for (int i=0; i<size; i++) {
+    for (int i = 0; i < size; i++) {
       a[i] = s.readLong();
     }
   }

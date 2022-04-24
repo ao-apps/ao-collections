@@ -48,11 +48,12 @@ public class PolymorphicMultimap<K, V> {
     private final List<K> keys;
     private final List<V> values;
     private final List<Entry<K, V>> entries;
+
     // TODO: AtomicLong for round-robin getAny
     private Lists(
-      List<K> keys,
-      List<V> values,
-      List<Entry<K, V>> entries
+        List<K> keys,
+        List<V> values,
+        List<Entry<K, V>> entries
     ) {
       assert keys.size() == values.size();
       assert values.size() == entries.size();
@@ -139,7 +140,7 @@ public class PolymorphicMultimap<K, V> {
    */
   @SuppressWarnings("unchecked")
   protected <T extends K> Lists<T, V> getLists(Class<T> clazz) {
-    return (Lists<T, V>)listsByClass.get(clazz);
+    return (Lists<T, V>) listsByClass.get(clazz);
   }
 
   /**
@@ -176,8 +177,8 @@ public class PolymorphicMultimap<K, V> {
       }
     }
     return (matches.size() == keys.size())
-      ? keys
-      : MinimalList.unmodifiable(matches);
+        ? keys
+        : MinimalList.unmodifiable(matches);
   }
 
   /**
@@ -201,8 +202,8 @@ public class PolymorphicMultimap<K, V> {
         }
       }
       return (matches.size() == entries.size())
-        ? lists.keys
-        : MinimalList.unmodifiable(matches);
+          ? lists.keys
+          : MinimalList.unmodifiable(matches);
     }
   }
 
@@ -227,8 +228,8 @@ public class PolymorphicMultimap<K, V> {
         }
       }
       return (matches.size() == entries.size())
-        ? lists.keys
-        : MinimalList.unmodifiable(matches);
+          ? lists.keys
+          : MinimalList.unmodifiable(matches);
     }
   }
 
@@ -266,8 +267,8 @@ public class PolymorphicMultimap<K, V> {
       }
     }
     return (matches.size() == values.size())
-      ? values
-      : MinimalList.unmodifiable(matches);
+        ? values
+        : MinimalList.unmodifiable(matches);
   }
 
   /**
@@ -291,8 +292,8 @@ public class PolymorphicMultimap<K, V> {
         }
       }
       return (matches.size() == entries.size())
-        ? lists.values
-        : MinimalList.unmodifiable(matches);
+          ? lists.values
+          : MinimalList.unmodifiable(matches);
     }
   }
 
@@ -317,8 +318,8 @@ public class PolymorphicMultimap<K, V> {
         }
       }
       return (matches.size() == entries.size())
-        ? lists.values
-        : MinimalList.unmodifiable(matches);
+          ? lists.values
+          : MinimalList.unmodifiable(matches);
     }
   }
 
@@ -356,8 +357,8 @@ public class PolymorphicMultimap<K, V> {
       }
     }
     return (matches.size() == entries.size())
-      ? entries
-      : MinimalList.unmodifiable(matches);
+        ? entries
+        : MinimalList.unmodifiable(matches);
   }
 
   /**
@@ -377,8 +378,8 @@ public class PolymorphicMultimap<K, V> {
       }
     }
     return (matches.size() == entries.size())
-      ? entries
-      : MinimalList.unmodifiable(matches);
+        ? entries
+        : MinimalList.unmodifiable(matches);
   }
 
   /**
@@ -398,8 +399,8 @@ public class PolymorphicMultimap<K, V> {
       }
     }
     return (matches.size() == entries.size())
-      ? entries
-      : MinimalList.unmodifiable(matches);
+        ? entries
+        : MinimalList.unmodifiable(matches);
   }
 
   /**

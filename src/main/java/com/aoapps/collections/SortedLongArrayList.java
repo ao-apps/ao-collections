@@ -66,20 +66,20 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
    */
   protected int binarySearch(long value) {
     int left = 0;
-    int right = size-1;
+    int right = size - 1;
     while (left <= right) {
-      int mid = (left + right)>>1;
+      int mid = (left + right) >> 1;
       long midValue = elementData[mid];
       if (value == midValue) {
         return mid;
       }
-      if (value<midValue) {
-        right = mid-1;
+      if (value < midValue) {
+        right = mid - 1;
       } else {
-        left = mid+1;
+        left = mid + 1;
       }
     }
-    return -(left+1);
+    return -(left + 1);
   }
 
   /**
@@ -92,15 +92,15 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
   @Override
   public int indexOf(long elem) {
     // Find the location to insert the object at
-    int pos=binarySearch(elem);
+    int pos = binarySearch(elem);
 
     // Not found
-    if (pos<0) {
+    if (pos < 0) {
       return -1;
     }
 
     // Found one, iterate backwards to the first one
-    while (pos>0 && elementData[pos-1] == elem) {
+    while (pos > 0 && elementData[pos - 1] == elem) {
       pos--;
     }
     return pos;
@@ -117,15 +117,15 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
   @Override
   public int lastIndexOf(long elem) {
     // Find the location to insert the object at
-    int pos=binarySearch(elem);
+    int pos = binarySearch(elem);
 
     // Not found
-    if (pos<0) {
+    if (pos < 0) {
       return -1;
     }
 
     // Found one, iterate forwards to the last one
-    while (pos<(size-1) && elementData[pos+1] == elem) {
+    while (pos < (size - 1) && elementData[pos + 1] == elem) {
       pos++;
     }
     return pos;
@@ -148,21 +148,21 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
   @Override
   public boolean add(long o) {
     // Shortcut for empty
-    int mySize=size();
+    int mySize = size();
     if (mySize == 0) {
       super.add(o);
     } else {
       // Shortcut for adding to end (makes imports of already-sorted data operate at constant-time instead of logarithmic complexity)
-      if (o >= elementData[mySize-1]) {
+      if (o >= elementData[mySize - 1]) {
         super.add(o);
       } else {
-        int index=binarySearch(o);
-        if (index<0) {
+        int index = binarySearch(o);
+        if (index < 0) {
           // Not found in list
-          super.add(-(index+1), o);
+          super.add(-(index + 1), o);
         } else {
           // Add after existing
-          super.add(index+1, o);
+          super.add(index + 1, o);
         }
       }
     }
@@ -192,8 +192,8 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
    */
   @Override
   public boolean removeByValue(long value) {
-    int index=binarySearch(value);
-    if (index<0) {
+    int index = binarySearch(value);
+    if (index < 0) {
       return false;
     }
     removeAtIndex(index);
@@ -207,11 +207,11 @@ public class SortedLongArrayList extends LongArrayList implements Cloneable, jav
    */
   @Override
   public boolean addAll(Collection<? extends Long> c) {
-    Iterator<? extends Long> iter=c.iterator();
-    boolean didOne=false;
+    Iterator<? extends Long> iter = c.iterator();
+    boolean didOne = false;
     while (iter.hasNext()) {
       add(iter.next().longValue());
-      didOne=true;
+      didOne = true;
     }
     return didOne;
   }

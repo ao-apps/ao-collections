@@ -88,7 +88,9 @@ public final class AoCollections {
     }
 
     @Override
-    public int size() {return 0;}
+    public int size() {
+      return 0;
+    }
 
     @Override
     public boolean contains(Object obj) {
@@ -140,7 +142,9 @@ public final class AoCollections {
 
     private final E element;
 
-    SingletonSortedSet(E e) {element = e;}
+    SingletonSortedSet(E e) {
+      element = e;
+    }
 
     @Override
     public Iterator<E> iterator() {
@@ -168,7 +172,9 @@ public final class AoCollections {
     }
 
     @Override
-    public boolean contains(Object o) {return Objects.equals(o, element);}
+    public boolean contains(Object o) {
+      return Objects.equals(o, element);
+    }
 
     @Override
     public Comparator<? super E> comparator() {
@@ -213,23 +219,23 @@ public final class AoCollections {
 
   // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
   private static final Class<?>[] unmodifiableCollectionClasses = {
-    // Collection
-    Collections.unmodifiableCollection(Collections.emptyList()).getClass(),
+      // Collection
+      Collections.unmodifiableCollection(Collections.emptyList()).getClass(),
 
-    // List
-    Collections.singletonList(null).getClass(),
-    Collections.unmodifiableList(new ArrayList<>(0)).getClass(), // RandomAccess
-    Collections.unmodifiableList(new LinkedList<>()).getClass(), // Sequential
+      // List
+      Collections.singletonList(null).getClass(),
+      Collections.unmodifiableList(new ArrayList<>(0)).getClass(), // RandomAccess
+      Collections.unmodifiableList(new LinkedList<>()).getClass(), // Sequential
 
-    // Set
-    Collections.singleton(null).getClass(),
-    Collections.unmodifiableSet(Collections.emptySet()).getClass(),
-    //UnionMethodSet.class, // Is now read-through
-    AoArrays.UnmodifiableArraySet.class,
+      // Set
+      Collections.singleton(null).getClass(),
+      Collections.unmodifiableSet(Collections.emptySet()).getClass(),
+      //UnionMethodSet.class, // Is now read-through
+      AoArrays.UnmodifiableArraySet.class,
 
-    // SortedSet
-    SingletonSortedSet.class,
-    Collections.unmodifiableSortedSet(emptySortedSet()).getClass(),
+      // SortedSet
+      SingletonSortedSet.class,
+      Collections.unmodifiableSortedSet(emptySortedSet()).getClass(),
   };
 
   /**
@@ -251,11 +257,11 @@ public final class AoCollections {
       return Collections.emptyList();
     }
     Class<?> clazz = collection.getClass();
-    for (int i=0, len = unmodifiableCollectionClasses.length; i < len; i++) {
+    for (int i = 0, len = unmodifiableCollectionClasses.length; i < len; i++) {
       if (unmodifiableCollectionClasses[i] == clazz) {
         // Safe change of generic bounds only because returned collection is unmodifiable
         @SuppressWarnings("unchecked")
-        Collection<T> unmodifiable = (Collection<T>)collection;
+        Collection<T> unmodifiable = (Collection<T>) collection;
         return unmodifiable;
       }
     }
@@ -277,7 +283,7 @@ public final class AoCollections {
       return null;
     }
     if (iterable instanceof Collection) {
-      return (Collection<E>)iterable;
+      return (Collection<E>) iterable;
     }
     List<E> list = new ArrayList<>();
     for (E elem : iterable) {
@@ -329,16 +335,16 @@ public final class AoCollections {
       return null;
     }
     if (iter instanceof Collection) {
-      return unmodifiableCopyCollection((Collection<? extends T>)iter, true);
+      return unmodifiableCopyCollection((Collection<? extends T>) iter, true);
     }
     return unmodifiableCopyCollection(asCollection(iter), false);
   }
 
   // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
   private static final Class<?>[] unmodifiableListClasses = {
-    Collections.singletonList(null).getClass(),
-    Collections.unmodifiableList(new ArrayList<>(0)).getClass(), // RandomAccess
-    Collections.unmodifiableList(new LinkedList<>()).getClass() // Sequential
+      Collections.singletonList(null).getClass(),
+      Collections.unmodifiableList(new ArrayList<>(0)).getClass(), // RandomAccess
+      Collections.unmodifiableList(new LinkedList<>()).getClass() // Sequential
   };
 
   /**
@@ -370,7 +376,7 @@ public final class AoCollections {
       if (unmodifiableListClasses[i] == clazz) {
         // Safe change of generic bounds only because returned list is unmodifiable
         @SuppressWarnings("unchecked")
-        List<T> unmodifiable = (List<T>)list;
+        List<T> unmodifiable = (List<T>) list;
         return unmodifiable;
       }
     }
@@ -378,7 +384,7 @@ public final class AoCollections {
       return Collections.singletonList(list.get(0));
     }
     if (list instanceof ArrayList) {
-      ((ArrayList)list).trimToSize();
+      ((ArrayList) list).trimToSize();
     }
     return Collections.unmodifiableList(list);
   }
@@ -395,7 +401,7 @@ public final class AoCollections {
       return null;
     }
     if (iterable instanceof List) {
-      return (List<E>)iterable;
+      return (List<E>) iterable;
     }
     List<E> list = new ArrayList<>();
     for (E elem : iterable) {
@@ -427,7 +433,7 @@ public final class AoCollections {
       return Collections.singletonList(collection.iterator().next());
     }
     if (!copyNeeded && collection instanceof List) {
-      return Collections.unmodifiableList((List<T>)collection);
+      return Collections.unmodifiableList((List<T>) collection);
     }
     return Collections.unmodifiableList(new ArrayList<>(collection));
   }
@@ -451,23 +457,23 @@ public final class AoCollections {
       return null;
     }
     if (iter instanceof Collection) {
-      return unmodifiableCopyList((Collection<? extends T>)iter, true);
+      return unmodifiableCopyList((Collection<? extends T>) iter, true);
     }
     return unmodifiableCopyList(asList(iter), false);
   }
 
   // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
   private static final Class<?>[] unmodifiableSetClasses = {
-    // Set
-    Collections.singleton(null).getClass(),
-    Collections.unmodifiableSet(Collections.emptySet()).getClass(),
-    Collections.unmodifiableMap(Collections.emptyMap()).entrySet().getClass(),
-    //UnionMethodSet.class, // Is now read-through
-    AoArrays.UnmodifiableArraySet.class,
+      // Set
+      Collections.singleton(null).getClass(),
+      Collections.unmodifiableSet(Collections.emptySet()).getClass(),
+      Collections.unmodifiableMap(Collections.emptyMap()).entrySet().getClass(),
+      //UnionMethodSet.class, // Is now read-through
+      AoArrays.UnmodifiableArraySet.class,
 
-    // SortedSet
-    SingletonSortedSet.class,
-    Collections.unmodifiableSortedSet(emptySortedSet()).getClass()
+      // SortedSet
+      SingletonSortedSet.class,
+      Collections.unmodifiableSortedSet(emptySortedSet()).getClass()
   };
 
   /**
@@ -493,7 +499,7 @@ public final class AoCollections {
       if (unmodifiableSetClasses[i] == clazz) {
         // Safe change of generic bounds only because returned set is unmodifiable
         @SuppressWarnings("unchecked")
-        Set<T> unmodifiable = (Set<T>)set;
+        Set<T> unmodifiable = (Set<T>) set;
         return unmodifiable;
       }
     }
@@ -515,7 +521,7 @@ public final class AoCollections {
       return null;
     }
     if (iterable instanceof Set) {
-      return (Set<E>)iterable;
+      return (Set<E>) iterable;
     }
     Set<E> set = new LinkedHashSet<>();
     for (E elem : iterable) {
@@ -547,7 +553,7 @@ public final class AoCollections {
       return Collections.singleton(collection.iterator().next());
     }
     if (!copyNeeded && collection instanceof Set) {
-      return Collections.unmodifiableSet((Set<T>)collection);
+      return Collections.unmodifiableSet((Set<T>) collection);
     }
     Set<T> set = new LinkedHashSet<>(collection);
     if (set.size() == 1) {
@@ -577,16 +583,16 @@ public final class AoCollections {
       return null;
     }
     if (iter instanceof Collection) {
-      return unmodifiableCopySet((Collection<? extends T>)iter, true);
+      return unmodifiableCopySet((Collection<? extends T>) iter, true);
     }
     return unmodifiableCopySet(asSet(iter), false);
   }
 
   // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
   private static final Class<?>[] unmodifiableSortedSetClasses = {
-    // SortedSet
-    SingletonSortedSet.class,
-    Collections.unmodifiableSortedSet(emptySortedSet()).getClass()
+      // SortedSet
+      SingletonSortedSet.class,
+      Collections.unmodifiableSortedSet(emptySortedSet()).getClass()
   };
 
   /**
@@ -631,7 +637,7 @@ public final class AoCollections {
       return null;
     }
     if (iterable instanceof SortedSet) {
-      return (SortedSet<E>)iterable;
+      return (SortedSet<E>) iterable;
     }
     SortedSet<E> sortedSet = new TreeSet<>();
     for (E elem : iterable) {
@@ -663,12 +669,12 @@ public final class AoCollections {
       return singletonSortedSet(collection.iterator().next());
     }
     if (!copyNeeded && collection instanceof SortedSet) {
-      return Collections.unmodifiableSortedSet((SortedSet<T>)collection);
+      return Collections.unmodifiableSortedSet((SortedSet<T>) collection);
     }
     SortedSet<T> copy;
     if (collection instanceof SortedSet) {
       // Java 9: copy = new TreeSet<>((SortedSet<>)collection), but make sure still calls SortedSet constructor
-      copy = new TreeSet<T>((SortedSet)collection);
+      copy = new TreeSet<T>((SortedSet) collection);
     } else {
       copy = new TreeSet<>(collection);
     }
@@ -697,20 +703,20 @@ public final class AoCollections {
       return null;
     }
     if (iter instanceof Collection) {
-      return unmodifiableCopySortedSet((Collection<? extends T>)iter, true);
+      return unmodifiableCopySortedSet((Collection<? extends T>) iter, true);
     }
     return unmodifiableCopySortedSet(asSortedSet(iter), false);
   }
 
   // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
   private static final Class<?>[] unmodifiableMapClasses = {
-    // Map
-    Collections.emptyMap().getClass(),
-    Collections.singletonMap(null, null).getClass(),
-    Collections.unmodifiableMap(Collections.emptyMap()).getClass(),
+      // Map
+      Collections.emptyMap().getClass(),
+      Collections.singletonMap(null, null).getClass(),
+      Collections.unmodifiableMap(Collections.emptyMap()).getClass(),
 
-    // SortedMap
-    Collections.unmodifiableSortedMap(new TreeMap<>()).getClass()
+      // SortedMap
+      Collections.unmodifiableSortedMap(new TreeMap<>()).getClass()
   };
 
   /**
@@ -736,7 +742,7 @@ public final class AoCollections {
       if (unmodifiableMapClasses[i] == clazz) {
         // Safe change of generic bounds only because returned map is unmodifiable
         @SuppressWarnings("unchecked")
-        Map<K, V> unmodifiable = (Map<K, V>)map;
+        Map<K, V> unmodifiable = (Map<K, V>) map;
         return unmodifiable;
       }
     }
@@ -780,7 +786,7 @@ public final class AoCollections {
 
   // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
   private static final Class<?>[] unmodifiableSortedMapClasses = {
-    Collections.unmodifiableSortedMap(new TreeMap<>()).getClass()
+      Collections.unmodifiableSortedMap(new TreeMap<>()).getClass()
   };
 
   /**
@@ -806,7 +812,7 @@ public final class AoCollections {
       if (unmodifiableSortedMapClasses[i] == clazz) {
         // Safe change of generic bounds only because returned map is unmodifiable
         @SuppressWarnings("unchecked")
-        SortedMap<K, V> unmodifiable = (SortedMap<K, V>)sortedMap;
+        SortedMap<K, V> unmodifiable = (SortedMap<K, V>) sortedMap;
         return unmodifiable;
       }
     }
@@ -846,7 +852,7 @@ public final class AoCollections {
     // TODO: }
     SortedMap<K, V> copy;
     if (map instanceof SortedMap) {
-      copy = new TreeMap<>((SortedMap<K, ? extends V>)map);
+      copy = new TreeMap<>((SortedMap<K, ? extends V>) map);
     } else {
       copy = new TreeMap<>(map);
     }
@@ -935,15 +941,15 @@ public final class AoCollections {
     }
     // Don't wrap already unmodifiable iterator types.
     if (
-      (iter instanceof UnmodifiableIterator)
-      || (iter instanceof EnumerationIterator)
-      || (iter instanceof SingletonIterator)
-      || (iter == Collections.emptyIterator())
-      || (iter == Collections.emptyListIterator())
+        (iter instanceof UnmodifiableIterator)
+            || (iter instanceof EnumerationIterator)
+            || (iter instanceof SingletonIterator)
+            || (iter == Collections.emptyIterator())
+            || (iter == Collections.emptyListIterator())
     ) {
       // Safe change of generic bounds only because returned iterator is unmodifiable
       @SuppressWarnings("unchecked")
-      Iterator<E> unmodifiable = (Iterator<E>)iter;
+      Iterator<E> unmodifiable = (Iterator<E>) iter;
       return unmodifiable;
     }
     return new UnmodifiableIterator<>(iter);
@@ -976,6 +982,7 @@ public final class AoCollections {
   public static class PeekIterator<E> implements Iterator<E> {
     private final Iterator<? extends E> iter;
     private E next;
+
     PeekIterator(Iterator<? extends E> iter) {
       this.iter = iter;
       next = iter.hasNext() ? iter.next() : null;
@@ -1040,19 +1047,19 @@ public final class AoCollections {
           int count = 0;
           while (iter1.hasNext() && iter2.hasNext()) {
             if (
-              !Objects.equals(
-                iter1.next(),
-                iter2.next()
-              )
+                !Objects.equals(
+                    iter1.next(),
+                    iter2.next()
+                )
             ) {
               return false;
             }
             count++;
           }
           if (
-            size != count
-            || iter1.hasNext()
-            || iter2.hasNext()
+              size != count
+                  || iter1.hasNext()
+                  || iter2.hasNext()
           ) {
             throw new ConcurrentModificationException();
           }
@@ -1078,7 +1085,7 @@ public final class AoCollections {
     Iterator<?> iter = iterable.iterator();
     while (iter.hasNext()) {
       Object e = iter.next();
-      hashCode = 31*hashCode + (e == null ? 0 : e.hashCode());
+      hashCode = 31 * hashCode + (e == null ? 0 : e.hashCode());
     }
     return hashCode;
   }
@@ -1110,6 +1117,7 @@ public final class AoCollections {
     );
      */
   }
+
 //  private static <K, S, V extends S> Map<K, V> filter(Map<K, S> map, Class<V> clazz) {
 //    return filter(map, clazz, LinkedHashMap::new);
 //  }
@@ -1211,7 +1219,7 @@ public final class AoCollections {
    * @see  IdentityHashMap
    */
   public static int getHashInitialCapacity(int elements) {
-    return (int)(elements / 0.75f) + 1;
+    return (int) (elements / 0.75f) + 1;
     //long initialCapacity = (long)elements * 4/3 + 1;
     //return (initialCapacity > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (int)initialCapacity;
   }

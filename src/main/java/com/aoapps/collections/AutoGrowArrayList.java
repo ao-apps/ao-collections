@@ -50,7 +50,7 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 
   @Override
   public E set(int index, E element) {
-    int minSize = index+1;
+    int minSize = index + 1;
     ensureCapacity(minSize);
     while (size() < minSize) {
       add(null);
@@ -60,7 +60,7 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 
   @Override
   public void add(int index, E element) {
-    ensureCapacity(index+1);
+    ensureCapacity(index + 1);
     while (size() < index) {
       add(null);
     }
@@ -69,7 +69,7 @@ public class AutoGrowArrayList<E> extends ArrayList<E> {
 
   @Override
   public boolean addAll(int index, Collection<? extends E> c) {
-    ensureCapacity(index+c.size());
+    ensureCapacity(index + c.size());
     while (size() < index) {
       add(null);
     }
