@@ -72,6 +72,9 @@ public final class AoCollections {
 
     private static final long serialVersionUID = 5914343416838268017L;
 
+    private EmptySortedSet() {
+    }
+
     @Override
     public Iterator<Object> iterator() {
       // Java 9: new Iterator<>
@@ -142,7 +145,7 @@ public final class AoCollections {
 
     private final E element;
 
-    SingletonSortedSet(E e) {
+    private SingletonSortedSet(E e) {
       element = e;
     }
 
@@ -880,7 +883,7 @@ public final class AoCollections {
     private final E value;
     private boolean hasNext = true;
 
-    SingletonIterator(E value) {
+    private SingletonIterator(E value) {
       this.value = value;
     }
 
@@ -914,7 +917,7 @@ public final class AoCollections {
 
     private final Iterator<? extends E> iter;
 
-    UnmodifiableIterator(Iterator<? extends E> iter) {
+    private UnmodifiableIterator(Iterator<? extends E> iter) {
       this.iter = iter;
     }
 
@@ -983,7 +986,7 @@ public final class AoCollections {
     private final Iterator<? extends E> iter;
     private E next;
 
-    PeekIterator(Iterator<? extends E> iter) {
+    private PeekIterator(Iterator<? extends E> iter) {
       this.iter = iter;
       next = iter.hasNext() ? iter.next() : null;
     }

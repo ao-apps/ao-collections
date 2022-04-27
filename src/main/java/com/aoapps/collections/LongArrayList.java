@@ -63,8 +63,8 @@ public class LongArrayList extends AbstractList<Long>
   public LongArrayList(int initialCapacity) {
     super();
     if (initialCapacity < 0) {
-      throw new IllegalArgumentException("Illegal Capacity: " +
-          initialCapacity);
+      throw new IllegalArgumentException("Illegal Capacity: "
+          + initialCapacity);
     }
     this.elementData = new long[initialCapacity];
   }

@@ -63,8 +63,8 @@ public class IntArrayList extends AbstractList<Integer>
   public IntArrayList(int initialCapacity) {
     super();
     if (initialCapacity < 0) {
-      throw new IllegalArgumentException("Illegal Capacity: " +
-          initialCapacity);
+      throw new IllegalArgumentException("Illegal Capacity: "
+          + initialCapacity);
     }
     this.elementData = new int[initialCapacity];
   }

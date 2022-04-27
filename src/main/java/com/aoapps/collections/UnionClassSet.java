@@ -55,7 +55,7 @@ public class UnionClassSet<E> extends AbstractSet<E> {
    */
   private static final boolean ENABLE_ASSERTIONS = true;
 
-  private int size = 0;
+  private int size;
 
   /**
    * Will never contain any empty sets.
