@@ -76,6 +76,8 @@ public class IdentityKey<T> {
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @see System#identityHashCode(java.lang.Object)
    */
   @Override

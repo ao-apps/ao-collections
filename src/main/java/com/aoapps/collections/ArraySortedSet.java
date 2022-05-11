@@ -99,8 +99,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
     return
         comparator == null
             ? java.util.Collections.binarySearch((List) elements, elem)
-            : java.util.Collections.binarySearch(elements, elem, comparator)
-    ;
+            : java.util.Collections.binarySearch(elements, elem, comparator);
   }
 
   @SuppressWarnings("unchecked")
@@ -108,8 +107,7 @@ public class ArraySortedSet<E> extends AbstractSet<E> implements SortedSet<E>, S
     return
         comparator == null
             ? ((Comparable) elem1).compareTo(elem2)
-            : comparator.compare(elem1, elem2)
-    ;
+            : comparator.compare(elem1, elem2);
   }
 
   public void trimToSize() {

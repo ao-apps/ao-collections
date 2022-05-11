@@ -104,7 +104,7 @@ public class ArraySetTest extends TestCase {
   }
 
   /**
-   * Used to find {@link ArraySet#BINARY_SEARCH_THRESHOLD}
+   * Used to find {@link ArraySet#BINARY_SEARCH_THRESHOLD}.
    */
   private void doTestBinarySearchThreshold() {
     final int numSearches = 10000;

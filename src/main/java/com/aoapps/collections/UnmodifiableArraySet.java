@@ -108,8 +108,9 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 
   /**
    * Uses the provided elements, which must already be sorted in hashCode order and unique.
-   *
+   * <p>
    * The sort order and uniqueness is only checked with assertions enabled.
+   * </p>
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */
@@ -125,8 +126,9 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
   /**
    * Uses the provided elements collection, which must already be sorted in hashCode order and unique.
    * A defensive copy is made.
-   *
+   * <p>
    * The sort order and uniqueness is only checked with assertions enabled.
+   * </p>
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */
@@ -135,19 +137,19 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
     this((E[]) elements.toArray());
   }
 
-  private static int binarySearch(Object[] elements, int oHash) {
-    return binarySearch0(elements, 0, elements.length, oHash);
+  private static int binarySearch(Object[] elements, int objHash) {
+    return binarySearch0(elements, 0, elements.length, objHash);
   }
 
-  private static int binarySearch0(Object[] elements, int fromIndex, int toIndex, int oHash) {
+  private static int binarySearch0(Object[] elements, int fromIndex, int toIndex, int objHash) {
     int low = fromIndex;
     int high = toIndex - 1;
     while (low <= high) {
       int mid = (low + high) >>> 1;
       int midHash = elements[mid].hashCode();
-      if (midHash < oHash) {
+      if (midHash < objHash) {
         low = mid + 1;
-      } else if (midHash > oHash) {
+      } else if (midHash > objHash) {
         high = mid - 1;
       } else {
         return mid;
@@ -192,10 +194,10 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
         return true;
       }
       // Look forward until different hashCode
-      int oHash = o.hashCode();
+      int objHash = o.hashCode();
       for (int i = index + 1; i < size; i++) {
         elem = elems[i];
-        if (elem.hashCode() != oHash) {
+        if (elem.hashCode() != objHash) {
           break;
         }
         if (elem.equals(o)) {
@@ -205,7 +207,7 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
       // Look backward until different hashCode
       for (int i = index - 1; i >= 0; i--) {
         elem = elems[i];
-        if (elem.hashCode() != oHash) {
+        if (elem.hashCode() != objHash) {
           break;
         }
         if (elem.equals(o)) {

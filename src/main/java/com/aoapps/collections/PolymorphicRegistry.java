@@ -60,10 +60,10 @@ public class PolymorphicRegistry<U> {
     // Add the entry under all classes, up to U, that it implements
     Class<? extends U> instanceClass = instance.getClass().asSubclass(upperBound);
     for (Class<?> clazz : Classes.getAllClasses(instanceClass, upperBound)) {
-      Class<? extends U> uClass = clazz.asSubclass(upperBound);
+      Class<? extends U> upperBoundClass = clazz.asSubclass(upperBound);
       boolean replaced;
       do {
-        List<U> oldList = instancesByClass.get(uClass);
+        List<U> oldList = instancesByClass.get(upperBoundClass);
         List<U> newList;
         if (oldList == null) {
           newList = Collections.singletonList(instance);
@@ -75,9 +75,9 @@ public class PolymorphicRegistry<U> {
           newList = Collections.unmodifiableList(newListTemp);
         }
         if (oldList == null) {
-          replaced = instancesByClass.putIfAbsent(uClass, newList) == null;
+          replaced = instancesByClass.putIfAbsent(upperBoundClass, newList) == null;
         } else {
-          replaced = instancesByClass.replace(uClass, oldList, newList);
+          replaced = instancesByClass.replace(upperBoundClass, oldList, newList);
         }
       } while (!replaced);
     }

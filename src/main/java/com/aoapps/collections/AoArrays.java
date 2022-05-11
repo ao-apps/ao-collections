@@ -118,9 +118,10 @@ public final class AoArrays {
 
   /**
    * Merges multiple already-sorted collections into one big array.
-   *
+   * <p>
    * Worst-case Complexity:
-   *
+   * </p>
+   * <pre>
    *     0 collections: constant
    *
    *     1 collection: O(n), where n is the number of elements in the collection
@@ -128,6 +129,7 @@ public final class AoArrays {
    *     2 collection: O(n+m), where n is the number of elements in one collection, and m is the number of elements in the other collection
    *
    *     3+ collections: O(n*log(m)), where n is the total number of elements in all collections, and m is the number of collections
+   * </pre>
    *
    * @return Object[] of results.
    */
@@ -313,8 +315,7 @@ public final class AoArrays {
       resultArray =
           resultArray.length >= len
               ? resultArray
-              : (T[]) java.lang.reflect.Array.newInstance(resultArray.getClass().getComponentType(), len)
-      ;
+              : (T[]) java.lang.reflect.Array.newInstance(resultArray.getClass().getComponentType(), len);
       System.arraycopy(array, 0, resultArray, 0, len);
       // Null terminate
       if (resultArray.length > len) {

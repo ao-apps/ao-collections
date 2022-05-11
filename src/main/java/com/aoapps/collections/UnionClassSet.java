@@ -34,8 +34,9 @@ import java.util.Set;
 /**
  * A union set that assumes objects of different classes are not equal.  It never
  * does any combining.
- *
+ * <p>
  * The following assumptions are made:
+ * </p>
  * <ol>
  *   <li>All elements of the added sets are of the same exact class</li>
  *   <li>Objects of different classes are not equal.</li>
@@ -51,7 +52,7 @@ import java.util.Set;
 public class UnionClassSet<E> extends AbstractSet<E> {
 
   /**
-   * May disable assertions more completely for benchmarking
+   * May disable assertions more completely for benchmarking.
    */
   private static final boolean ENABLE_ASSERTIONS = true;
 

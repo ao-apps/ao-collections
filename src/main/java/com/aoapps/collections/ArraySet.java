@@ -142,8 +142,9 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   /**
    * Uses the provided elements list without copying, which must already
    * be sorted in hashCode order and unique.
-   *
+   * <p>
    * The sort order and uniqueness is only checked with assertions enabled.
+   * </p>
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */
@@ -221,10 +222,10 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
         return true;
       }
       // Look forward until different hashCode
-      int oHash = o.hashCode();
+      int objHash = o.hashCode();
       for (int i = index + 1; i < size; i++) {
         elem = elements.get(i);
-        if (elem.hashCode() != oHash) {
+        if (elem.hashCode() != objHash) {
           break;
         }
         if (elem.equals(o)) {
@@ -234,7 +235,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
       // Look backward until different hashCode
       for (int i = index - 1; i >= 0; i--) {
         elem = elements.get(i);
-        if (elem.hashCode() != oHash) {
+        if (elem.hashCode() != objHash) {
           break;
         }
         if (elem.equals(o)) {
@@ -290,13 +291,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
       return true;
     } else {
       // Shortcut for adding last element
-      int eHash = e.hashCode();
+      int elemHash = e.hashCode();
       E last = elements.get(size - 1);
       int lastHash = last.hashCode();
-      if (eHash > lastHash) {
+      if (elemHash > lastHash) {
         elements.add(e);
         return true;
-      } else if (eHash == lastHash) {
+      } else if (elemHash == lastHash) {
         if (last.equals(e)) {
           // Already in set
           return false;
@@ -304,7 +305,7 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
         // Look backward until different hashCode
         for (int i = size - 2; i >= 0; i--) {
           E elem = elements.get(i);
-          if (elem.hashCode() != eHash) {
+          if (elem.hashCode() != elemHash) {
             break;
           }
           if (elem.equals(e)) {

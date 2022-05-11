@@ -136,7 +136,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
   }
 
   /**
-   * Finds the first index where the object has the provided hashCode
+   * Finds the first index where the object has the provided hashCode.
    */
   public int indexOf(int hashCode) {
     int pos = binarySearchHashCode(hashCode);
@@ -229,19 +229,19 @@ public class SortedArrayList<E> extends ArrayList<E> {
     if (size == 0) {
       super.add(o);
     } else {
-      int oHash = o.hashCode();
+      int objHash = o.hashCode();
 
       // Shortcut for adding to end (makes imports of already-sorted data operate at constant-time instead of logarithmic complexity)
-      if (oHash >= get(size - 1).hashCode()) {
+      if (objHash >= get(size - 1).hashCode()) {
         super.add(o);
       } else {
-        int index = binarySearchHashCode(oHash);
+        int index = binarySearchHashCode(objHash);
         if (index < 0) {
           // Not found in list
           super.add(-(index + 1), o);
         } else {
           // Add after the last item with matching hashCodes
-          while (index < (size - 1) && get(index + 1).hashCode() == oHash) {
+          while (index < (size - 1) && get(index + 1).hashCode() == objHash) {
             index++;
           }
           super.add(index + 1, o);
@@ -266,9 +266,10 @@ public class SortedArrayList<E> extends ArrayList<E> {
    * If the list contains one or more such
    * elements.  Returns {@code true} if the list contained the
    * specified element (or equivalently, if the list changed as a
-   * result of the call).<p>
+   * result of the call).
    *
    * @param o element to be removed from this list, if present.
+   *
    * @return {@code true} if the list contained the specified element.
    */
   @Override
@@ -288,7 +289,7 @@ public class SortedArrayList<E> extends ArrayList<E> {
    */
   @Override
   public boolean addAll(Collection<? extends E> c) {
-    Iterator<? extends E>iter = c.iterator();
+    Iterator<? extends E> iter = c.iterator();
     boolean didOne = false;
     while (iter.hasNext()) {
       add(iter.next());

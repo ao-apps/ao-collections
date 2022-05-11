@@ -46,8 +46,9 @@ public class UnionSet<E> extends AbstractSet<E> {
   /**
    * Any set added with fewer or equal to this many items will just be added to
    * the internal combined set.
-   *
+   * <p>
    * TODO: This value is arbitrary.  Benchmark other values.
+   * </p>
    */
   private static final int MAXIMUM_COMBINE_SIZE = 10;
 
@@ -119,8 +120,9 @@ public class UnionSet<E> extends AbstractSet<E> {
 
   /**
    * Triggers combining.
-   *
+   * <p>
    * TODO: Iterate without combining - benchmark speed versus complexity
+   * </p>
    */
   @Override
   public Iterator<E> iterator() {

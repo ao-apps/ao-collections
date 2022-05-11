@@ -62,7 +62,7 @@ public class ArraySortedSetTest extends TestCase {
       while (randomValues.size() < testSize) {
         randomValues.add(fastRandom.nextInt());
       }
-      List<Integer> randomList = new ArrayList<>(randomValues);
+      final List<Integer> randomList = new ArrayList<>(randomValues);
       // Time new
       long startNanos = System.nanoTime();
       TreeSet<Integer> treeSet = new TreeSet<>(randomValues);

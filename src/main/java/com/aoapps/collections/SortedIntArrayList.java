@@ -186,9 +186,10 @@ public class SortedIntArrayList extends IntArrayList implements Cloneable, Seria
    * if the list contains one or more such
    * elements.  Returns {@code true} if the list contained the
    * specified element (or equivalently, if the list changed as a
-   * result of the call).<p>
+   * result of the call).
    *
    * @param value element to be removed from this list, if present.
+   *
    * @return {@code true} if the list contained the specified element.
    */
   @Override

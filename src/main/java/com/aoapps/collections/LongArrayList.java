@@ -36,8 +36,7 @@ import java.util.RandomAccess;
  */
 // TODO: Support LongStream
 public class LongArrayList extends AbstractList<Long>
-    implements LongList, RandomAccess, Cloneable, java.io.Serializable
-{
+    implements LongList, RandomAccess, Cloneable, java.io.Serializable {
   private static final long serialVersionUID = -1395562938435931403L;
 
   /**
@@ -324,14 +323,15 @@ public class LongArrayList extends AbstractList<Long>
    * correct order; the runtime type of the returned array is that of the
    * specified array.  If the list fits in the specified array, it is
    * returned therein.  Otherwise, a new array is allocated with the runtime
-   * type of the specified array and the size of this list.<p>
-   *
+   * type of the specified array and the size of this list.
+   * <p>
    * If the list fits in the specified array with room to spare (i.e., the
    * array has more elements than the list), the element in the array
    * immediately following the end of the collection is set to
    * {@code null}.  This is useful in determining the length of the list
    * <i>only</i> if the caller knows that the list does not contain any
    * {@code null} elements.
+   * </p>
    *
    * @param a the array into which the elements of the list are to
    *                be stored, if it is big enough; otherwise, a new array of the
@@ -344,8 +344,7 @@ public class LongArrayList extends AbstractList<Long>
   @Override
   public <T> T[] toArray(T[] a) {
     if (a.length < size) {
-      a = (T[]) java.lang.reflect.Array.
-          newInstance(a.getClass().getComponentType(), size);
+      a = (T[]) java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);
     }
     System.arraycopy(elementData, 0, a, 0, size);
     if (a.length > size) {
@@ -365,7 +364,7 @@ public class LongArrayList extends AbstractList<Long>
    */
   @Override
   public Long get(int index) {
-    RangeCheck(index);
+    rangeCheck(index);
 
     return elementData[index];
   }
@@ -379,7 +378,7 @@ public class LongArrayList extends AbstractList<Long>
    */
   @Override
   public long getLong(int index) {
-    RangeCheck(index);
+    rangeCheck(index);
 
     return elementData[index];
   }
@@ -411,7 +410,7 @@ public class LongArrayList extends AbstractList<Long>
    */
   @Override
   public long set(int index, long element) {
-    RangeCheck(index);
+    rangeCheck(index);
 
     long oldValue = elementData[index];
     elementData[index] = element;
@@ -506,7 +505,7 @@ public class LongArrayList extends AbstractList<Long>
    */
   @Override
   public long removeAtIndex(int index) {
-    RangeCheck(index);
+    rangeCheck(index);
 
     modCount++;
     long oldValue = elementData[index];
@@ -528,9 +527,10 @@ public class LongArrayList extends AbstractList<Long>
    * if the list contains one or more such
    * elements.  Returns {@code true} if the list contained the
    * specified element (or equivalently, if the list changed as a
-   * result of the call).<p>
+   * result of the call).
    *
    * @param o element to be removed from this list, if present.
+   *
    * @return {@code true} if the list contained the specified element.
    */
   @Override
@@ -548,9 +548,10 @@ public class LongArrayList extends AbstractList<Long>
    * if the list contains one or more such
    * elements.  Returns {@code true} if the list contained the
    * specified element (or equivalently, if the list changed as a
-   * result of the call).<p>
+   * result of the call).
    *
    * @param value element to be removed from this list, if present.
+   *
    * @return {@code true} if the list contained the specified element.
    */
   @Override
@@ -688,7 +689,7 @@ public class LongArrayList extends AbstractList<Long>
    * negative: It is always used immediately prior to an array access,
    * which throws an ArrayIndexOutOfBoundsException if index is negative.
    */
-  private void RangeCheck(int index) {
+  private void rangeCheck(int index) {
     if (index >= size) {
       throw new IndexOutOfBoundsException(
           "Index: " + index + ", Size: " + size);
@@ -705,7 +706,7 @@ public class LongArrayList extends AbstractList<Long>
    */
   private void writeObject(java.io.ObjectOutputStream s)
       throws java.io.IOException {
-    int expectedModCount = modCount;
+    final int expectedModCount = modCount;
     // Write out element count, and any hidden stuff
     s.defaultWriteObject();
 

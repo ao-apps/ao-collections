@@ -54,7 +54,7 @@ public class UnmodifiableArraySetTest extends TestCase {
   private static final Random fastRandom = new Random(IoUtils.bufferToLong(new SecureRandom().generateSeed(Long.BYTES)));
 
   /**
-   * Used to find {@link UnmodifiableArraySet#BINARY_SEARCH_THRESHOLD}
+   * Used to find {@link UnmodifiableArraySet#BINARY_SEARCH_THRESHOLD}.
    */
   private void doTestBinarySearchThreshold() {
     final int numSearches = 10000;

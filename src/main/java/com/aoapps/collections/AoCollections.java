@@ -83,6 +83,7 @@ public final class AoCollections {
         public boolean hasNext() {
           return false;
         }
+
         @Override
         public Object next() throws NoSuchElementException {
           throw new NoSuchElementException();
@@ -154,10 +155,12 @@ public final class AoCollections {
       // Java 9: new Iterator<>
       return new Iterator<E>() {
         private boolean hasNext = true;
+
         @Override
         public boolean hasNext() {
           return hasNext;
         }
+
         @Override
         public E next() throws NoSuchElementException {
           if (!hasNext) {
@@ -1031,8 +1034,9 @@ public final class AoCollections {
   /**
    * Two collections are considered equal when they are the same size and have the same
    * elements in the same iteration order.
-   *
+   * <p>
    * If both collections are null they are also considered equal.
+   * </p>
    */
   public static boolean equals(Collection<?> collection1, Collection<?> collection2) {
     if (collection1 == null) {
@@ -1121,51 +1125,51 @@ public final class AoCollections {
      */
   }
 
-//  private static <K, S, V extends S> Map<K, V> filter(Map<K, S> map, Class<V> clazz) {
-//    return filter(map, clazz, LinkedHashMap::new);
-//  }
-//  private static <K, V, R extends V> Map<K, R> filter(Map<K, V> map, Class<R> clazz, Supplier<Map<K, R>> mapSupplier) {
-//    if (map == null) {
-//      return Collections.emptyMap();
-//    } else {
-//      // Imperative version:
-////      Map<K, R> results = mapSupplier.get();
-////      for (Map.Entry<K, V> entry : map.entrySet()) {
-////        V value = entry.getValue();
-////        if (clazz.isInstance(value)) {
-////          results.put(entry.getKey(), clazz.cast(value));
-////        }
-////      }
-////      return Collections.unmodifiableMap(results);
-//      // Mixed functional/imperative:
-//      Map<K, R> results = mapSupplier.get();
-//      map.forEach(
-//        (key, value) -> {
-//          if (clazz.isInstance(value)) {
-//            results.put(key, clazz.cast(value));
-//          }
-//        }
-//      );
-//      return Collections.unmodifiableMap(results);
-//      // Functional version:
-////      return Collections.unmodifiableMap(
-////        map
-////          .entrySet()
-////          .stream()
-////          .filter(e -> e.getValue() instanceof Contact)
-////          .collect(
-////            Collectors.toMap(
-////              Map.Entry::getKey,
-////              e -> clazz.cast(e.getValue()),
-////              (u, v) -> {
-////                throw new AssertionError("Duplicate keys should not happen since we use key from original map");
-////              },
-////              mapSupplier
-////            )
-////          )
-////      );
-//    }
-//  }
+  //  private static <K, S, V extends S> Map<K, V> filter(Map<K, S> map, Class<V> clazz) {
+  //    return filter(map, clazz, LinkedHashMap::new);
+  //  }
+  //  private static <K, V, R extends V> Map<K, R> filter(Map<K, V> map, Class<R> clazz, Supplier<Map<K, R>> mapSupplier) {
+  //    if (map == null) {
+  //      return Collections.emptyMap();
+  //    } else {
+  //      // Imperative version:
+  ////      Map<K, R> results = mapSupplier.get();
+  ////      for (Map.Entry<K, V> entry : map.entrySet()) {
+  ////        V value = entry.getValue();
+  ////        if (clazz.isInstance(value)) {
+  ////          results.put(entry.getKey(), clazz.cast(value));
+  ////        }
+  ////      }
+  ////      return Collections.unmodifiableMap(results);
+  //      // Mixed functional/imperative:
+  //      Map<K, R> results = mapSupplier.get();
+  //      map.forEach(
+  //        (key, value) -> {
+  //          if (clazz.isInstance(value)) {
+  //            results.put(key, clazz.cast(value));
+  //          }
+  //        }
+  //      );
+  //      return Collections.unmodifiableMap(results);
+  //      // Functional version:
+  ////      return Collections.unmodifiableMap(
+  ////        map
+  ////          .entrySet()
+  ////          .stream()
+  ////          .filter(e -> e.getValue() instanceof Contact)
+  ////          .collect(
+  ////            Collectors.toMap(
+  ////              Map.Entry::getKey,
+  ////              e -> clazz.cast(e.getValue()),
+  ////              (u, v) -> {
+  ////                throw new AssertionError("Duplicate keys should not happen since we use key from original map");
+  ////              },
+  ////              mapSupplier
+  ////            )
+  ////          )
+  ////      );
+  //    }
+  //  }
 
   /**
    * Returns a modifiable set of all the keys in a map that match the given value.

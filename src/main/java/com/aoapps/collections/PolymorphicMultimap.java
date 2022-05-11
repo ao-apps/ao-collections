@@ -62,6 +62,7 @@ public class PolymorphicMultimap<K, V> {
       this.entries = entries;
     }
   }
+
   private final ConcurrentMap<Class<? extends K>, Lists<K, V>> listsByClass = new ConcurrentHashMap<>();
 
   public PolymorphicMultimap(Class<K> upperBound) {
@@ -80,7 +81,7 @@ public class PolymorphicMultimap<K, V> {
     // Add the entry under all classes, up to K, that it implements
     Class<? extends K> keyClass = key.getClass().asSubclass(upperBound);
     for (Class<?> clazz : Classes.getAllClasses(keyClass, upperBound)) {
-      Class<? extends K> uClass = clazz.asSubclass(upperBound);
+      Class<? extends K> upperBoundClass = clazz.asSubclass(upperBound);
       // Java 9: new Entry<>
       Entry<K, V> newEntry = new Entry<K, V>() {
         @Override
@@ -100,7 +101,7 @@ public class PolymorphicMultimap<K, V> {
       };
       boolean replaced;
       do {
-        Lists<K, V> oldLists = listsByClass.get(uClass);
+        Lists<K, V> oldLists = listsByClass.get(upperBoundClass);
         List<K> newKeys;
         List<V> newValues;
         List<Entry<K, V>> newEntries;
@@ -125,9 +126,9 @@ public class PolymorphicMultimap<K, V> {
         }
         Lists<K, V> newLists = new Lists<>(newKeys, newValues, newEntries);
         if (oldLists == null) {
-          replaced = listsByClass.putIfAbsent(uClass, newLists) == null;
+          replaced = listsByClass.putIfAbsent(upperBoundClass, newLists) == null;
         } else {
-          replaced = listsByClass.replace(uClass, oldLists, newLists);
+          replaced = listsByClass.replace(upperBoundClass, oldLists, newLists);
         }
       } while (!replaced);
     }

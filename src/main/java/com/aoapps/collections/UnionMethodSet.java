@@ -37,8 +37,9 @@ import java.util.Set;
  * A union set that assumes objects of different classes are not equal.  It obtains
  * the objects by invoking the provided methods.  The provided methods will be invoked
  * on an as-needed basis.  It never does any combining.
- *
+ * <p>
  * The following assumptions are made:
+ * </p>
  * <ol>
  *   <li>All elements of the returned sets are of the same exact class (within a single method)</li>
  *   <li>Objects of different classes are not equal.</li>
