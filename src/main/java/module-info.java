@@ -25,4 +25,4 @@ module com.aoapps.collections {
   // Direct
   requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   requires static org.apache.commons.collections4; // <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId>
-} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
+}
