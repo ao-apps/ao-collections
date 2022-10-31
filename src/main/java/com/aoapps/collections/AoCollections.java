@@ -1254,6 +1254,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code -1} when unknown
    */
+  // Java 19: Deprecate in favor of HashMap.newHashMap, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <K, V> HashMap<K, V> newHashMap(int elements) {
     return (elements == -1) ? new HashMap<>() : new HashMap<>(getHashInitialCapacity(elements));
   }
@@ -1263,6 +1264,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code null} when unknown
    */
+  // Java 19: Deprecate in favor of HashMap.newHashMap, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <K, V> HashMap<K, V> newHashMap(Integer elements) {
     return newHashMap(elements == null ? -1 : elements);
   }
@@ -1272,6 +1274,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code -1} when unknown
    */
+  // Java 19: Deprecate in favor of HashSet.newHashSet, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <E> HashSet<E> newHashSet(int elements) {
     return (elements == -1) ? new HashSet<>() : new HashSet<>(getHashInitialCapacity(elements));
   }
@@ -1281,6 +1284,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code null} when unknown
    */
+  // Java 19: Deprecate in favor of HashSet.newHashSet, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <E> HashSet<E> newHashSet(Integer elements) {
     return newHashSet(elements == null ? -1 : elements);
   }
@@ -1326,6 +1330,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code -1} when unknown
    */
+  // Java 19: Deprecate in favor of LinkedHashMap.newLinkedHashMap, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int elements) {
     return (elements == -1) ? new LinkedHashMap<>() : new LinkedHashMap<>(getHashInitialCapacity(elements));
   }
@@ -1335,6 +1340,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code null} when unknown
    */
+  // Java 19: Deprecate in favor of LinkedHashMap.newLinkedHashMap, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Integer elements) {
     return newLinkedHashMap(elements == null ? -1 : elements);
   }
@@ -1344,6 +1350,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code -1} when unknown
    */
+  // Java 19: Deprecate in favor of LinkedHashSet.newLinkedHashSet, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <E> LinkedHashSet<E> newLinkedHashSet(int elements) {
     return (elements == -1) ? new LinkedHashSet<>() : new LinkedHashSet<>(getHashInitialCapacity(elements));
   }
@@ -1353,6 +1360,7 @@ public final class AoCollections {
    *
    * @param  elements  The number of elements or {@code null} when unknown
    */
+  // Java 19: Deprecate in favor of LinkedHashSet.newLinkedHashSet, see https://bugs.openjdk.org/browse/JDK-8186958
   public static <E> LinkedHashSet<E> newLinkedHashSet(Integer elements) {
     return newLinkedHashSet(elements == null ? -1 : elements);
   }
