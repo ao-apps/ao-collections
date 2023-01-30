@@ -244,8 +244,6 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections4.version}</version>
-        <!-- Javadoc-only -->
-        <exclusions><exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion></exclusions>
       </dependency>
       <!-- Test Direct -->
       <dependency>
