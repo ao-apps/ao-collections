@@ -50,10 +50,6 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
         <li><a target="${javadoc.target}" href="https://oss.aoapps.com/collections/transformers/">AO Collections Transformers</a></li>
       </ul>
     </div>]]></javadoc.modules>
-    <!-- SonarQube -->
-    <sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
-    <sonar.organization>ao-apps</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- Dependencies -->
     <commons-collections4.version>4.4</commons-collections4.version>
     <!-- NetBeans Hints that we can't find @SuppressWarnings for -->
