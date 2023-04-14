@@ -22,7 +22,7 @@ Collections and related utilities for Java.
 * [Project Home](https://oss.aoapps.com/collections/)
 * [Changelog](https://oss.aoapps.com/collections/changelog)
 * [API Docs](https://oss.aoapps.com/collections/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/search?namespace=com.aoapps&q=a%3Aao-collections)
+* [Maven Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-collections)
 * [GitHub](https://github.com/ao-apps/ao-collections)
 
 ## Modules
