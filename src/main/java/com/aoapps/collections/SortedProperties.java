@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2012, 2013, 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -41,7 +41,7 @@ import java.util.TreeSet;
  *              <a href="https://commons.apache.org/proper/commons-collections/">Apache Commons Collections</a>.
  *              <p>
  *              As of Java 18, properties will be sorted by default, per
- *              <a href="https://bugs.openjdk.java.net/browse/JDK-8231640">[JDK-8231640] (prop) Canonical property storage - Java Bug System</a>.
+ *              <a href="https://bugs.openjdk.org/browse/JDK-8231640">[JDK-8231640] (prop) Canonical property storage - Java Bug System</a>.
  *              </p>
  *
  * @author  AO Industries, Inc.

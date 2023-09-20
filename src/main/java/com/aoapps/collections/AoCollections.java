@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -223,7 +223,7 @@ public final class AoCollections {
     }
   }
 
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   private static final Class<?>[] unmodifiableCollectionClasses = {
       // Collection
       Collections.unmodifiableCollection(Collections.emptyList()).getClass(),
@@ -253,7 +253,7 @@ public final class AoCollections {
    *
    * @param  collection  may be {@code null}, which will return {@code null}
    */
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   public static <T> Collection<T> optimalUnmodifiableCollection(Collection<? extends T> collection) {
     if (collection == null) {
       return null;
@@ -346,7 +346,7 @@ public final class AoCollections {
     return unmodifiableCopyCollection(asCollection(iter), false);
   }
 
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   private static final Class<?>[] unmodifiableListClasses = {
       Collections.singletonList(null).getClass(),
       Collections.unmodifiableList(new ArrayList<>(0)).getClass(), // RandomAccess
@@ -368,7 +368,7 @@ public final class AoCollections {
    * @see ArrayList#trimToSize()
    * @see Collections#unmodifiableList(java.util.List)
    */
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   public static <T> List<T> optimalUnmodifiableList(List<? extends T> list) {
     if (list == null) {
       return null;
@@ -468,7 +468,7 @@ public final class AoCollections {
     return unmodifiableCopyList(asList(iter), false);
   }
 
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   private static final Class<?>[] unmodifiableSetClasses = {
       // Set
       Collections.singleton(null).getClass(),
@@ -491,7 +491,7 @@ public final class AoCollections {
    *
    * @param  set  may be {@code null}, which will return {@code null}
    */
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   public static <T> Set<T> optimalUnmodifiableSet(Set<? extends T> set) {
     if (set == null) {
       return null;
@@ -594,7 +594,7 @@ public final class AoCollections {
     return unmodifiableCopySet(asSet(iter), false);
   }
 
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   private static final Class<?>[] unmodifiableSortedSetClasses = {
       // SortedSet
       SingletonSortedSet.class,
@@ -610,7 +610,7 @@ public final class AoCollections {
    *
    * @param  sortedSet  may be {@code null}, which will return {@code null}
    */
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   public static <T> SortedSet<T> optimalUnmodifiableSortedSet(SortedSet<T> sortedSet) {
     if (sortedSet == null) {
       return null;
@@ -714,7 +714,7 @@ public final class AoCollections {
     return unmodifiableCopySortedSet(asSortedSet(iter), false);
   }
 
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   private static final Class<?>[] unmodifiableMapClasses = {
       // Map
       Collections.emptyMap().getClass(),
@@ -734,7 +734,7 @@ public final class AoCollections {
    *
    * @param  map  may be {@code null}, which will return {@code null}
    */
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   public static <K, V> Map<K, V> optimalUnmodifiableMap(Map<? extends K, ? extends V> map) {
     if (map == null) {
       return null;
@@ -790,7 +790,7 @@ public final class AoCollections {
     return Collections.unmodifiableMap(new LinkedHashMap<>(map));
   }
 
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   private static final Class<?>[] unmodifiableSortedMapClasses = {
       Collections.unmodifiableSortedMap(new TreeMap<>()).getClass()
   };
@@ -804,7 +804,7 @@ public final class AoCollections {
    *
    * @param  sortedMap  may be {@code null}, which will return {@code null}
    */
-  // Java 17: Deprecate: https://bugs.openjdk.java.net/browse/JDK-6323374
+  // Java 17: Deprecate: https://bugs.openjdk.org/browse/JDK-6323374
   public static <K, V> SortedMap<K, V> optimalUnmodifiableSortedMap(SortedMap<K, ? extends V> sortedMap) {
     if (sortedMap == null) {
       return null;
