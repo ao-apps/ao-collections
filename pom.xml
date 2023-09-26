@@ -49,8 +49,6 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
         <li><a target="${javadoc.target}" href="https://oss.aoapps.com/collections/transformers/">AO Collections Transformers</a></li>
       </ul>
     </div>]]></javadoc.modules>
-    <!-- Dependencies -->
-    <commons-collections4.version>4.4</commons-collections4.version>
     <!-- NetBeans Hints that we can't find @SuppressWarnings for -->
     <org-netbeans-spi-editor-hints-projects.text.x-java.org_2e_netbeans_2e_modules_2e_java_2e_hints_2e_bugs_2e_CloneAndCloneable_2e_cloneWithoutThrows.hintSeverity>HINT</org-netbeans-spi-editor-hints-projects.text.x-java.org_2e_netbeans_2e_modules_2e_java_2e_hints_2e_bugs_2e_CloneAndCloneable_2e_cloneWithoutThrows.hintSeverity>
   </properties>
@@ -216,7 +214,7 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
                   <location>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</location>
                 </offlineLink>
                 <offlineLink>
-                  <url>https://commons.apache.org/proper/commons-collections/javadocs/api-${commons-collections4.version}/</url>
+                  <url>https://commons.apache.org/proper/commons-collections/javadocs/api-${org.apache.commons:commons-collections4:jar.version}/</url>
                   <location>${project.build.directory}/offlineLinks/org.apache.commons/commons-collections4</location>
                 </offlineLink>
                 <!-- Test Direct -->
@@ -239,7 +237,7 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
         <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><version>5.5.1${POST-SNAPSHOT}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>${commons-collections4.version}</version>
+        <groupId>org.apache.commons</groupId><artifactId>commons-collections4</artifactId><version>4.4</version>
       </dependency>
       <!-- Test Direct -->
       <dependency>
