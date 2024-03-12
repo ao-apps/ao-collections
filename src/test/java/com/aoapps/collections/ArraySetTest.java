@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -67,13 +67,13 @@ public class ArraySetTest extends TestCase {
       List<Integer> randomList = new ArrayList<>(randomValues);
       // Time new
       long startNanos = System.nanoTime();
-      HashSet<Integer> hashSet = new HashSet<>(randomList);
+      final HashSet<Integer> hashSet = new HashSet<>(randomList);
       long timeNanos = System.nanoTime() - startNanos;
       System.out.println(testSize + ": Created HashSet in " + BigDecimal.valueOf(timeNanos / 1000, 3) + " ms");
       startNanos = System.nanoTime();
       ArrayList<Integer> list = new ArrayList<>(randomList);
       java.util.Collections.sort(list, HashCodeComparator.getInstance());
-      ArraySet<Integer> arraySet = new ArraySet<>(list);
+      final ArraySet<Integer> arraySet = new ArraySet<>(list);
       timeNanos = System.nanoTime() - startNanos;
       System.out.println(testSize + ": Created ArraySet in " + BigDecimal.valueOf(timeNanos / 1000, 3) + " ms");
       // Test contains
