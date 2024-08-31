@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -104,6 +104,29 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
     addAll(c);
   }
 
+  /**
+   * Uses the provided elements list without copying, which must already
+   * be sorted in hashCode order and unique.
+   * <p>
+   * The sort order and uniqueness is only checked with assertions enabled.
+   * </p>
+   *
+   * @see  HashCodeComparator to properly sort objects before adding to the set
+   */
+  /*
+  @Complexity(
+    best=GrowthFunction.CONSTANT,
+    average=GrowthFunction.CONSTANT,
+    worst=GrowthFunction.CONSTANT
+  )
+   */
+  public ArraySet(ArrayList<E> elements) {
+    if (ASSERTIONS_ENABLED) {
+      assert assertInOrderAndUnique(elements);
+    }
+    this.elements = elements;
+  }
+
   private boolean assertInOrderAndUnique(ArrayList<E> elements) {
     // Make sure all elements are in hashCode order and unique
     int size = elements.size();
@@ -137,29 +160,6 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
       }
     }
     return true;
-  }
-
-  /**
-   * Uses the provided elements list without copying, which must already
-   * be sorted in hashCode order and unique.
-   * <p>
-   * The sort order and uniqueness is only checked with assertions enabled.
-   * </p>
-   *
-   * @see  HashCodeComparator to properly sort objects before adding to the set
-   */
-  /*
-  @Complexity(
-    best=GrowthFunction.CONSTANT,
-    average=GrowthFunction.CONSTANT,
-    worst=GrowthFunction.CONSTANT
-  )
-   */
-  public ArraySet(ArrayList<E> elements) {
-    if (ASSERTIONS_ENABLED) {
-      assert assertInOrderAndUnique(elements);
-    }
-    this.elements = elements;
   }
 
   /*

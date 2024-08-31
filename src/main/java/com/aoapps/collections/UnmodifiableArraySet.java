@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2014, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2014, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -135,6 +135,16 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
   @SuppressWarnings("unchecked")
   public UnmodifiableArraySet(Collection<E> elements) {
     this((E[]) elements.toArray());
+  }
+
+  /**
+   * @deprecated  Only required for implementation, do not use directly.
+   *
+   * @see  Externalizable
+   */
+  @Deprecated // Java 9: (forRemoval = false)
+  public UnmodifiableArraySet() {
+    // Do nothing
   }
 
   private static int binarySearch(Object[] elements, int objHash) {
@@ -303,16 +313,6 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 
   // <editor-fold defaultstate="collapsed" desc="Externalizable">
   private static final long serialVersionUID = 5725680713634634667L;
-
-  /**
-   * @deprecated  Only required for implementation, do not use directly.
-   *
-   * @see  Externalizable
-   */
-  @Deprecated // Java 9: (forRemoval = false)
-  public UnmodifiableArraySet() {
-    // Do nothing
-  }
 
   @Override
   public void writeExternal(ObjectOutput out) throws IOException {
