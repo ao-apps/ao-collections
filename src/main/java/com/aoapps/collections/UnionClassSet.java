@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2011, 2013, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,9 +34,9 @@ import java.util.Set;
 /**
  * A union set that assumes objects of different classes are not equal.  It never
  * does any combining.
- * <p>
- * The following assumptions are made:
- * </p>
+ *
+ * <p>The following assumptions are made:</p>
+ *
  * <ol>
  *   <li>All elements of the added sets are of the same exact class</li>
  *   <li>Objects of different classes are not equal.</li>

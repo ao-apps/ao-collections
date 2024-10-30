@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013, 2016, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013, 2016, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -324,14 +324,13 @@ public class IntArrayList extends AbstractList<Integer>
    * specified array.  If the list fits in the specified array, it is
    * returned therein.  Otherwise, a new array is allocated with the runtime
    * type of the specified array and the size of this list.
-   * <p>
-   * If the list fits in the specified array with room to spare (i.e., the
+   *
+   * <p>If the list fits in the specified array with room to spare (i.e., the
    * array has more elements than the list), the element in the array
    * immediately following the end of the collection is set to
    * {@code null}.  This is useful in determining the length of the list
    * <i>only</i> if the caller knows that the list does not contain any
-   * {@code null} elements.
-   * </p>
+   * {@code null} elements.</p>
    *
    * @param a the array into which the elements of the list are to
    *                be stored, if it is big enough; otherwise, a new array of the

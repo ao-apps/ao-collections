@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,11 +32,10 @@ import java.util.List;
  * efficient List implementation.  The implementation of List is changed as needed.
  * MinimalList is most suited for building list-based data structures that use less
  * heap space than a pure ArrayList-based solution.
- * <p>
- * size=0: {@link Collections#emptyList()}<br>
+ *
+ * <p>size=0: {@link Collections#emptyList()}<br>
  * size=1: {@link Collections#singletonList(java.lang.Object)}<br>
- * size=2: {@link ArrayList}
- * </p>
+ * size=2: {@link ArrayList}</p>
  *
  * @author  AO Industries, Inc.
  */

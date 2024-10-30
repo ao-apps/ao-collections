@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 ao-collections - Collections and related utilities for Java.
-Copyright (C) 2022  AO Industries, Inc.
+Copyright (C) 2022, 2024  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -29,6 +29,12 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
 
   <!-- TODO: Complete Javadocs -->
   <suppress checks="(MissingJavadocMethod|MissingJavadocType|SummaryJavadoc)" />
+
+  <!-- Cannot find how to allow <p> inside @deprecated -->
+  <suppress
+    checks="JavadocParagraph"
+    files="[/\\]com[/\\]aoapps[/\\]collections[/\\]SortedProperties\.java$"
+  />
 
   <!-- Will not reorder overloads -->
   <suppress

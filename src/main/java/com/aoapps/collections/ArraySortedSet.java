@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -34,24 +34,19 @@ import java.util.NoSuchElementException;
 import java.util.SortedSet;
 
 /**
- * <p>
  * A compact <code>SortedSet</code> implementation that stores the elements in order.
  * The emphasis is to use as little heap space as possible - this is not a general-purpose
  * <code>SortedSet</code> implementation as it has specific constraints about the order elements
  * may be added or removed.  To avoid the possibility of O(n^2) behavior, the elements must
  * already be sorted and be added in ascending order.  Also, only the last element may be
  * removed.
- * </p>
- * <p>
- * This set does not support null values.
- * </p>
- * <p>
- * Creation of a set for an already sorted set is O(n) compared to TreeSet's O(n log n).
- * Other operations perform at O(log n) with times very similar to TreeSet.
- * </p>
- * <p>
- * This set is not thread safe.
- * </p>
+ *
+ * <p>This set does not support null values.</p>
+ *
+ * <p>Creation of a set for an already sorted set is O(n) compared to TreeSet's O(n log n).
+ * Other operations perform at O(log n) with times very similar to TreeSet.</p>
+ *
+ * <p>This set is not thread safe.</p>
  *
  * @author  AO Industries, Inc.
  */

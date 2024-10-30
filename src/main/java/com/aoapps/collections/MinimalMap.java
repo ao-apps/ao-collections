@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -35,14 +35,12 @@ import java.util.Objects;
  * efficient Map implementation.  The implementation of Map is changed as needed.
  * MinimalMap is most suited for building map-based data structures that use less
  * heap space than a pure HashMap-based solution.
- * <p>
- * Insertion order is maintained.
- * </p>
- * <p>
- * size=0: {@link Collections#emptyMap()}<br>
+ *
+ * <p>Insertion order is maintained.</p>
+ *
+ * <p>size=0: {@link Collections#emptyMap()}<br>
  * size=1: {@link Collections#singletonMap(java.lang.Object, java.lang.Object)}<br>
- * size=2: {@link LinkedHashMap}
- * </p>
+ * size=2: {@link LinkedHashMap}</p>
  *
  * @author  AO Industries, Inc.
  */

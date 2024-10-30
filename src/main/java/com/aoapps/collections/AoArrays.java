@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -118,18 +118,16 @@ public final class AoArrays {
 
   /**
    * Merges multiple already-sorted collections into one big array.
-   * <p>
-   * Worst-case Complexity:
-   * </p>
-   * <pre>
-   *     0 collections: constant
+   *
+   * <p>Worst-case Complexity:</p>
+   *
+   * <pre>    0 collections: constant
    *
    *     1 collection: O(n), where n is the number of elements in the collection
    *
    *     2 collection: O(n+m), where n is the number of elements in one collection, and m is the number of elements in the other collection
    *
-   *     3+ collections: O(n*log(m)), where n is the total number of elements in all collections, and m is the number of collections
-   * </pre>
+   *     3+ collections: O(n*log(m)), where n is the total number of elements in all collections, and m is the number of collections</pre>
    *
    * @return Object[] of results.
    */
@@ -368,16 +366,14 @@ public final class AoArrays {
 
   /**
    * Gets an unmodifiable set view with the contents of a backing array.
-   * <p>
-   * Contains is implemented sequentially and is thus O(n).  As a result, this
-   * is best used for very small sets.
-   * </p>
-   * <p>
-   * In order to have correct set semantics, the array must have unique values
+   *
+   * <p>Contains is implemented sequentially and is thus O(n).  As a result, this
+   * is best used for very small sets.</p>
+   *
+   * <p>In order to have correct set semantics, the array must have unique values
    * as determined by the element equals methods.  This is not checked, however,
    * and passing in an array with duplicate values will result in duplicate
-   * values on iteration and a size that doesn't match the number of unique values.
-   * </p>
+   * values on iteration and a size that doesn't match the number of unique values.</p>
    *
    * @param  array  may be {@code null}, which will return {@code null}
    *
@@ -964,11 +960,10 @@ public final class AoArrays {
    * all other arrays to match.
    * Uses the natural sorting of the objects.
    * All arrays must be the same length.
-   * <p>
-   * The time complexity isn't too bad. Looks something like
+   *
+   * <p>The time complexity isn't too bad. Looks something like
    * {@code O((M+1)*N*log(N))}, where {@code M} is the number of otherArrays
-   * and {@code N} is the number of keys. No crazy worst-case issues, at least.
-   * </p>
+   * and {@code N} is the number of keys. No crazy worst-case issues, at least.</p>
    *
    * @param  keys         the values used to sort, may be duplicate
    *

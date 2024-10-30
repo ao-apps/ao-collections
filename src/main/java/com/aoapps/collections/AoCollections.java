@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -1034,9 +1034,8 @@ public final class AoCollections {
   /**
    * Two collections are considered equal when they are the same size and have the same
    * elements in the same iteration order.
-   * <p>
-   * If both collections are null they are also considered equal.
-   * </p>
+   *
+   * <p>If both collections are null they are also considered equal.</p>
    */
   public static boolean equals(Collection<?> collection1, Collection<?> collection2) {
     if (collection1 == null) {

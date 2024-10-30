@@ -30,24 +30,19 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * <p>
  * A compact <code>Set</code> implementation that stores the elements in hashCode order.
  * The emphasis is to use as little heap space as possible - this is not a general-purpose
  * <code>Set</code> implementation as it has specific constraints about the order elements
  * may be added or removed.  To avoid the possibility of O(n^2) behavior, the elements must
  * already be sorted and be added in ascending order.  Also, only the last element may be
  * removed.
- * </p>
- * <p>
- * This set does not support null values.
- * </p>
- * <p>
- * This set will generally operate at O(log n) due to binary search.  In general, it will
- * not be as fast as the O(1) behavior of HashSet.  Here we give up speed to save space.
- * </p>
- * <p>
- * This set is not thread safe.
- * </p>
+ *
+ * <p>This set does not support null values.</p>
+ *
+ * <p>This set will generally operate at O(log n) due to binary search.  In general, it will
+ * not be as fast as the O(1) behavior of HashSet.  Here we give up speed to save space.</p>
+ *
+ * <p>This set is not thread safe.</p>
  *
  * @see  HashCodeComparator to properly sort objects before adding to the set
  *
@@ -107,9 +102,8 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   /**
    * Uses the provided elements list without copying, which must already
    * be sorted in hashCode order and unique.
-   * <p>
-   * The sort order and uniqueness is only checked with assertions enabled.
-   * </p>
+   *
+   * <p>The sort order and uniqueness is only checked with assertions enabled.</p>
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */

@@ -37,21 +37,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * <p>
  * An unmodifiable compact <code>Set</code> implementation that stores the elements in hashCode order.
  * The emphasis is to use as little heap space as possible - this is not a general-purpose
  * <code>Set</code> implementation.
- * </p>
- * <p>
- * This set does not support null values.
- * </p>
- * <p>
- * This set will generally operate at O(log n) due to binary search.  In general, it will
- * not be as fast as the O(1) behavior of HashSet.  Here we give up speed to save space.
- * </p>
- * <p>
- * This set is not thread safe.
- * </p>
+ *
+ * <p>This set does not support null values.</p>
+ *
+ * <p>This set will generally operate at O(log n) due to binary search.  In general, it will
+ * not be as fast as the O(1) behavior of HashSet.  Here we give up speed to save space.</p>
+ *
+ * <p>This set is not thread safe.</p>
  *
  * @see  HashCodeComparator to properly sort objects before adding to the set
  *
@@ -108,9 +103,8 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
 
   /**
    * Uses the provided elements, which must already be sorted in hashCode order and unique.
-   * <p>
-   * The sort order and uniqueness is only checked with assertions enabled.
-   * </p>
+   *
+   * <p>The sort order and uniqueness is only checked with assertions enabled.</p>
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */
@@ -126,9 +120,8 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
   /**
    * Uses the provided elements collection, which must already be sorted in hashCode order and unique.
    * A defensive copy is made.
-   * <p>
-   * The sort order and uniqueness is only checked with assertions enabled.
-   * </p>
+   *
+   * <p>The sort order and uniqueness is only checked with assertions enabled.</p>
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */

@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2012, 2016, 2017, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2012, 2016, 2017, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -30,10 +30,9 @@ import java.util.WeakHashMap;
  * Allows any object to be used as a hash key, with identity used for {@link #hashCode()} and
  * {@link #equals(java.lang.Object)}.  They may be used, for example, to have {@link IdentityHashMap}
  * semantics with {@link WeakHashMap} references.
- * <p>
- * Supports {@code null} value, which may allow {@code null} keys in maps that otherwise do not support {@code null}
- * keys.
- * </p>
+ *
+ * <p>Supports {@code null} value, which may allow {@code null} keys in maps that otherwise do not support {@code null}
+ * keys.</p>
  *
  * @author  AO Industries, Inc.
  */

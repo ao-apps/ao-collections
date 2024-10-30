@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -32,12 +32,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <p>
  * In order to efficiently provide a union of fewer, larger sets, this provides a
  * set view on top of other sets.  Any set that is added to this union set via
  * <code>addAll(Set)</code> must not be modified after being added.  For
  * performance purposes, defensive copying is not performed.
- * </p>
  *
  * @author  AO Industries, Inc.
  */
@@ -46,9 +44,8 @@ public class UnionSet<E> extends AbstractSet<E> {
   /**
    * Any set added with fewer or equal to this many items will just be added to
    * the internal combined set.
-   * <p>
-   * TODO: This value is arbitrary.  Benchmark other values.
-   * </p>
+   *
+   * <p>TODO: This value is arbitrary.  Benchmark other values.</p>
    */
   private static final int MAXIMUM_COMBINE_SIZE = 10;
 
@@ -120,9 +117,8 @@ public class UnionSet<E> extends AbstractSet<E> {
 
   /**
    * Triggers combining.
-   * <p>
-   * TODO: Iterate without combining - benchmark speed versus complexity
-   * </p>
+   *
+   * <p>TODO: Iterate without combining - benchmark speed versus complexity</p>
    */
   @Override
   public Iterator<E> iterator() {
