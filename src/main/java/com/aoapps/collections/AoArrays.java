@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -280,8 +280,7 @@ public final class AoArrays {
 
     @Override
     public Iterator<E> iterator() {
-      // Java 9: new Iterator<>
-      return new Iterator<E>() {
+      return new Iterator<>() {
         private int pos = 0;
         @Override
         public boolean hasNext() {

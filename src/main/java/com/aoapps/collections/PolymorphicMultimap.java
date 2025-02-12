@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2018, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2018, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -81,8 +81,7 @@ public class PolymorphicMultimap<K, V> {
     Class<? extends K> keyClass = key.getClass().asSubclass(upperBound);
     for (Class<?> clazz : Classes.getAllClasses(keyClass, upperBound)) {
       Class<? extends K> upperBoundClass = clazz.asSubclass(upperBound);
-      // Java 9: new Entry<>
-      Entry<K, V> newEntry = new Entry<K, V>() {
+      Entry<K, V> newEntry = new Entry<>() {
         @Override
         public K getKey() {
           return key;

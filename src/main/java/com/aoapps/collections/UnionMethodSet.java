@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2011, 2013, 2014, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2014, 2016, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -265,8 +265,7 @@ public class UnionMethodSet<E> extends AbstractSet<E> {
   public Iterator<E> iterator() {
     // Iterating through all lists of methods per class
     final Iterator<? extends List<? extends Method<? extends E>>> classIter = methodsByClass.values().iterator();
-    // Java 9: Iterator<>
-    return new Iterator<E>() {
+    return new Iterator<>() {
       // Iterating through methods
       private List<? extends Method<? extends E>> methods;
       private int methodsSize = 0;

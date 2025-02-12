@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -60,14 +60,26 @@ public final class AoCollections {
     throw new AssertionError();
   }
 
+  /**
+   * {@link Collections#emptySortedSet()}.
+   *
+   * @deprecated  Please use {@link Collections#emptySortedSet()}.
+   */
+  @Deprecated(forRemoval = true)
   public static final SortedSet<?> EMPTY_SORTED_SET = new EmptySortedSet();
 
-  /** Java 1.8: use standard version */
+  /**
+   * {@link Collections#emptySortedSet()}.
+   *
+   * @deprecated  Please use {@link Collections#emptySortedSet()}.
+   */
+  @Deprecated(forRemoval = true)
   @SuppressWarnings("unchecked")
-  public static final <T> SortedSet<T> emptySortedSet() {
+  public static <T> SortedSet<T> emptySortedSet() {
     return (SortedSet<T>) EMPTY_SORTED_SET;
   }
 
+  @Deprecated(forRemoval = true)
   private static final class EmptySortedSet extends AbstractSet<Object> implements SortedSet<Object>, Serializable {
 
     private static final long serialVersionUID = 5914343416838268017L;
@@ -77,8 +89,7 @@ public final class AoCollections {
 
     @Override
     public Iterator<Object> iterator() {
-      // Java 9: new Iterator<>
-      return new Iterator<Object>() {
+      return new Iterator<>() {
         @Override
         public boolean hasNext() {
           return false;
@@ -152,8 +163,7 @@ public final class AoCollections {
 
     @Override
     public Iterator<E> iterator() {
-      // Java 9: new Iterator<>
-      return new Iterator<E>() {
+      return new Iterator<>() {
         private boolean hasNext = true;
 
         @Override
@@ -190,7 +200,7 @@ public final class AoCollections {
     @Override
     public SortedSet<E> subSet(E fromElement, E toElement) {
       if (Objects.equals(element, fromElement) && Objects.equals(element, toElement)) {
-        return emptySortedSet();
+        return Collections.emptySortedSet();
       }
       throw new IllegalArgumentException();
     }
@@ -198,7 +208,7 @@ public final class AoCollections {
     @Override
     public SortedSet<E> headSet(E toElement) {
       if (Objects.equals(element, toElement)) {
-        return emptySortedSet();
+        return Collections.emptySortedSet();
       }
       throw new IllegalArgumentException();
     }
@@ -241,7 +251,7 @@ public final class AoCollections {
 
       // SortedSet
       SingletonSortedSet.class,
-      Collections.unmodifiableSortedSet(emptySortedSet()).getClass(),
+      Collections.unmodifiableSortedSet(Collections.emptySortedSet()).getClass(),
   };
 
   /**
@@ -479,7 +489,7 @@ public final class AoCollections {
 
       // SortedSet
       SingletonSortedSet.class,
-      Collections.unmodifiableSortedSet(emptySortedSet()).getClass()
+      Collections.unmodifiableSortedSet(Collections.emptySortedSet()).getClass()
   };
 
   /**
@@ -598,12 +608,12 @@ public final class AoCollections {
   private static final Class<?>[] unmodifiableSortedSetClasses = {
       // SortedSet
       SingletonSortedSet.class,
-      Collections.unmodifiableSortedSet(emptySortedSet()).getClass()
+      Collections.unmodifiableSortedSet(Collections.emptySortedSet()).getClass()
   };
 
   /**
    * Gets the optimal implementation for unmodifiable sorted set.
-   * If sorted set is empty, uses <code>emptySortedSet</code>.
+   * If sorted set is empty, uses {@link Collections#emptySortedSet()}.
    * If the sorted set is already unmodifiable, returns the same sorted set.
    * If sorted set has one element, uses <code>singletonSortedSet</code>.
    * Otherwise, wraps the sorted set with <code>Collections.unmodifiableSortedSet</code>.
@@ -617,7 +627,7 @@ public final class AoCollections {
     }
     int size = sortedSet.size();
     if (size == 0) {
-      return emptySortedSet();
+      return Collections.emptySortedSet();
     }
     Class<?> clazz = sortedSet.getClass();
     for (int i = 0, len = unmodifiableSortedSetClasses.length; i < len; i++) {
@@ -659,7 +669,7 @@ public final class AoCollections {
     }
     int size = collection.size();
     if (size == 0) {
-      return emptySortedSet();
+      return Collections.emptySortedSet();
     }
     // TODO: Create an unmodifiable collection that can only be populated here, and reused.
     // TODO: Goal is to protect from changes to original collection, while also not having
@@ -679,8 +689,7 @@ public final class AoCollections {
     }
     SortedSet<T> copy;
     if (collection instanceof SortedSet) {
-      // Java 9: copy = new TreeSet<>((SortedSet<>)collection), but make sure still calls SortedSet constructor
-      copy = new TreeSet<T>((SortedSet) collection);
+      copy = new TreeSet<>((SortedSet) collection);
     } else {
       copy = new TreeSet<>(collection);
     }
