@@ -56,7 +56,10 @@ public final class AoArrays {
 
   /**
    * Checks if the subrange of two byte arrays is equal.
+   *
+   * @deprecated  Please use {@link Arrays#equals(byte[], int, int, byte[], int, int)}
    */
+  @Deprecated(forRemoval = true)
   public static boolean equals(byte[] b1, byte[] b2, int off, int len) {
     for (int end = off + len; off < end; off++) {
       if (b1[off] != b2[off]) {
@@ -68,7 +71,10 @@ public final class AoArrays {
 
   /**
    * Checks if the subrange of two byte arrays is equal.
+   *
+   * @deprecated  Please use {@link Arrays#equals(byte[], int, int, byte[], int, int)}
    */
+  @Deprecated(forRemoval = true)
   public static boolean equals(byte[] b1, int off1, byte[] b2, int off2, int len) {
     for (int end = off1 + len; off1 < end; off1++, off2++) {
       if (b1[off1] != b2[off2]) {
