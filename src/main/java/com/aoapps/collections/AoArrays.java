@@ -951,7 +951,7 @@ public final class AoArrays {
                 && (
                 max == null
                     || value.compareTo(max) > 0
-            )
+              )
         ) {
           max = value;
         }
