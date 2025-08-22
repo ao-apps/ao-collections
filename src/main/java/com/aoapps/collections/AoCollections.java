@@ -246,7 +246,7 @@ public final class AoCollections {
       // Set
       Collections.singleton(null).getClass(),
       Collections.unmodifiableSet(Collections.emptySet()).getClass(),
-      //UnionMethodSet.class, // Is now read-through
+      // UnionMethodSet.class, // Is now read-through
       AoArrays.UnmodifiableArraySet.class,
 
       // SortedSet
@@ -320,12 +320,12 @@ public final class AoCollections {
     // TODO: Goal is to protect from changes to original collection, while also not having
     // TODO: to copy repeatedly when different components use this same method for protection.
     // TODO: Also allow standard Collections singleton
-    //Class<?> clazz = collection.getClass();
-    //for (int i=0, len=unmodifiableCollectionClasses.length; i<len; i++) {
-    //  if (unmodifiableCollectionClasses[i] == clazz) {
-    //    return collection;
-    //  }
-    //}
+    // Class<?> clazz = collection.getClass();
+    // for (int i=0, len=unmodifiableCollectionClasses.length; i<len; i++) {
+    //   if (unmodifiableCollectionClasses[i] == clazz) {
+    //     return collection;
+    //   }
+    // }
     if (size == 1) {
       return Collections.singletonList(collection.iterator().next());
     }
@@ -439,12 +439,12 @@ public final class AoCollections {
     // TODO: Goal is to protect from changes to original collection, while also not having
     // TODO: to copy repeatedly when different components use this same method for protection.
     // TODO: Also allow standard Collections singleton
-    //Class<?> clazz = collection.getClass();
-    //for (int i=0, len=unmodifiableListClasses.length; i<len; i++) {
-    //  if (unmodifiableListClasses[i] == clazz) {
-    //    return (List<T>)collection;
-    //  }
-    //}
+    // Class<?> clazz = collection.getClass();
+    // for (int i=0, len=unmodifiableListClasses.length; i<len; i++) {
+    //   if (unmodifiableListClasses[i] == clazz) {
+    //     return (List<T>)collection;
+    //   }
+    // }
     if (size == 1) {
       return Collections.singletonList(collection.iterator().next());
     }
@@ -484,7 +484,7 @@ public final class AoCollections {
       Collections.singleton(null).getClass(),
       Collections.unmodifiableSet(Collections.emptySet()).getClass(),
       Collections.unmodifiableMap(Collections.emptyMap()).entrySet().getClass(),
-      //UnionMethodSet.class, // Is now read-through
+      // UnionMethodSet.class, // Is now read-through
       AoArrays.UnmodifiableArraySet.class,
 
       // SortedSet
@@ -559,12 +559,12 @@ public final class AoCollections {
     // TODO: Goal is to protect from changes to original collection, while also not having
     // TODO: to copy repeatedly when different components use this same method for protection.
     // TODO: Also allow standard Collections singleton
-    //Class<?> clazz = collection.getClass();
-    //for (int i=0, len=unmodifiableSetClasses.length; i<len; i++) {
-    //  if (unmodifiableSetClasses[i] == clazz) {
-    //    return (Set<T>)collection;
-    //  }
-    //}
+    // Class<?> clazz = collection.getClass();
+    // for (int i=0, len=unmodifiableSetClasses.length; i<len; i++) {
+    //   if (unmodifiableSetClasses[i] == clazz) {
+    //     return (Set<T>)collection;
+    //   }
+    // }
     if (size == 1) {
       return Collections.singleton(collection.iterator().next());
     }
@@ -675,12 +675,12 @@ public final class AoCollections {
     // TODO: Goal is to protect from changes to original collection, while also not having
     // TODO: to copy repeatedly when different components use this same method for protection.
     // TODO: Also allow standard Collections singleton
-    //Class<?> clazz = collection.getClass();
-    //for (int i=0, len=unmodifiableSortedSetClasses.length; i<len; i++) {
-    //  if (unmodifiableSortedSetClasses[i] == clazz) {
-    //    return (SortedSet<T>)collection;
-    //  }
-    //}
+    // Class<?> clazz = collection.getClass();
+    // for (int i=0, len=unmodifiableSortedSetClasses.length; i<len; i++) {
+    //   if (unmodifiableSortedSetClasses[i] == clazz) {
+    //     return (SortedSet<T>)collection;
+    //   }
+    // }
     if (size == 1) {
       return singletonSortedSet(collection.iterator().next());
     }
@@ -786,12 +786,12 @@ public final class AoCollections {
     // TODO: Goal is to protect from changes to original collection, while also not having
     // TODO: to copy repeatedly when different components use this same method for protection.
     // TODO: Also allow standard Collections singleton
-    //Class<?> clazz = map.getClass();
-    //for (int i=0, len=unmodifiableMapClasses.length; i<len; i++) {
-    //  if (unmodifiableMapClasses[i] == clazz) {
-    //    return map;
-    //  }
-    //}
+    // Class<?> clazz = map.getClass();
+    // for (int i=0, len=unmodifiableMapClasses.length; i<len; i++) {
+    //   if (unmodifiableMapClasses[i] == clazz) {
+    //     return map;
+    //   }
+    // }
     if (size == 1) {
       Map.Entry<? extends K, ? extends V> entry = map.entrySet().iterator().next();
       return Collections.singletonMap(entry.getKey(), entry.getValue());
@@ -855,12 +855,12 @@ public final class AoCollections {
     // TODO: Goal is to protect from changes to original collection, while also not having
     // TODO: to copy repeatedly when different components use this same method for protection.
     // TODO: Also allow standard Collections singleton
-    //Class<?> clazz = map.getClass();
-    //for (int i=0, len=unmodifiableSortedMapClasses.length; i<len; i++) {
-    //  if (unmodifiableSortedMapClasses[i] == clazz) {
-    //    return (SortedMap<K, V>)map;
-    //  }
-    //}
+    // Class<?> clazz = map.getClass();
+    // for (int i=0, len=unmodifiableSortedMapClasses.length; i<len; i++) {
+    //   if (unmodifiableSortedMapClasses[i] == clazz) {
+    //     return (SortedMap<K, V>)map;
+    //   }
+    // }
     // TODO: if (size == 1) {
     // TODO:     K key = sortedMap.firstKey();
     // TODO:     return singletonSortedMap(key, sortedMap.get(key));
@@ -1141,14 +1141,14 @@ public final class AoCollections {
   //      return Collections.emptyMap();
   //    } else {
   //      // Imperative version:
-  ////      Map<K, R> results = mapSupplier.get();
-  ////      for (Map.Entry<K, V> entry : map.entrySet()) {
-  ////        V value = entry.getValue();
-  ////        if (clazz.isInstance(value)) {
-  ////          results.put(entry.getKey(), clazz.cast(value));
-  ////        }
-  ////      }
-  ////      return Collections.unmodifiableMap(results);
+  // //      Map<K, R> results = mapSupplier.get();
+  // //      for (Map.Entry<K, V> entry : map.entrySet()) {
+  // //        V value = entry.getValue();
+  // //        if (clazz.isInstance(value)) {
+  // //          results.put(entry.getKey(), clazz.cast(value));
+  // //        }
+  // //      }
+  // //      return Collections.unmodifiableMap(results);
   //      // Mixed functional/imperative:
   //      Map<K, R> results = mapSupplier.get();
   //      map.forEach(
@@ -1160,22 +1160,22 @@ public final class AoCollections {
   //      );
   //      return Collections.unmodifiableMap(results);
   //      // Functional version:
-  ////      return Collections.unmodifiableMap(
-  ////        map
-  ////          .entrySet()
-  ////          .stream()
-  ////          .filter(e -> e.getValue() instanceof Contact)
-  ////          .collect(
-  ////            Collectors.toMap(
-  ////              Map.Entry::getKey,
-  ////              e -> clazz.cast(e.getValue()),
-  ////              (u, v) -> {
-  ////                throw new AssertionError("Duplicate keys should not happen since we use key from original map");
-  ////              },
-  ////              mapSupplier
-  ////            )
-  ////          )
-  ////      );
+  // //      return Collections.unmodifiableMap(
+  // //        map
+  // //          .entrySet()
+  // //          .stream()
+  // //          .filter(e -> e.getValue() instanceof Contact)
+  // //          .collect(
+  // //            Collectors.toMap(
+  // //              Map.Entry::getKey,
+  // //              e -> clazz.cast(e.getValue()),
+  // //              (u, v) -> {
+  // //                throw new AssertionError("Duplicate keys should not happen since we use key from original map");
+  // //              },
+  // //              mapSupplier
+  // //            )
+  // //          )
+  // //      );
   //    }
   //  }
 
@@ -1235,8 +1235,8 @@ public final class AoCollections {
    */
   public static int getHashInitialCapacity(int elements) {
     return (int) (elements / 0.75f) + 1;
-    //long initialCapacity = (long)elements * 4/3 + 1;
-    //return (initialCapacity > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (int)initialCapacity;
+    // long initialCapacity = (long)elements * 4/3 + 1;
+    // return (initialCapacity > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (int)initialCapacity;
   }
 
   /**

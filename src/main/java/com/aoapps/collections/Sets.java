@@ -71,7 +71,7 @@ public final class Sets {
    * @see  LinkedHashSet
    */
   @SafeVarargs
-  public static <E> Set<E> union(Set<? extends E> ... sets) {
+  public static <E> Set<E> union(Set<? extends E>... sets) {
     int size = 0;
     if (sets != null) {
       for (Set<? extends E> set : sets) {
@@ -101,7 +101,7 @@ public final class Sets {
    */
   @SafeVarargs
   @SuppressWarnings("varargs")
-  public static <E> Set<E> union(Set<? extends E> set, E ... elements) {
+  public static <E> Set<E> union(Set<? extends E> set, E... elements) {
     int size =
         (set == null ? 0 : set.size())
             + (elements == null ? 0 : elements.length);

@@ -942,7 +942,7 @@ public final class AoArrays {
    * @param  values  may be {@code null}, which will return {@code null}
    */
   @SafeVarargs
-  public static <T extends Comparable<? super T>> T maxNonNull(T ... values) {
+  public static <T extends Comparable<? super T>> T maxNonNull(T... values) {
     T max = null;
     if (values != null) {
       for (T value : values) {
@@ -980,7 +980,7 @@ public final class AoArrays {
    */
   public static <E extends Comparable<? super E>> void sortParallelArrays(
       E[] keys,
-      Object[] ... otherArrays
+      Object[]... otherArrays
   ) {
     int numKeys = keys.length;
     int numOtherArrays = otherArrays.length;

@@ -76,12 +76,12 @@ public class UnmodifiableArraySet<E> extends AbstractSet<E> implements Externali
         Object elem = elements[index];
         int elemHash = elem.hashCode();
         if (elemHash < prevHash) {
-          return false; //throw new AssertionError("elements not sorted by hashCode: "+elemHash+"<"+prevHash+": "+elem+"<"+prev);
+          return false; // throw new AssertionError("elements not sorted by hashCode: "+elemHash+"<"+prevHash+": "+elem+"<"+prev);
         }
         if (elemHash == prevHash) {
           // Make sure not equal to prev
           if (elem.equals(prev)) {
-            return false; //throw new AssertionError("Element not unique: "+elem);
+            return false; // throw new AssertionError("Element not unique: "+elem);
           }
           // Look backward until different hashCode
           for (int i = index - 2; i >= 0; i--) {
