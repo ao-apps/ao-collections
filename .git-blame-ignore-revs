@@ -34,3 +34,6 @@ dd13af35df7fc9f3e3f23392affc0b4713532fd2
 
 # checkstyle-11.0.0 compatibility
 c9bf4d1385be8a7092adc584ecc97d3c66c95c75
+
+# Workaround javadoc reproducibility limitations/bugs
+98e55cea289859c98fb0a086146bfa03aecd3f49
