@@ -27,8 +27,8 @@ import java.util.IdentityHashMap;
 import java.util.WeakHashMap;
 
 /**
- * Allows any object to be used as a hash key, with identity used for {@link #hashCode()} and
- * {@link #equals(java.lang.Object)}.  They may be used, for example, to have {@link IdentityHashMap}
+ * Allows any object to be used as a hash key, with identity used for {@link IdentityKey#hashCode()} and
+ * {@link IdentityKey#equals(java.lang.Object)}.  They may be used, for example, to have {@link IdentityHashMap}
  * semantics with {@link WeakHashMap} references.
  *
  * <p>Supports {@code null} value, which may allow {@code null} keys in maps that otherwise do not support {@code null}
@@ -49,7 +49,7 @@ public class IdentityKey<T> {
   }
 
   /**
-   * Gets the identity key for the given value or {@link #NULL} for a {@code null} value.
+   * Gets the identity key for the given value or {@link IdentityKey#NULL} for a {@code null} value.
    */
   public static <T> IdentityKey<T> of(T value) {
     if (value == null) {
@@ -62,7 +62,7 @@ public class IdentityKey<T> {
   private final T value;
 
   /**
-   * @deprecated  Please use {@link #of(java.lang.Object)}, which may return {@link #NULL} for {@code null} values.
+   * @deprecated  Please use {@link IdentityKey#of(java.lang.Object)}, which may return {@link IdentityKey#NULL} for {@code null} values.
    */
   @Deprecated
   public IdentityKey(T value) {

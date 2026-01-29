@@ -74,7 +74,7 @@ public class PolymorphicMultimap<K, V> {
    * The key is registered under {@link Classes#getAllClasses(java.lang.Class, java.lang.Class) all classes and interfaces}
    * it extends and implements, up to and including the upper bound {@code K}.
    *
-   * <p>This implementation favors lookup speed at O(1), and pays the price during {@link #put(java.lang.Object, java.lang.Object)}.</p>
+   * <p>This implementation favors lookup speed at O(1), and pays the price during {@link PolymorphicMultimap#put(java.lang.Object, java.lang.Object)}.</p>
    */
   public void put(final K key, final V value) {
     // Add the entry under all classes, up to K, that it implements

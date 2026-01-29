@@ -194,7 +194,7 @@ public class IntArrayList extends AbstractList<Integer>
 
   /**
    * Searches for the first occurrence of the given argument, testing
-   * for equality using the {@link #equals(java.lang.Object) equals} method.
+   * for equality using the {@link IntArrayList#equals(java.lang.Object) equals} method.
    *
    * @param   elem   an object.
    * @return  the index of the first occurrence of the argument in this
@@ -214,7 +214,7 @@ public class IntArrayList extends AbstractList<Integer>
 
   /**
    * Searches for the first occurrence of the given argument, testing
-   * for equality using the {@link #equals(java.lang.Object) equals} method.
+   * for equality using the {@link IntArrayList#equals(java.lang.Object) equals} method.
    *
    * @param   elem   an object.
    * @return  the index of the first occurrence of the argument in this

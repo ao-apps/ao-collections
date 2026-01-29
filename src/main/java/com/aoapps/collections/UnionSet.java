@@ -188,7 +188,7 @@ public class UnionSet<E> extends AbstractSet<E> {
   /**
    * Triggers combining.
    *
-   * @see  #addAll(java.util.Set)
+   * @see  UnionSet#addAll(java.util.Set)
    */
   @Override
   public boolean addAll(Collection<? extends E> c) {

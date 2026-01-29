@@ -132,7 +132,7 @@ public class UnionClassSet<E> extends AbstractSet<E> {
   /**
    * Must be a set.
    *
-   * @see  #addAll(java.util.Set)
+   * @see  UnionClassSet#addAll(java.util.Set)
    */
   @Override
   @SuppressWarnings("unchecked")
