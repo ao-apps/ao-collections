@@ -51,7 +51,7 @@ along with ao-collections.  If not, see <https://www.gnu.org/licenses/>.
         groupId="@{project.groupId}"
         artifactId="@{documented.artifactId}"
         scmUrl="@{project.scm.url}"
-      >
+      />
     </c:if>
 
     <changelog:release
