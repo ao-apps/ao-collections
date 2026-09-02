@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2016, 2019, 2020, 2021, 2022, 2024, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -80,15 +80,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
     this.elements = new ArrayList<>(initialCapacity);
   }
 
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.LINEAR,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.QUADRATIC
-  )
-   */
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.LINEAR,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.QUADRATIC
+  // )
   /**
    * @deprecated  This is for convention only, please provide a previously sorted ArrayList for best performance.
    */
@@ -107,13 +105,11 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
    *
    * @see  HashCodeComparator to properly sort objects before adding to the set
    */
-  /*
-  @Complexity(
-    best=GrowthFunction.CONSTANT,
-    average=GrowthFunction.CONSTANT,
-    worst=GrowthFunction.CONSTANT
-  )
-   */
+  // @Complexity(
+  //   best=GrowthFunction.CONSTANT,
+  //   average=GrowthFunction.CONSTANT,
+  //   worst=GrowthFunction.CONSTANT
+  // )
   public ArraySet(ArrayList<E> elements) {
     if (ASSERTIONS_ENABLED) {
       assert assertInOrderAndUnique(elements);
@@ -156,13 +152,11 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
     return true;
   }
 
-  /*
-  @Complexity(
-    best=GrowthFunction.LOGARITHMIC,
-    average=GrowthFunction.LOGARITHMIC,
-    worst=GrowthFunction.LOGARITHMIC
-  )
-   */
+  // @Complexity(
+  //   best=GrowthFunction.LOGARITHMIC,
+  //   average=GrowthFunction.LOGARITHMIC,
+  //   worst=GrowthFunction.LOGARITHMIC
+  // )
   @SuppressWarnings("unchecked")
   private int binarySearch(E elem) {
     return java.util.Collections.binarySearch(elements, elem, HashCodeComparator.getInstance());
@@ -184,15 +178,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
 
   @Override
   @SuppressWarnings("unchecked")
-  /*
-  @Complexity(
-    best=GrowthFunction.LOGARITHMIC,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.LOGARITHMIC,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.LINEAR
-  )
-   */
+  // @Complexity(
+  //   best=GrowthFunction.LOGARITHMIC,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.LOGARITHMIC,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.LINEAR
+  // )
   public boolean contains(Object o) {
     int size = elements.size();
     if (size == 0 || o == null) {
@@ -246,38 +238,34 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    average=GrowthFunction.LINEAR,
-    worst=GrowthFunction.LINEAR
-  )
-   */
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   average=GrowthFunction.LINEAR,
+  //   worst=GrowthFunction.LINEAR
+  // )
   public Object[] toArray() {
     return elements.toArray();
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    average=GrowthFunction.LINEAR,
-    worst=GrowthFunction.LINEAR
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   average=GrowthFunction.LINEAR,
+  //   worst=GrowthFunction.LINEAR
+  // )
   @SuppressWarnings("SuspiciousToArrayCall")
   public <T> T[] toArray(T[] a) {
     return elements.toArray(a);
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.CONSTANT,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.CONSTANT,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.LINEAR
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.CONSTANT,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.CONSTANT,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.LINEAR
+  // )
   public boolean add(E e) {
     int size = elements.size();
     if (size == 0) {
@@ -321,14 +309,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.CONSTANT,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.CONSTANT,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.LINEAR
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.CONSTANT,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.CONSTANT,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.LINEAR
+  // )
   @SuppressWarnings("element-type-mismatch")
   public boolean remove(Object o) {
     int size = elements.size();
@@ -349,14 +336,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.LINEAR,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.QUADRATIC
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.LINEAR,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.QUADRATIC
+  // )
   @SuppressWarnings("element-type-mismatch")
   public boolean containsAll(Collection<?> c) {
     for (Object o : c) {
@@ -368,14 +354,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.LINEAR,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.QUADRATIC
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.LINEAR,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.QUADRATIC
+  // )
   public boolean addAll(Collection<? extends E> c) {
     boolean modified = false;
     for (E elem : c) {
@@ -392,14 +377,13 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    bestConditions={GrowthCondition.GOOD_HASH_CODE},
-    average=GrowthFunction.LINEAR,
-    averageConditions={GrowthCondition.GOOD_HASH_CODE},
-    worst=GrowthFunction.QUADRATIC
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   bestConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   average=GrowthFunction.LINEAR,
+  //   averageConditions={GrowthCondition.GOOD_HASH_CODE},
+  //   worst=GrowthFunction.QUADRATIC
+  // )
   @SuppressWarnings("element-type-mismatch")
   public boolean removeAll(Collection<?> c) {
     boolean modified = false;
@@ -412,12 +396,11 @@ public class ArraySet<E> extends AbstractSet<E> implements Serializable {
   }
 
   @Override
-  /*
-  @Complexity(
-    best=GrowthFunction.LINEAR,
-    average=GrowthFunction.LINEAR,
-    worst=GrowthFunction.LINEAR
-  )*/
+  // @Complexity(
+  //   best=GrowthFunction.LINEAR,
+  //   average=GrowthFunction.LINEAR,
+  //   worst=GrowthFunction.LINEAR
+  // )
   public void clear() {
     elements.clear();
   }

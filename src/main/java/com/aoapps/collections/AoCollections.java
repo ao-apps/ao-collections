@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -970,24 +970,23 @@ public final class AoCollections {
     return new UnmodifiableIterator<>(iter);
   }
 
-  /*
-  private static void test() {
-    List<Object> list = new ArrayList<>();
-    list.add("One");
-    list.add("Two");
-    list = optimalUnmodifiableList(list);
-    // Collection
-    long startTime = System.currentTimeMillis();
-    for (int c=0;c<100000000;c++) {
-      optimalUnmodifiableList(list);
-    }
-    long endTime = System.currentTimeMillis() - startTime;
-    System.out.println("    Finished optimalUnmodifiableCollection in "+BigDecimal.valueOf(endTime, 3)+" sec");
-  }
-
-  public static void main(String[] args) {
-    for (int c=0;c<30;c++) test();
-  }*/
+  // private static void test() {
+  //   List<Object> list = new ArrayList<>();
+  //   list.add("One");
+  //   list.add("Two");
+  //   list = optimalUnmodifiableList(list);
+  //   // Collection
+  //   long startTime = System.currentTimeMillis();
+  //   for (int c=0;c<100000000;c++) {
+  //     optimalUnmodifiableList(list);
+  //   }
+  //   long endTime = System.currentTimeMillis() - startTime;
+  //   System.out.println("    Finished optimalUnmodifiableCollection in "+BigDecimal.valueOf(endTime, 3)+" sec");
+  // }
+  //
+  // public static void main(String[] args) {
+  //   for (int c=0;c<30;c++) test();
+  // }
 
   /**
    * Allows peeking the first element of iteration.  Does not support remove.
@@ -1122,15 +1121,14 @@ public final class AoCollections {
       }
     }
     return MinimalList.unmodifiable(results);
-    /* Functional version:
-    return Collections.unmodifiableList(
-      list
-        .stream()
-        .filter(e -> clazz.isInstance(e))
-        .map(e -> clazz.cast(e))
-        .collect(Collectors.toList())
-    );
-     */
+    // Functional version:
+    // return Collections.unmodifiableList(
+    //   list
+    //     .stream()
+    //     .filter(e -> clazz.isInstance(e))
+    //     .map(e -> clazz.cast(e))
+    //     .collect(Collectors.toList())
+    // );
   }
 
   //  private static <K, S, V extends S> Map<K, V> filter(Map<K, S> map, Class<V> clazz) {

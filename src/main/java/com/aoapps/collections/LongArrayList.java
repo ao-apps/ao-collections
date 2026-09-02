@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013, 2016, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013, 2016, 2020, 2021, 2022, 2024, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -87,9 +87,7 @@ public class LongArrayList extends AbstractList<Long>
   public LongArrayList(Collection<? extends Number> c) {
     size = c.size();
     // Allow 10% room for growth
-    elementData = new long[
-    (int) Math.min((size * 110L) / 100, Integer.MAX_VALUE)
-    ];
+    elementData = new long[(int) Math.min((size * 110L) / 100, Integer.MAX_VALUE)];
     Iterator<? extends Number> iter = c.iterator();
     int pos = 0;
     while (iter.hasNext()) {

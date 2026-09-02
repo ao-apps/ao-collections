@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013, 2016, 2020, 2021, 2022, 2024  AO Industries, Inc.
+ * Copyright (C) 2006, 2007, 2008, 2009, 2010, 2011, 2013, 2016, 2020, 2021, 2022, 2024, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -99,9 +99,7 @@ public class IntArrayList extends AbstractList<Integer>
   public IntArrayList(int[] elements) {
     size = elements.length;
     // Allow 10% room for growth
-    elementData = new int[
-    (int) Math.min((size * 110L) / 100, Integer.MAX_VALUE)
-    ];
+    elementData = new int[(int) Math.min((size * 110L) / 100, Integer.MAX_VALUE)];
     System.arraycopy(elements, 0, elementData, 0, size);
   }
 

@@ -1,6 +1,6 @@
 /*
  * ao-collections - Collections and related utilities for Java.
- * Copyright (C) 2010, 2011, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025  AO Industries, Inc.
+ * Copyright (C) 2010, 2011, 2013, 2014, 2016, 2017, 2019, 2020, 2021, 2022, 2024, 2025, 2026  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -257,14 +257,14 @@ public final class AoArrays {
           }
         }
       } else {
-        /* 278 ms * /
-        int i=len;
-        while (i>0) {
-          if (o.equals(array[--i])) {
-            return true;
-          }
-        }
-        /* */
+        /* 278 ms */
+        // int i=len;
+        // while (i>0) {
+        //   if (o.equals(array[--i])) {
+        //     return true;
+        //   }
+        // }
+
         /* 205 ms */
         int i = len - 1;
         while (i >= 0) {
@@ -272,14 +272,13 @@ public final class AoArrays {
             return true;
           }
         }
-        /* */
-        /* 275 ms * /
-        for (int i=0; i<len; i++) {
-          if (o.equals(array[i])) {
-            return true;
-          }
-        }
-        /* */
+
+        /* 275 ms */
+        // for (int i=0; i<len; i++) {
+        //   if (o.equals(array[i])) {
+        //     return true;
+        //   }
+        // }
       }
       return false;
     }
